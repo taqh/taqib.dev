@@ -1,0 +1,49 @@
+---
+const { frontmatter } = Astro.props;
+import BackButton from '../components/BackButton.astro';
+import Container from '../components/Container.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Image from 'astro/components/Image.astro';
+---
+
+<BaseLayout pageTitle={`${frontmatter.title} - Projects`}>
+  <Container>
+    <article class='py-20'>
+      <BackButton />
+      <div>
+        <div class='flex items-center justify-between'>
+          <h1
+            class='mt-2 inline-block font-bold text-4xl leading-tight lg:text-5xl'
+          >
+            {frontmatter.title}
+          </h1>
+          <div
+            class='inline-flex items-center rounded-lg border px-3 py-1 text-sm font-medium bg-background'
+          >
+            <span class='relative flex h-2 w-2 mr-2'>
+              <span
+                class={`absolute inline-flex h-full w-full animate-ping rounded-full ${frontmatter.status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
+              ></span>
+              <span
+                class={`relative inline-flex h-2 w-2 rounded-full ${frontmatter.status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'}`}
+              ></span>
+            </span>
+            <span class='hidden sm:inline'>Project is {frontmatter.status}</span
+            >
+          </div>
+        </div>
+
+        <Image
+          src={frontmatter.image.url}
+          alt={frontmatter.image.alt}
+          width={800}
+          height={300}
+          class='object-cover w-auto h-auto rounded-lg my-8'
+        />
+        <p><em>{frontmatter.description}</em></p>
+      </div>
+
+      <slot />
+    </article>
+  </Container>
+</BaseLayout>

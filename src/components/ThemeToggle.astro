@@ -1,0 +1,103 @@
+---
+let theme = 'light';
+import Sun from './icons/Sun.astro';
+import Moon from './icons/Moon.astro';
+---
+
+<div class='fixed bottom-8 right-8 hidden sm:block z-50'>
+  <button
+    id='themeToggle'
+    class='rounded-full grid place-content-center w-10 h-10 border shadow'
+  >
+    <span class='sr-only'>Toggle website theme</span>
+    <span id='themeIcon'><Sun /></span>
+  </button>
+</div>
+
+<script>
+  function toggleTheme(event: MouseEvent) {
+    const x = event.clientX;
+    const y = event.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    if (!document.startViewTransition) {
+      document.documentElement.classList.toggle('dark');
+      return;
+    }
+
+    const transition = document.startViewTransition(() => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    transition.ready.then(() => {
+      const isDark = document.documentElement.classList.contains('dark');
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+      document.documentElement.animate(
+        {
+          clipPath: isDark ? [...clipPath].reverse() : clipPath,
+        },
+        {
+          duration: 400,
+          easing: 'ease-in',
+          pseudoElement: isDark
+            ? '::view-transition-old(root)'
+            : '::view-transition-new(root)',
+        }
+      );
+    });
+
+    // Update localStorage and theme icon
+    const newTheme = document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light';
+    localStorage.setItem('theme', newTheme);
+    // document.getElementById('themeIcon')!.textContent =
+    //   newTheme === 'dark' ? '🌞' : '🌜';
+  }
+
+  // astro:page-load makes the script availabe to the next pages after navigation
+  document.addEventListener('astro:page-load', () => {
+    const theme = (() => {
+      if (
+        typeof localStorage !== 'undefined' &&
+        localStorage.getItem('theme')
+      ) {
+        return localStorage.getItem('theme');
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      return 'light';
+    })();
+
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+
+    window.localStorage.setItem('theme', theme!);
+
+    document
+      .getElementById('themeToggle')!
+      .addEventListener('click', toggleTheme);
+  });
+</script>
+
+<script is:inline>
+  function applyTheme() {
+    const theme = localStorage.getItem('theme');
+    theme === 'dark'
+      ? document.documentElement.classList.add('dark')
+      : document.documentElement.classList.remove('dark');
+  }
+
+  document.addEventListener('astro:after-swap', applyTheme);
+  applyTheme();
+</script>

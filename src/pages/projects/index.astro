@@ -1,0 +1,25 @@
+---
+import Container from '../../components/Container.astro';
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+const projects = await getCollection('projects');
+
+const pageTitle = 'Projects - Taqib';
+---
+
+<Layout pageTitle={pageTitle}>
+  <Container classNames='min-h-[calc(100vh-64px)] pt-20'>
+    <ul class='flex flex-col gap-6'>
+      {
+        projects.map((project) => (
+          <li>
+            <a href={`/projects/${project.slug}`} class="space-y-1">
+              <p class="font-bold text-lg">{project.data.title}</p>
+              <p class="text-muted-foreground">{project.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</Layout>
