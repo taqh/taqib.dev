@@ -6,14 +6,13 @@ const postsCollection = defineCollection({
     title: z.string(),
     status: z.string(),
     description: z.string(),
-    author: z.string(),
     image: z.object({
       url: z.string(),
       alt: z.string(),
-    }),
+    }).optional(),
     links: z.object({
-      github: z.string().url(),
-      live: z.string().url().nullable(),
+      repo: z.string().url().optional(),
+      live: z.string().url().optional(),
     }),
     technologies: z.array(z.string()),
   }),

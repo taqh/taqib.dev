@@ -5,9 +5,10 @@
 @layer base {
   :root {
     --foreground: 223 16% 9%;
-    --background: 34 78% 91%;
+    --background: 28 100% 97%;
     --muted-foreground: 223 10% 45%;
     --border: 30 2% 81%;
+    --card: hsl(28, 76%, 95%);
 
     --accent: 220 14.3% 95.9%;
     --primary: 262.1 83.3% 57.8%;
@@ -15,16 +16,20 @@
     --muted: 220 14.3% 95.9%;
     --accent-foreground: 220.9 39.3% 11%;
 
-    --dot-bg-color: hsl(34 78% 91%);
-    --dot-color: hsl(212, 12%, 21%);
+    --dot-bg-color: hsl(28, 100%, 97%);
+    --dot-color: hsl(0, 0%, 85%);
     --dot-mask-color: hsl(34 78% 91%);
+
+    --scrollbar-thumb: hsl(0, 0%, 37%);
+    --scrollbar-thumb-hover: hsl(0, 0%, 40%);
   }
 
   .dark {
     --foreground: 34 78% 91%;
-    --background: 223 16% 9%;
+    --background: 0, 0%, 10%;
     --muted-foreground: 33, 15%, 76%;
-    --border: 222 11% 23%;
+    --border: 225 5% 18%;
+    --card: hsl(0, 0%, 10%);
 
     --accent: 220 14.3% 95.9%;
     --primary: 262.1 83.3% 57.8%;
@@ -32,14 +37,33 @@
     --muted: 220 14.3% 95.9%;
     --accent-foreground: 220.9 39.3% 11%;
 
-    --dot-bg-color: hsl(223 16% 9%);
-    --dot-color: hsla(212, 12%, 68%, 0.314);
+    --dot-bg-color: hsl(0, 0%, 10%);
+    --dot-color: hsl(225, 5%, 16%);
     --dot-mask-color: hsl(223 16% 9%);
+
+    --scrollbar-thumb: hsl(0, 0%, 53%);
+    --scrollbar-thumb-hover: hsl(0, 0%, 33%);
   }
 }
 
+@font-face {
+  font-family: "GeistMono";
+  src: url("/fonts/geist/GeistMono[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat/Montserrat-VariableFont_wght.ttf") format("ttf");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
-  
   * {
     border-color: hsl(var(--border));
   }
@@ -54,6 +78,20 @@
   body {
     min-height: 100vh;
   }
+
+  *:not(h1, h2, h3, h4, h5, h6) {
+    font-family: "GeistMono", system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  #logo {
+    font-family: "Montserrat", system-ui, sans-serif;
+  }
 }
 
 @layer utilities {
@@ -64,13 +102,16 @@
   .bg-dot::before {
     content: "";
     position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
     inset: 0;
     background:
-      linear-gradient(90deg, var(--dot-bg-color) 22px, transparent 1%) 50%,
-      linear-gradient(var(--dot-bg-color) 22px, transparent 1%) 50%,
+      linear-gradient(90deg, var(--dot-bg-color) 18px, transparent 1%) 50%,
+      linear-gradient(var(--dot-bg-color) 18px, transparent 1%) 50%,
       var(--dot-color);
     background-position: center center;
-    background-size: 24px 24px;
+    background-size: 20px 20px;
     -webkit-mask-image: linear-gradient(
       0deg,
       transparent 5%,
@@ -128,11 +169,10 @@
   width: 0.525rem;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 2rem;
+  background-color: var(--scrollbar-thumb);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+  background-color: var(--scrollbar-thumb-hover);
 }
 ::-webkit-scrollbar-track {
   background: hsl(var(--background) / 0.8);

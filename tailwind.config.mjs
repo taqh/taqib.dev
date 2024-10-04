@@ -4,8 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
+        card: "hsl(var(--card))",
         input: "hsl(var(--input))",
+        border: "hsl(var(--border))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         "muted-foreground": "hsl(var(--muted-foreground))",

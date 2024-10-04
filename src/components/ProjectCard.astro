@@ -2,47 +2,86 @@
 interface Props {
   title: string;
   description: string;
-  route: string;
   status: string;
   image: {
     url: string;
     alt: string;
   };
+  links: {
+    repo?: string;
+    live?: string;
+  };
+  index: number;
 }
-import Image from 'astro/components/Image.astro';
 
-const { route, title, description, image, status } = Astro.props as Props;
+import Github from './icons/Github.astro';
+import Globe from './icons/Globe.astro';
+
+const { title, description, image, status, links, index } =
+  Astro.props as Props;
+const { repo, live } = links;
 ---
 
-<li class='flex flex-col gap-4 border rounded-lg card z-10'>
+<li
+  class={`flex flex-col gap-4 border rounded-lg backdrop-blur-md card z-10 bg-card ${index === 2 ? 'md:col-span-2' : 'md:col-span-1'}`}
+>
   <div class='relative group overflow-hidden z-10 rounded-t-lg'>
-    <Image
-      src={image.url}
-      alt={image.alt}
-      width={400}
-      height={400}
-      class='object-cover aspect-square transition duration-500'
-    />
-    <div
-      class='inline-flex items-center rounded-lg px-2 py-1 text-sm font-medium mb-4 absolute left-4 top-4'
-    >
-      <span class='relative flex h-2 w-2 mr-2'>
-        <span
-          class={`absolute inline-flex h-full w-full animate-ping rounded-full ${status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
-        ></span>
-        <span
-          class={`relative inline-flex h-2 w-2 rounded-full ${status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'}`}
-        ></span>
-      </span>
-    </div>
+    {
+      image && (
+        <img
+          src={image.url}
+          alt={image.alt}
+          class='object-cover aspect-video transition duration-500'
+        />
+      )
+    }
   </div>
   <div class='flex flex-col gap-2 px-4 py-2'>
-    <h2 class='font-bold text-lg'>
-      {title}
-    </h2>
-    <!-- <p class='text-muted-foreground'>
+    <div class="flex justify-between">
+      <h2 class='font-bold text-lg uppercase tracking-wider'>
+        {title}
+      </h2>
+      <div
+        class='inline-flex items-center rounded-lg px-2 py-1 text-sm font-medium'
+      >
+        <span class='relative flex h-2 w-2 mr-2'>
+          <span
+            class={`absolute inline-flex h-full w-full animate-ping rounded-full ${status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
+          ></span>
+          <span
+            class={`relative inline-flex h-2 w-2 rounded-full ${status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'}`}
+          ></span>
+        </span>
+      </div>
+    </div>
+    <p class='text-muted-foreground'>
       {description}
-    </p> -->
-    <a href={`/projects/${route}`} class='rounded-full bg-border px-2 py-1 text-sm w-fit'>details</a>
+    </p>
+    <div class='flex items-center gap-4'>
+      {
+        repo && (
+          <a
+            href={repo}
+            target='_blank'
+            class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
+          >
+            <span class='sr-only'>view source code on github</span>
+            <Github />
+          </a>
+        )
+      }
+      {
+        live && (
+          <a
+            href={live}
+            target='_blank'
+            class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
+          >
+            <span class='sr-only'>view the live site</span>
+            <Globe />
+          </a>
+        )
+      }
+    </div>
   </div>
 </li>
