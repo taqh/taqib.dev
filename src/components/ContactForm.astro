@@ -22,7 +22,7 @@
       id='email'
       autocomplete='off'
       placeholder='Your email'
-      class='flex h-11 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+      class='flex h-11 w-full rounded-md border bg-background px-3 py-2 lg:text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
     />
   </div>
   <div class='lg:col-span-2'>
@@ -34,7 +34,7 @@
       name='message'
       spellcheck='false'
       placeholder="Anything you'd like to say..."
-      class='flex w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-11'
+      class='flex w-full rounded-md border bg-background px-3 py-2 lg:text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-11'
     ></textarea>
   </div>
   <button
@@ -51,7 +51,13 @@
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
-    const { error } = await actions.contact(formData);
-    console.log(error);
+    const result = await actions.contact(formData);
+    
+    if (result.data && result.data.success) {
+      alert('Message sent successfully!');
+    } else {
+      alert(result.error || 'Failed to send message.');
+    }
   });
+  
 </script>
