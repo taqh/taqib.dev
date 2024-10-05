@@ -20,6 +20,11 @@ import Globe from './icons/Globe.astro';
 const { title, description, image, status, links, index } =
   Astro.props as Props;
 const { repo, live } = links;
+const { url, alt } = image;
+
+import { Image } from 'astro:assets';
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}')
+if (!images[url]) throw new Error(`"${image?.url}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`);
 ---
 
 <li
@@ -27,11 +32,10 @@ const { repo, live } = links;
 >
   <div class='relative group overflow-hidden z-10 rounded-t-lg'>
     {
-      image && (
-        <img
-          src={image.url}
-          alt={image.alt}
-          class='object-cover aspect-video transition duration-500'
+      image.url !== "/src/assets/stashbot.png" && (
+        <Image 
+          src={images[url]()}
+          alt={alt}
         />
       )
     }

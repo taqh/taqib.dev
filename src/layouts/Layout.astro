@@ -3,7 +3,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import '../styles/global.css';
 import { ViewTransitions } from 'astro:transitions';
-import { fade, slide } from 'astro:transitions';
+import { fade } from 'astro:transitions';
 import Tracker from '../components/Tracker.astro';
 const { pageTitle } = Astro.props;
 ---
@@ -21,7 +21,7 @@ const { pageTitle } = Astro.props;
     <meta property='og:description' content='Frontend web developer' />
     <meta property='og:image' content='/og-dark.png' />
     <meta property='og:image:alt' content='Taqib Frontend web developer' />
-    <title>{pageTitle}</title>
+    <title>Taqib</title>
     <ViewTransitions transition:animate={fade({duration: 0.6})} />
   </head>
   <body class='bg-dot overflow-x-hidden relative'>

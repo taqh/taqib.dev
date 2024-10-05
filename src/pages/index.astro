@@ -21,10 +21,9 @@ import Linkedin from '../components/icons/Linkedin.astro';
 import Tracker from '../components/Tracker.astro'
 
 const projects = await getCollection('projects');
-const title = 'Taqib';
 ---
 
-<Layout pageTitle={title}>
+<Layout>
   <main class="divide-y">
     <!-- hero section -->
     <Container className="border-t">
@@ -46,7 +45,7 @@ const title = 'Taqib';
           web developer crafting modern web applications.
         </h1>
         <p class='mt-5 max-w-prose text-muted-foreground sm:text-lg'>
-          I&apos;m passionate about building accessible, beautiful, and modern web
+          I love building accessible, beautiful, and modern web
           experiences using cutting edge technologies.
         </p>
       </section>
@@ -208,13 +207,13 @@ const title = 'Taqib';
           <div class='grid gap-6 lg:grid-cols-2 sm:px-10 max-lg:max-w-md max-lg:mx-auto'>
             <div class='flex flex-col gap-8 justify-center max-sm:items-center max-sm:text-center '>
               <div>
-                <h4 class='font-semibold text-lg'>
+                <h3 class='font-semibold text-lg'>
                   You can contact me via email at
-                </h4>
+                </h3>
                 <p
                   class='w-fit relative after:absolute after:bg-foreground after:h-px after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
                 >
-                  <a href='mailto:taqib.ibrahim@gmail.com' class='bg-gradient-to-r from-blue-700 to-fuchsia-600 bg-clip-text text-transparent dark:bg-gradient-to-r dark:from-blue-500 dark:to-fuchsia-300'
+                  <a href='mailto:taqib.ibrahim@gmail.com' class='bg-gradient-to-r from-blue-700 to-fuchsia-600 bg-clip-text text-transparent dark:bg-gradient-to-r dark:from-blue-500 dark:to-fuchsia-500'
                     >taqib.ibrahim@gmail.com</a
                   >
                 </p>
