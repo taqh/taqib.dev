@@ -28,6 +28,8 @@ Inside the project, you'll see the following folders and files:
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
+## Content
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:

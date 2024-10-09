@@ -7,7 +7,7 @@
     --foreground: 223 16% 9%;
     --background: 28 100% 97%;
     --muted-foreground: 223 10% 45%;
-    --border: 30 2% 81%;
+    --border: 0 0% 85%;
     --card: hsl(28, 76%, 95%);
 
     --accent: 220 14.3% 95.9%;
@@ -22,6 +22,8 @@
 
     --scrollbar-thumb: hsl(0, 0%, 37%);
     --scrollbar-thumb-hover: hsl(0, 0%, 40%);
+
+    /* --bg: hsl(27, 100%, 98%); */
   }
 
   .dark {

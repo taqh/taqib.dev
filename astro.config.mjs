@@ -8,6 +8,7 @@ import vercel from "@astrojs/vercel/serverless";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), mdx()],
+  site: "https://taqib.vercel.app",
   output: "server",
   adapter: vercel({
     webAnalytics: { enabled: true }

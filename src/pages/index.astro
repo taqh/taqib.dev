@@ -1,37 +1,38 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import Container from '../components/Container.astro';
+import Layout from '@/layouts/Layout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import Container from '@/components/Container.astro';
 import { getCollection } from 'astro:content';
-import ContactForm from '../components/ContactForm.astro';
-import React from '../components/icons/React.astro';
-import Typescript from '../components/icons/Typescript.astro';
-import Tailwind from '../components/icons/Tailwind.astro';
-import Nextjs from '../components/icons/Nextjs.astro';
-import Nodejs from '../components/icons/Nodejs.astro';
-import MongoDB from '../components/icons/MongoDB.astro';
-import Postgres from '../components/icons/Postgres.astro';
-import AstroIcon from '../components/icons/AstroIcon.astro';
-import Prisma from '../components/icons/Prisma.astro';
-import Sass from '../components/icons/Sass.astro';
-import X from '../components/icons/X.astro';
-import Github from '../components/icons/Github.astro';
-import Discord from '../components/icons/Discord.astro';
-import Linkedin from '../components/icons/Linkedin.astro';
-import Tracker from '../components/Tracker.astro'
+import ContactForm from '@/components/ContactForm.astro';
+import React from '@/components/icons/React.astro';
+import Typescript from '@/components/icons/Typescript.astro';
+import Tailwind from '@/components/icons/Tailwind.astro';
+import Nextjs from '@/components/icons/Nextjs.astro';
+import Nodejs from '@/components/icons/Nodejs.astro';
+import MongoDB from '@/components/icons/MongoDB.astro';
+import Postgres from '@/components/icons/Postgres.astro';
+import AstroIcon from '@/components/icons/AstroIcon.astro';
+import Prisma from '@/components/icons/Prisma.astro';
+import Sass from '@/components/icons/Sass.astro';
+import X from '@/components/icons/X.astro';
+import Github from '@/components/icons/Github.astro';
+import Discord from '@/components/icons/Discord.astro';
+import Linkedin from '@/components/icons/Linkedin.astro';
+import { SITE } from '@/lib/constants';
+import Link from '@/components/Link.astro';
 
 const projects = await getCollection('projects');
 ---
 
-<Layout>
-  <main class="divide-y">
+<Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
+  <div class='divide-y'>
     <!-- hero section -->
-    <Container className="border-t">
+    <Container class='border-t'>
       <section
         class='overflow-x-hidden sm:border-x bg-background py-16 lg:py-24 text-center flex items-center flex-col justify-center'
       >
         <div
-          class='inline-flex items-center rounded-lg border px-3 py-1 text-sm font-medium mb-4 bg-background'
+          class='inline-flex items-center rounded-lg border px-3 py-1 text-sm md:text-base font-medium mb-4 bg-background'
         >
           <span>Hi there, I&apos;m Taqib</span>
         </div>
@@ -45,15 +46,18 @@ const projects = await getCollection('projects');
           web developer crafting modern web applications.
         </h1>
         <p class='mt-5 max-w-prose text-muted-foreground sm:text-lg'>
-          I love building accessible, beautiful, and modern web
-          experiences using cutting edge technologies.
+          I’m passionate about crafting accessible, visually appealing, and
+          modern web experiences using the latest technologies
         </p>
       </section>
     </Container>
-  
+
     <!-- about section -->
     <Container>
-      <section id='about' class='sm:border-x px-4 md:px-6 bg-background space-y-12 py-8 md:py-12 lg:py-24'>
+      <section
+        id='about'
+        class='sm:border-x px-4 md:px-6 bg-background space-y-12 py-8 md:py-12 lg:py-24'
+      >
         <div class='mx-auto flex flex-col space-y-4'>
           <h2
             class='font-medium text-2xl leading-[1.1] sm:text-3xl md:text-4xl text-center mb-6'
@@ -73,19 +77,22 @@ const projects = await getCollection('projects');
               <p
                 class='max-w-prose leading-normal text-muted-foreground sm:text-lg sm:leading-7'
               >
-                Currently, learning about design systems and
-                UI/UX fundamentals, aiming to create web experiences that are not
-                only functional but also intuitive and visually appealing. 
+                Currently, learning about design systems and UI/UX fundamentals,
+                aiming to create web experiences that are not only functional
+                but also intuitive and visually appealing.
               </p>
             </div>
           </div>
         </div>
       </section>
     </Container>
-  
+
     <!-- projects section -->
     <Container>
-      <section id='projects' class='bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:px-6 md:px-10 lg:px-16'>
+      <section
+        id='projects'
+        class='bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:px-6 md:px-10 lg:px-16'
+      >
         <div class='mx-auto flex flex-col space-y-4 justify-center text-center'>
           <h2
             class='font-semibold text-2xl leading-[1.1] sm:text-3xl md:text-4xl'
@@ -93,168 +100,197 @@ const projects = await getCollection('projects');
             Projects
           </h2>
           <p
-            class='max-w-prose mx-auto  leading-normal text-muted-foreground sm:text-lg sm:leading-7'
+            class='max-w-prose mx-auto leading-normal text-muted-foreground sm:text-lg sm:leading-7'
           >
-            I like to stay busy and always have a project in the works. Here are
-            some of the projects I&apos;ve dedicated my
-            time to.
+            I Love learning and staying engaged through exciting new projects. Here
+            are a few I've poured my energy into.
           </p>
         </div>
         <!-- project list -->
-        <ul
-          class='mx-auto grid justify-center gap-8 md:grid-cols-2'
+        <ul class='mx-auto grid justify-center gap-8 md:grid-cols-2'>
+          {projects.map((project) => <ProjectCard {...project.data} slug={project.slug} />)}
+        </ul>
+        {
+          projects.length > 4 && (
+            <div class='flex justify-center mt-10'>
+              <Link href='/projects'>See All Projects</Link>
+            </div>
+          )
+        }
+      </section>
+    </Container>
+
+    <!-- technologies section -->
+    <Container>
+      <section
+        id='skills'
+        class='sm:border-x sm:px-14 py-8 md:py-12 lg:py-28 space-y-14 lg:space-y-20'
+      >
+        <div
+          class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
         >
-          {
-            projects.map((project, index) => (
-              <ProjectCard
-                image={project.data.image}
-                title={project.data.title}
-                description={project.data.description}
-                status={project.data.status}
-                links={project.data.links}
-                index={index}
-              />
-            ))
-          }
+          <h2
+            class='font-medium text-3xl leading-[1.1] sm:text-3xl md:text-5xl'
+          >
+            Stack
+          </h2>
+          <p
+            class='max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7'
+          >
+            The technologies I work with most frequently
+          </p>
+        </div>
+        <ul
+          class='grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center'
+        >
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#61DAFB]'
+          >
+            <React />
+            <span>React.js</span>
+          </li>
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#3178C6]'
+          >
+            <Typescript />
+            <span>Typescript</span>
+          </li>
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#06B6D4]'
+          >
+            <Tailwind />
+            <span>Tailwind CSS</span>
+          </li>
+          <li class='cursor-pointer flex items-center gap-2'>
+            <Nextjs />
+            <span>Next.js</span>
+          </li>
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#47A248]'
+          >
+            <MongoDB />
+            <span>MongoDB</span>
+          </li>
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#CC6699]'
+          >
+            <Sass />
+            <span>Sass</span>
+          </li>
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#2D3748] dark:hover:text-white'
+          >
+            <Prisma />
+            <span>Prisma</span>
+          </li>
+          <li class='cursor-pointer flex items-center gap-2'>
+            <AstroIcon />
+            <span>Astro</span>
+          </li>
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#4169E1]'
+          >
+            <Postgres />
+            <span>PostgreSQL</span>
+          </li>
+          <li
+            class='cursor-pointer flex items-center gap-2 hover:text-[#5FA04E]'
+          >
+            <Nodejs />
+            <span>Node.js</span>
+          </li>
         </ul>
       </section>
     </Container>
-  
-    <!-- technologies section -->
-    <Container>
-      <section id='skills' class="sm:border-x sm:px-14 py-8 md:py-12 lg:py-28 space-y-14 lg:space-y-20">
-          <div
-            class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
-          >
-            <h2
-              class='font-medium text-3xl leading-[1.1] sm:text-3xl md:text-5xl'
-            >
-              Stack
-            </h2>
-            <p
-              class='max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7'
-            >
-              The technologies I work with most frequently
-            </p>
-          </div>
-          <ul
-            class='grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center '
-          >
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#61DAFB]'>
-              <React />
-              <span>React.js</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#3178C6]'>
-              <Typescript />
-              <span>Typescript</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#06B6D4]'>
-              <Tailwind />
-              <span>Tailwind CSS</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2'>
-              <Nextjs />
-              <span>Next.js</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#47A248]'>
-              <MongoDB />
-              <span>MongoDB</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#CC6699]'>
-              <Sass />
-              <span>Sass</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#2D3748] dark:hover:text-white'>
-              <Prisma />
-              <span>Prisma</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2'>
-              <AstroIcon />
-              <span>Astro</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#4169E1]'>
-              <Postgres />
-              <span>PostgreSQL</span>
-            </li>
-            <li class='cursor-pointer flex items-center gap-2 hover:text-[#5FA04E]'>
-              <Nodejs />
-              <span>Node.js</span>
-            </li>
-          </ul>
-      </section>
-    </Container>
-  
+
     <!-- contact section -->
     <Container>
-      <section id='contact' class="sm:border-x py-8 md:py-12 lg:py-24 space-y-10">
-          <div
-            class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
+      <section
+        id='contact'
+        class='sm:border-x py-8 md:py-12 lg:py-24 space-y-10'
+      >
+        <div
+          class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
+        >
+          <h2
+            class='font-medium text-3xl leading-[1.1] sm:text-3xl md:text-5xl'
           >
-            <h2
-              class='font-medium text-3xl leading-[1.1] sm:text-3xl md:text-5xl'
-            >
-              Get in touch
-            </h2>
-            <p
-              class='max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7'
-            >
-              I'm actively seeking new opportunities to apply my skills and create
-              value. Whether you have a project in mind, a job opportunity, or
-              just want to connect, I'd love to hear from you.
-            </p>
-          </div>
-  
-          <div class='grid gap-6 lg:grid-cols-2 sm:px-10 max-lg:max-w-md max-lg:mx-auto'>
-            <div class='flex flex-col gap-8 justify-center max-sm:items-center max-sm:text-center '>
-              <div>
-                <h3 class='font-semibold text-lg'>
-                  You can contact me via email at
-                </h3>
-                <p
-                  class='w-fit relative after:absolute after:bg-foreground after:h-px after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+            Get in touch
+          </h2>
+          <p
+            class='max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7'
+          >
+            I'm actively seeking new opportunities to apply my skills and create
+            value. Whether you have a project in mind, a job opportunity, or
+            just want to connect, I'd love to hear from you.
+          </p>
+        </div>
+
+        <div
+          class='grid gap-6 lg:grid-cols-2 sm:px-10 max-lg:max-w-md max-lg:mx-auto'
+        >
+          <div
+            class='flex flex-col gap-8 justify-center max-sm:items-center max-sm:text-center'
+          >
+            <div>
+              <h3 class='font-semibold text-lg'>
+                You can contact me via email at
+              </h3>
+              <p
+                class='w-fit relative after:absolute after:bg-foreground after:h-px after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+              >
+                <a
+                  href='mailto:taqib.ibrahim@gmail.com'
+                  class='bg-gradient-to-r from-blue-700 to-fuchsia-600 bg-clip-text text-transparent dark:bg-gradient-to-r dark:from-blue-500 dark:to-fuchsia-500'
+                  >taqib.ibrahim@gmail.com</a
                 >
-                  <a href='mailto:taqib.ibrahim@gmail.com' class='bg-gradient-to-r from-blue-700 to-fuchsia-600 bg-clip-text text-transparent dark:bg-gradient-to-r dark:from-blue-500 dark:to-fuchsia-500'
-                    >taqib.ibrahim@gmail.com</a
-                  >
-                </p>
-              </div>
-              <div class="space-y-4">
-                <h4 class='font-semibold text-lg'>Find me on</h4>
-                <ul class='flex gap-4'>
-                  <li
-                    class='rounded-md'
-                  >
-                    <a href='https://github.com/taqh' target="_blank" class="hover:text-black dark:hover:text-white p-2 rounded-md inline-block">
-                      <Github />
-                    </a>
-                  </li>
-                  <li
-                    class='rounded-md'
-                  >
-                    <a href='https://x.com/rahimtkb' target="_blank" class="hover:text-black dark:hover:text-white p-2 rounded-md inline-block">
-                      <X />
-                    </a>
-                  </li>
-                  <li
-                    class='rounded-md'
-                  >
-                    <a href='https://linkedin.com/in/taqib-ibrahim' target="_blank" class="p-2 rounded-md inline-block hover:text-[#0A66C2]">
-                      <Linkedin />
-                    </a>
-                  </li>
-                  <li
-                    class='rounded-md'
-                  >
-                    <a href='https://discord.com/users/851479949717798932' target="_blank" class="p-2 rounded-md inline-block hover:text-[#5865F2]">
-                      <Discord />
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              </p>
             </div>
-            <ContactForm />
+            <div class='space-y-4'>
+              <h4 class='font-semibold text-lg'>Find me on</h4>
+              <ul class='flex gap-4'>
+                <li class='rounded-md'>
+                  <a
+                    href='https://github.com/taqh'
+                    target='_blank'
+                    class='hover:text-black dark:hover:text-white p-2 rounded-md inline-block'
+                  >
+                    <Github />
+                  </a>
+                </li>
+                <li class='rounded-md'>
+                  <a
+                    href='https://x.com/rahimtkb'
+                    target='_blank'
+                    class='hover:text-black dark:hover:text-white p-2 rounded-md inline-block'
+                  >
+                    <X />
+                  </a>
+                </li>
+                <li class='rounded-md'>
+                  <a
+                    href='https://linkedin.com/in/taqib-ibrahim'
+                    target='_blank'
+                    class='p-2 rounded-md inline-block hover:text-[#0A66C2]'
+                  >
+                    <Linkedin />
+                  </a>
+                </li>
+                <li class='rounded-md'>
+                  <a
+                    href='https://discord.com/users/851479949717798932'
+                    target='_blank'
+                    class='p-2 rounded-md inline-block hover:text-[#5865F2]'
+                  >
+                    <Discord />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
+          <ContactForm />
+        </div>
       </section>
     </Container>
-  </main>
+  </div>
 </Layout>

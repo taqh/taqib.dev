@@ -1,47 +1,44 @@
 ---
 interface Props {
   title: string;
-  description: string;
   status: string;
-  image: {
-    url: string;
+  image: string;
+  slug: string;
+  description: string;
+  preview?: {
+    src: string;
     alt: string;
   };
   links: {
     repo?: string;
     live?: string;
   };
-  index: number;
+  technologies: string[];
 }
 
 import Github from './icons/Github.astro';
 import Globe from './icons/Globe.astro';
+import Link from './Link.astro';
 
-const { title, description, image, status, links, index } =
+const { title, description, preview, status, links, slug } =
   Astro.props as Props;
 const { repo, live } = links;
-const { url, alt } = image;
 
 import { Image } from 'astro:assets';
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}')
-if (!images[url]) throw new Error(`"${image?.url}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`);
 ---
 
 <li
-  class={`flex flex-col gap-4 border rounded-lg backdrop-blur-md card z-10 bg-card ${index === 2 ? 'md:col-span-2' : 'md:col-span-1'}`}
+  class={`flex flex-col gap-4 border rounded-lg backdrop-blur-md card z-10 bg-card`}
 >
-  <div class='relative group overflow-hidden z-10 rounded-t-lg'>
-    {
-      image.url !== "/src/assets/stashbot.png" && (
-        <Image 
-          src={images[url]()}
-          alt={alt}
-        />
-      )
-    }
-  </div>
+  {
+    preview && (
+      <div class='relative group overflow-hidden z-10 rounded-t-lg'>
+        <Image src={preview.src} alt={preview.alt} width={500} height={250} />
+      </div>
+    )
+  }
   <div class='flex flex-col gap-2 px-4 py-2'>
-    <div class="flex justify-between">
+    <div class='flex justify-between'>
       <h2 class='font-bold text-lg uppercase tracking-wider'>
         {title}
       </h2>
@@ -50,10 +47,10 @@ if (!images[url]) throw new Error(`"${image?.url}" does not exist in glob: "src/
       >
         <span class='relative flex h-2 w-2 mr-2'>
           <span
-            class={`absolute inline-flex h-full w-full animate-ping rounded-full ${status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
+            class={`absolute inline-flex h-full w-full animate-ping rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
           ></span>
           <span
-            class={`relative inline-flex h-2 w-2 rounded-full ${status === 'ongoing' ? 'bg-yellow-400' : 'bg-green-400'}`}
+            class={`relative inline-flex h-2 w-2 rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'}`}
           ></span>
         </span>
       </div>
@@ -61,31 +58,36 @@ if (!images[url]) throw new Error(`"${image?.url}" does not exist in glob: "src/
     <p class='text-muted-foreground'>
       {description}
     </p>
-    <div class='flex items-center gap-4'>
-      {
-        repo && (
-          <a
-            href={repo}
-            target='_blank'
-            class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
-          >
-            <span class='sr-only'>view source code on github</span>
-            <Github />
-          </a>
-        )
-      }
-      {
-        live && (
-          <a
-            href={live}
-            target='_blank'
-            class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
-          >
-            <span class='sr-only'>view the live site</span>
-            <Globe />
-          </a>
-        )
-      }
+    <div class='flex justify-between'>
+      <Link href={`/projects/${slug}`}>Details</Link>
+      <div class='flex items-center gap-4'>
+        {
+          repo && (
+            <Link
+              href={repo}
+              external
+              variant='icon'
+              class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
+            >
+              <span class='sr-only'>view source code on github</span>
+              <Github />
+            </Link>
+          )
+        }
+        {
+          live && (
+            <Link
+              href={live}
+              external
+              variant='icon'
+              class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
+            >
+              <span class='sr-only'>view the live site</span>
+              <Globe />
+            </Link>
+          )
+        }
+      </div>
     </div>
   </div>
 </li>

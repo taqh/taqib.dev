@@ -1,36 +1,24 @@
 ---
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
-import { fade } from 'astro:transitions';
-import Tracker from '../components/Tracker.astro';
-const { pageTitle } = Astro.props;
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+import Tracker from '@/components/Tracker.astro';
+import Head from '@/components/Head.astro';
+import '@/styles/global.css';
+import BackToTop from '@/components/BackToTop.astro'
+
+const { title, description, image } = Astro.props;
 ---
 
 <html lang='en'>
   <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <meta name='description' content='Frontend web developer' />
-    <meta property='og:type' content='website' />
-    <meta property='og:url' content='' />
-    <meta property='og:title' content='Taqib' />
-    <meta property='og:description' content='Frontend web developer' />
-    <meta property='og:image' content='/og-dark.png' />
-    <meta property='og:image:alt' content='Taqib Frontend web developer' />
-    <title>Taqib</title>
-    <ViewTransitions transition:animate={fade({duration: 0.6})} />
+    <Head title={title} description={description} image={image} />
   </head>
   <body class='bg-dot overflow-x-hidden relative'>
     <Header />
-    <slot />
-    <!-- <Tracker /> -->
+    <main>
+      <slot />
+    </main>
     <Footer />
-    <script>
-      import '../scripts/tracker.ts';
-    </script>
+    <BackToTop />
   </body>
 </html>
