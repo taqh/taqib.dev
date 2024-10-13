@@ -1,19 +1,20 @@
 ---
-interface Props {
+import type { HTMLAttributes } from 'astro/types';
+interface Props extends HTMLAttributes<'a'> {
   href: string;
   external?: boolean;
   forward?: boolean;
   class?: string;
   variant?: 'card' | 'icon' | 'button';
 }
-
-const { href, external, forward, class: classNames, variant } = Astro.props;
+const { href, external, forward, class: classNames, variant, ...attrs } = Astro.props;
 ---
 
 <a
   href={href}
   target={external ? '_blank' : '_self'}
   class={`group font-sans rounded-md hover:bg-border focus-visible:bg-border flex border cursor-pointer transition duration-300 focus-visible:ring-offset-2 ${variant === 'card' ? 'flex-col p-4 text-base' : variant === 'icon' ? 'p-2 border-none' : 'px-4 py-2 items-center justify-center text-sm'} ${classNames}`}
+  {...attrs}
 >
   <slot />
   {
