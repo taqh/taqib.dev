@@ -1,25 +1,38 @@
 ---
-import Container from '../../components/Container.astro';
+import Container from '@/components/Container.astro';
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-const projects = await getCollection('projects');
+import Layout from '@/layouts/Layout.astro';
+import { PROJECTS } from '@/lib/constants';
+import Link from '@/components/Link.astro'
 
-const pageTitle = 'Projects - Taqib';
+const projects = await getCollection('projects', ({ data }) => data.draft !== true)
 ---
 
-<Layout pageTitle={pageTitle}>
-  <Container classNames='min-h-[calc(100vh-64px)] pt-20'>
-    <ul class='flex flex-col gap-6'>
-      {
-        projects.map((project) => (
-          <li>
-            <a href={`/projects/${project.slug}`} class="space-y-1">
-              <p class="font-bold text-lg">{project.data.title}</p>
-              <p class="text-muted-foreground">{project.data.description}</p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+<Layout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <Container class='border-t'>
+    <section class='py-20 sm:border-x sm:bg-background min-h-[calc(100vh-88px)] sm:min-h-[calc(100vh-103px)] lg:min-h-[calc(100vh-120px)]'>
+      <div class='max-w-2xl mx-auto mb-10 space-y-2'>
+        <h1 class='font-medium text-2xl leading-[1.1] sm:text-3xl md:text-4xl italic'>
+          Projects
+        </h1>
+        <p class='text-muted-foreground text-sm'>A list of projects I've worked on or currently working on.</p>
+      </div>
+      <ul class='flex flex-col gap-6 max-w-2xl mx-auto'>
+        {
+          projects.map((project) => (
+            <li>
+              <Link
+                href={`/projects/${project.slug}`}
+                class='space-y-1'
+                variant='card'
+              >
+                <h2 class='font-semibold tracking-wide text-lg italic'>{project.data.title}</h2>
+                <p class='text-muted-foreground'>{project.data.description}</p>
+              </Link>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </Container>
 </Layout>

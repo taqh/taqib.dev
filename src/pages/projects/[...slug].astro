@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/Container.astro';
+import { SITE } from '../../lib/constants';
+import Link from '@/components/Link.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const projectEntries = await getCollection('projects');
+  return projectEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout
+  title={`${entry.data.title} - ${SITE.TITLE}`}
+  description={entry.data.description}
+  image={entry.data.image}
+>
+  <Container class='border-t'>
+    <div
+      class='sm:border-x sm:px-2 bg-background min-h-[calc(100vh-88px)] sm:min-h-[calc(100vh-103px)] lg:min-h-[calc(100vh-120px)] py-6 sm:py-8 md:py-10'
+    >
+      <section class='max-w-3xl mx-auto mb-10 space-y-6'>
+        <Link href="/projects" class='w-fit'> Back to projects</Link>
+        <div class='space-y-3'>
+          <h1 class='font-bold text-3xl sm:leading-tight sm:text-4xl md:text-5xl'>
+            {entry.data.title}
+          </h1>
+        </div>
+        <div class='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+          {entry.data.links.repo && <Link href={entry.data.links.repo} external> View repository </Link>}
+          {entry.data.links.live && <Link href={entry.data.links.live} external> Visit the site </Link>}
+        </div>
+      </section>
+      <article
+        class='prose xl:prose-lg prose-taqib max-w-3xl prose-headings:font-mono mx-auto'
+      >
+        <Content />
+      </article>
+    </div>
+  </Container>
+</Layout>

@@ -1,19 +1,46 @@
----
-import Sun from './icons/Sun.astro';
-import Moon from './icons/Moon.astro';
----
-
 <div class=''>
   <button
     id='themeToggle'
-    class='rounded-full bg-background grid place-content-center size-10'
+    class='rounded-full bg-background grid place-content-center size-10 hover:bg-border focus-visible:bg-border transition-all duration-300'
   >
     <span class='sr-only'>Toggle website theme</span>
-    <span id='themeIcon'><Sun /></span>
+    <svg aria-hidden="true" class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+    <svg aria-hidden="true" class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
   </button>
 </div>
 
+<style>
+  .sun { display: block; }
+  .moon { display: none; }
+  
+  :global(.dark) .sun { display: none; }
+  :global(.dark) .moon { display: block; }
+</style>
+
 <script>
+  function getSystemTheme(): 'dark' | 'light' {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function getCurrentTheme(): 'dark' | 'light' {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  }
+
+  function setTheme(theme: 'dark' | 'light') {
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
+    const theme = savedTheme || getSystemTheme();
+    setTheme(theme);
+  }
+
   function toggleTheme(event: MouseEvent) {
     const x = event.clientX;
     const y = event.clientY;
@@ -22,87 +49,64 @@ import Moon from './icons/Moon.astro';
       Math.max(y, window.innerHeight - y)
     );
 
-    // type assertion for view transition to avoid build errors as TypeScript doesn't recognize the startViewTransition API 
     const doc = document as Document & {
       startViewTransition?: (callback: () => void) => {
         ready: Promise<void>;
       };
     };
 
-   // Fallback for browsers that don't support View Transitions:
+    const newTheme = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+
     if (!doc.startViewTransition) {
-      document.documentElement.classList.toggle('dark');
+      setTheme(newTheme);
     } else {
-      // With View Transitions:
       const transition = doc.startViewTransition(() => {
-        document.documentElement.classList.toggle('dark');
+        setTheme(newTheme);
       });
-  
+
       transition.ready.then(() => {
-        const isDark = document.documentElement.classList.contains('dark');
         const clipPath = [
           `circle(0px at ${x}px ${y}px)`,
           `circle(${endRadius}px at ${x}px ${y}px)`,
         ];
         document.documentElement.animate(
           {
-            clipPath: isDark ? [...clipPath].reverse() : clipPath,
+            clipPath: newTheme === 'dark' ? [...clipPath].reverse() : clipPath,
           },
           {
             duration: 400,
             easing: 'ease-in',
-            pseudoElement: isDark
+            pseudoElement: newTheme === 'dark'
               ? '::view-transition-old(root)'
               : '::view-transition-new(root)',
           }
         );
       });
-  
-      // Update localStorage and theme icon
-      const newTheme = document.documentElement.classList.contains('dark')
-        ? 'dark'
-        : 'light';
-      localStorage.setItem('theme', newTheme);
     }
   }
 
-  // astro:page-load makes the script availabe to the next pages after navigation
+  // Initialize theme on page load
   document.addEventListener('astro:page-load', () => {
-    const theme = (() => {
-      if (
-        typeof localStorage !== 'undefined' &&
-        localStorage.getItem('theme')
-      ) {
-        return localStorage.getItem('theme');
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-      return 'light';
-    })();
-
-    if (theme === 'light') {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
-
-    window.localStorage.setItem('theme', theme!);
-
+    initializeTheme();
     document
-      .getElementById('themeToggle')!
-      .addEventListener('click', toggleTheme);
+      .getElementById('themeToggle')
+      ?.addEventListener('click', toggleTheme);
   });
 </script>
 
 <script is:inline>
   function applyTheme() {
-    const theme = localStorage.getItem('theme');
-    theme === 'dark'
-      ? document.documentElement.classList.add('dark')
-      : document.documentElement.classList.remove('dark');
+    const theme = localStorage.getItem('theme') || 
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }
 
-  document.addEventListener('astro:after-swap', applyTheme);
+  // Apply theme immediately and after page transitions
   applyTheme();
+  document.addEventListener('astro:after-swap', applyTheme);
 </script>

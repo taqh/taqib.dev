@@ -1,0 +1,46 @@
+---
+
+---
+
+<button
+  id='scroll-to-top'
+  class='group fixed bottom-8 right-8 lg:bottom-20 lg:right-20 z-50 hidden w-fit flex-nowrap rounded-md border hover:bg-border p-2 bg-background transition duration-300'
+>
+  <svg
+    class="transition-all group-hover:-translate-y-0.5 duration-300 lucide lucide-chevrons-up"
+    xmlns='http://www.w3.org/2000/svg'
+    width='18'
+    height='18'
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    stroke-width='2'
+    stroke-linecap='round'
+    stroke-linejoin='round'
+    ><path d='m17 11-5-5-5 5'></path><path d='m17 18-5-5-5 5'></path></svg
+  >
+  <span class='sr-only'>Scroll to top</span>
+</button>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const scrollToTopButton = document.getElementById('scroll-to-top');
+    const footer = document.querySelector('footer');
+
+    if (scrollToTopButton && footer) {
+      scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      window.addEventListener('scroll', () => {
+        const footerRect = footer.getBoundingClientRect();
+        const isFooterVisible = footerRect.top <= window.innerHeight;
+
+        scrollToTopButton.classList.toggle(
+          'hidden',
+          window.scrollY <= 300 || isFooterVisible
+        );
+      });
+    }
+  });
+</script>
