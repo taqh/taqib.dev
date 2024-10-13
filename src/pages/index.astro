@@ -21,7 +21,9 @@ import Linkedin from '@/components/icons/Linkedin.astro';
 import { SITE } from '@/lib/constants';
 import Link from '@/components/Link.astro';
 
-const projects = await getCollection('projects');
+const projects = await getCollection('projects', ({ data }) => {
+  return data.draft !== true;
+})
 ---
 
 <Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
@@ -29,14 +31,14 @@ const projects = await getCollection('projects');
     <!-- hero section -->
     <Container class='border-t'>
       <section
-        class='overflow-x-hidden sm:border-x bg-background py-16 lg:py-24 text-center flex items-center flex-col justify-center'
+        class='overflow-x-hidden sm:border-x sm:bg-background py-16 lg:py-24 text-center flex items-center flex-col justify-center'
       >
         <div
           class='inline-flex items-center rounded-lg border px-3 py-1 text-sm md:text-base font-medium mb-4 bg-background'
         >
           <span>Hi there, I&apos;m Taqib</span>
         </div>
-        <h1 class='max-w-4xl text-4xl font-bold md:text-5xl lg:text-6xl'>
+        <h1 class='max-w-4xl text-4xl font-semibold md:text-5xl lg:text-6xl'>
           A
           <span
             class='text-transparent inline-block bg-clip-text bg-gradient-to-r from-blue-700 to-fuchsia-600'
@@ -45,10 +47,7 @@ const projects = await getCollection('projects');
           </span>
           web developer crafting modern web applications.
         </h1>
-        <p class='mt-5 max-w-prose text-muted-foreground sm:text-lg'>
-          I’m passionate about crafting accessible, visually appealing, and
-          modern web experiences using the latest technologies
-        </p>
+        
       </section>
     </Container>
 
@@ -56,7 +55,7 @@ const projects = await getCollection('projects');
     <Container>
       <section
         id='about'
-        class='sm:border-x px-4 md:px-6 bg-background space-y-12 py-8 md:py-12 lg:py-24'
+        class='sm:border-x px-4 md:px-6 sm:bg-background space-y-12 py-8 md:py-12 lg:py-24'
       >
         <div class='mx-auto flex flex-col space-y-4'>
           <h2
@@ -78,8 +77,7 @@ const projects = await getCollection('projects');
                 class='max-w-prose leading-normal text-muted-foreground sm:text-lg sm:leading-7'
               >
                 Currently, learning about design systems and UI/UX fundamentals,
-                aiming to create web experiences that are not only functional
-                but also intuitive and visually appealing.
+                aiming to improve my web development skills and create visually appealing web experiences. 
               </p>
             </div>
           </div>
@@ -91,7 +89,7 @@ const projects = await getCollection('projects');
     <Container>
       <section
         id='projects'
-        class='bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:px-6 md:px-10 lg:px-16'
+        class='sm:bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:px-6 md:px-10 lg:px-16'
       >
         <div class='mx-auto flex flex-col space-y-4 justify-center text-center'>
           <h2
@@ -103,7 +101,7 @@ const projects = await getCollection('projects');
             class='max-w-prose mx-auto leading-normal text-muted-foreground sm:text-lg sm:leading-7'
           >
             I Love learning and staying engaged through exciting new projects. Here
-            are a few I've poured my energy into.
+            are a few I've spent my time on.
           </p>
         </div>
         <!-- project list -->
@@ -113,7 +111,7 @@ const projects = await getCollection('projects');
         {
           projects.length > 4 && (
             <div class='flex justify-center mt-10'>
-              <Link href='/projects'>See All Projects</Link>
+              <Link forward href='/projects'>See All Projects</Link>
             </div>
           )
         }
@@ -141,60 +139,60 @@ const projects = await getCollection('projects');
           </p>
         </div>
         <ul
-          class='grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center'
+          class='grid grid-cols-[repeat(auto-fill,_minmax(8.5rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center'
         >
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#61DAFB]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#61DAFB]'
           >
             <React />
             <span>React.js</span>
           </li>
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#3178C6]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#3178C6]'
           >
             <Typescript />
             <span>Typescript</span>
           </li>
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#06B6D4]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#06B6D4]'
           >
             <Tailwind />
             <span>Tailwind CSS</span>
           </li>
-          <li class='cursor-pointer flex items-center gap-2'>
+          <li class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-black dark:hover:text-white'>
             <Nextjs />
             <span>Next.js</span>
           </li>
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#47A248]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#47A248]'
           >
             <MongoDB />
             <span>MongoDB</span>
           </li>
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#CC6699]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#CC6699]'
           >
             <Sass />
             <span>Sass</span>
           </li>
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#2D3748] dark:hover:text-white'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#2D3748] dark:hover:text-white'
           >
             <Prisma />
             <span>Prisma</span>
           </li>
-          <li class='cursor-pointer flex items-center gap-2'>
+          <li class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2'>
             <AstroIcon />
             <span>Astro</span>
           </li>
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#4169E1]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#4169E1]'
           >
             <Postgres />
             <span>PostgreSQL</span>
           </li>
           <li
-            class='cursor-pointer flex items-center gap-2 hover:text-[#5FA04E]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#5FA04E]'
           >
             <Nodejs />
             <span>Node.js</span>
@@ -250,40 +248,40 @@ const projects = await getCollection('projects');
               <h4 class='font-semibold text-lg'>Find me on</h4>
               <ul class='flex gap-4'>
                 <li class='rounded-md'>
-                  <a
+                  <Link
                     href='https://github.com/taqh'
-                    target='_blank'
-                    class='hover:text-black dark:hover:text-white p-2 rounded-md inline-block'
+                    external
+                    variant='icon'
                   >
                     <Github />
-                  </a>
+                  </Link>
                 </li>
                 <li class='rounded-md'>
-                  <a
+                  <Link
                     href='https://x.com/rahimtkb'
-                    target='_blank'
-                    class='hover:text-black dark:hover:text-white p-2 rounded-md inline-block'
+                    external
+                    variant='icon'
                   >
                     <X />
-                  </a>
+                  </Link>
                 </li>
                 <li class='rounded-md'>
-                  <a
+                  <Link
                     href='https://linkedin.com/in/taqib-ibrahim'
-                    target='_blank'
-                    class='p-2 rounded-md inline-block hover:text-[#0A66C2]'
+                    external
+                    variant='icon'
                   >
                     <Linkedin />
-                  </a>
+                  </Link>
                 </li>
                 <li class='rounded-md'>
-                  <a
+                  <Link
                     href='https://discord.com/users/851479949717798932'
-                    target='_blank'
-                    class='p-2 rounded-md inline-block hover:text-[#5865F2]'
+                    external
+                    variant='icon'
                   >
                     <Discord />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -1,32 +1,28 @@
-<div class='tracker'>
-  <div id='blob'></div>
-  <div id='blur'></div>
-</div>
+<div id='blob'></div>
+<div id='blur'></div>
 
 <style>
-  .tracker {
-    position: relative;
-    min-height: 100%;
-  }
   #blob {
     background-color: white;
-    height: 150px;
+    height: 200px;
     aspect-ratio: 1;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     translate: -50% -50%;
     border-radius: 50%;
     background: linear-gradient(to right, aquamarine, mediumpurple);
     animation: rotate 20s infinite;
-    /* filter: blur(100px); */
+    /* filter: blur(200px); */
+    z-index: -1;
   }
+
   #blur {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 2;
-    backdrop-filter: blur(10px);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: -1;
+    /* backdrop-filter: blur(200px); */
   }
 
   @keyframes rotate {
@@ -34,10 +30,25 @@
       rotate: 0deg;
     }
     50% {
-      scale: 1 1.2;
+      scale: 1 1.5;
     }
     to {
       rotate: 360deg;
     }
   }
 </style>
+
+<script>
+  const blob = document.getElementById("blob");
+
+  document.body.onpointermove = (event) => {
+    const { clientX, clientY } = event;
+
+    if (blob) {
+      blob.animate({
+        left: `${clientX}px`,
+        top: `${clientY}px`
+      }, { duration: 3000, fill: "forwards" });
+    }
+  };
+</script>

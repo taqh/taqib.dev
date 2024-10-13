@@ -5,25 +5,19 @@
 @layer base {
   :root {
     --foreground: 223 16% 9%;
-    --background: 28 100% 97%;
-    --muted-foreground: 223 10% 45%;
+    --background: 40 60% 93%;
+    --muted-foreground: 220 11% 22%;
     --border: 0 0% 85%;
-    --card: hsl(28, 76%, 95%);
+    --card: hsl 28, 76%, 95%;
 
-    --accent: 220 14.3% 95.9%;
-    --primary: 262.1 83.3% 57.8%;
-    --secondary: 220 14.3% 95.9%;
-    --muted: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
-
-    --dot-bg-color: hsl(28, 100%, 97%);
+    --dot-bg-color: hsl(40, 60%, 93%);
     --dot-color: hsl(0, 0%, 85%);
-    --dot-mask-color: hsl(34 78% 91%);
+    --dot-mask-color: hsl(30, 100%, 99%);
 
-    --scrollbar-thumb: hsl(0, 0%, 37%);
-    --scrollbar-thumb-hover: hsl(0, 0%, 40%);
+    --scrollbar-thumb: 0 0% 37%;
+    --scrollbar-thumb-hover: 0 0% 40%;
 
-    /* --bg: hsl(27, 100%, 98%); */
+    --bg: hsl(40, 60%, 93%);
   }
 
   .dark {
@@ -31,31 +25,33 @@
     --background: 0, 0%, 10%;
     --muted-foreground: 33, 15%, 76%;
     --border: 225 5% 18%;
-    --card: hsl(0, 0%, 10%);
-
-    --accent: 220 14.3% 95.9%;
-    --primary: 262.1 83.3% 57.8%;
-    --secondary: 220 14.3% 95.9%;
-    --muted: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --card: hsl 0, 0%, 10%;
+    --accent: ;
 
     --dot-bg-color: hsl(0, 0%, 10%);
     --dot-color: hsl(225, 5%, 16%);
     --dot-mask-color: hsl(223 16% 9%);
 
-    --scrollbar-thumb: hsl(0, 0%, 53%);
-    --scrollbar-thumb-hover: hsl(0, 0%, 33%);
+    --scrollbar-thumb: 0, 0%, 53%;
+    --scrollbar-thumb-hover: 0, 0%, 33%;
   }
 }
 
 @font-face {
   font-family: "GeistMono";
-  src: url("/fonts/geist/GeistMono[wght].woff2") format("woff2");
+  src: url("/fonts/geist/GeistMonoVF.woff") format("woff");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist/GeistVF.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Montserrat";
@@ -71,7 +67,7 @@
   }
 
   html {
-    font-family: system-ui, sans-serif;
+    font-family: GeistMono, system-ui, sans-serif;
     background: hsl(var(--background));
     color: hsl(var(--foreground));
     scroll-behavior: smooth;
@@ -79,10 +75,12 @@
 
   body {
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  *:not(h1, h2, h3, h4, h5, h6) {
-    font-family: "GeistMono", system-ui, sans-serif;
+  article > *:not(h1, h2, h3, h4, h5, h6) {
+    font-family: "Geist", system-ui, sans-serif;
   }
 
   h1,
@@ -90,15 +88,17 @@
   h3,
   h4,
   h5,
-  h6,
-  #logo {
+  h6 {
     font-family: "Montserrat", system-ui, sans-serif;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-blue-700 to-fuchsia-600 bg-clip-text text-transparent;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to-right, from #1d4ed8 to #c026d3);
   }
 
   .bg-dot::before {
@@ -171,10 +171,10 @@
   width: 0.525rem;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb);
+  background-color: hsl(var(--scrollbar-thumb));
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--scrollbar-thumb-hover);
+  background-color: hsl(var(--scrollbar-thumb-hover));
 }
 ::-webkit-scrollbar-track {
   background: hsl(var(--background) / 0.8);
