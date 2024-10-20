@@ -7,7 +7,7 @@ image: "/og-dark.png"
 draft: true
 preview:
   src: "../../assets/wouldyou.png"
-  alt: "A preview of the quillstash homepage"
+  alt: "A preview of the wouldyoubot on discord"
 technologies: ["Next.js", "Prisma ORM", "Typescript", "Framer Motion"]
 links:
   repo: "https://github.com/wouldyoubot/website-app"
