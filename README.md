@@ -9,30 +9,17 @@ Inside the project, you'll see the following folders and files:
 ```text
 /
 ├── public/
-│   ├─── fonts/
-│   │    └── geist/
-│   │    └── montserrat/
-│   └── favicon.svg
-│   └── all-opengraph-images.png
+│ ├─ favicon.svg
+│ ├─ all-opengraph-images
+│ └─ fonts/
 ├── src/
-│   ├── assets/
-│   ├── components/
-│   │   ├── icons/
-│   │   │   └── all-icons.astro
-│   │   └── all-other-components.astro
-│   ├── content/
-│   │    └── projects/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   ├── lib/
-│   ├── pages/
-│   │    ├── index.astro
-│   │    ├── projects/
-│   │    │   └── index.astro
-│   │    │   └── [...slug].astro
-│   │    └── 404.astro
-│   ├── styles/
-│   │    └── global.css
+│ ├─ assets/
+│ ├─ components/
+│ ├─ content/
+│ ├─ layouts/
+│ ├─ lib/
+│ ├─ pages/
+│ └─ styles/
 ├── astro.config.mjs
 ├── package.json
 ├── README.md
@@ -109,6 +96,7 @@ theme: {
 ```
 
 Replace the variables with your prefered colors. The CSS variables are defined in the `src/styles/global.css` file.
+
 <!-- https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#adding-custom-color-themes -->
 
 ## Content Collections
@@ -123,7 +111,7 @@ title: "Project Title"
 status: "live"
 description: "Project description"
 slug: "project-slug"
-draft: false 
+draft: false
 image: "your-opengraph-image.png"
 technologies: ["Tech1", "Tech2", "Tech3"]
 links:
@@ -133,14 +121,13 @@ preview:
   src: "../../assets/quillstash.png"
   alt: "A preview of the quillstash homepage"
 ---
-
 You can then add your project content here using markdown syntax.
 ```
 
-The frontmatter can be customized to fit your needs. However you will need to update the schema in the  `/content/config.ts` file to match your frontmatter.
+The frontmatter can be customized to fit your needs. However you will need to update the schema in the `/content/config.ts` file to match your frontmatter.
 
 ```typescript
-import { defineCollection } from 'astro:collections';
+import { defineCollection } from "astro:collections";
 
 // this is my project collection schema update it to match your frontmatter
 const projectsCollection = defineCollection({
@@ -150,10 +137,12 @@ const projectsCollection = defineCollection({
     status: z.enum(["live", "dev"]),
     description: z.string(),
     image: z.string(),
-    preview: z.object({
-      src: z.string(),
-      alt: z.string(),
-    }).optional(),
+    preview: z
+      .object({
+        src: z.string(),
+        alt: z.string(),
+      })
+      .optional(),
     links: z.object({
       repo: z.string().url().optional(),
       live: z.string().url().optional(),
@@ -161,21 +150,20 @@ const projectsCollection = defineCollection({
     technologies: z.array(z.string()),
   }),
 });
-
 ```
 
 To get content from the project collection, use astro's getCollection function.
 
 ```typescript
-   import { getCollection } from 'astro:collections';
+import { getCollection } from "astro:collections";
 
-   // this will return an array of all projects in the collection
-   const projects = await getCollection('projects');
+// this will return an array of all projects in the collection
+const projects = await getCollection("projects");
 
-   // get collection also takes an optional filter function
-   const projects = await getCollection('projects', ({ data }) => {
-      return data.draft !== true;
-   });
+// get collection also takes an optional filter function
+const projects = await getCollection("projects", ({ data }) => {
+  return data.draft !== true;
+});
 ```
 
 ## References
