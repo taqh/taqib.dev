@@ -1,9 +1,9 @@
 import { defineAction } from "astro:actions";
 import { z } from 'astro:schema';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-const user = await import.meta.env.GMAIL_USER
-const pass = await import.meta.env.GMAIL_PASS
+const pass = await import.meta.env.RESEND_API_KEY
+const resend = new Resend(pass);
 
 export const server = {
   contact: defineAction({
@@ -15,31 +15,20 @@ export const server = {
     }),
     handler: async ({ name, email, message }) => {
 
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: user, // your Gmail address
-          pass: pass, // your Gmail App Password
-        },
-      });
-
       // Configure the email details
       const mailOptions = {
-        from: email,
-        to: user, 
-        subject: `New message from ${name}`,
-        text: message,
+        from: `Website <${name}@hello.taqib.dev>`,
+        to: 'hello@taqib.dev', 
+        subject: `New message from site visitor: ${name}`,
         html: `
-          <h2>New Message from Contact Form</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
           <p>${message}</p>
         `,
       };
 
       try {
-        await transporter.sendMail(mailOptions);
+        await resend.emails.send(mailOptions);
         return { success: true };
       } catch (error) {
         console.error('Error sending email:', error);

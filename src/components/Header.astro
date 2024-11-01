@@ -8,14 +8,14 @@ import ThemeToggle from './ThemeToggle.astro';
     <nav
       class='sm:bg-background flex items-center justify-between h-full sm:px-6 py-6 md:py-8 lg:py-10 sm:-mb-10 md:-mb-14 lg:-mb-20'
     >
-      <a href="/">
-        <p
+      <a href="/" class="focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 rounded-full">
+        <span
           id='logo'
           aria-hidden='true'
           class='font-bold font-mono text-lg select-none bg-background uppercase size-10 grid place-content-center'
         >
           tq.
-        </p>
+        </span>
       </a>
       <div>
         <ThemeToggle />
@@ -23,7 +23,7 @@ import ThemeToggle from './ThemeToggle.astro';
     </nav>
     <div
       aria-hidden='true'
-      class='hidden sm:block sm:h-10 md:h-14 lg:h-20 border-x'
+      class='hidden sm:block sm:h-10 md:h-14 lg:h-20 border-x border-dashed'
     >
     </div>
   </Container>

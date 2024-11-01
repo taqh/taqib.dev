@@ -14,7 +14,7 @@ const { title, preview, links, description, status } = entry.data
 ---
 
 <li
-  class={`flex flex-col gap-4 border rounded-lg backdrop-blur-md card z-10 bg-card`}
+  class={`flex flex-col gap-4 border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card`}
 >
   {
     preview && (
@@ -41,7 +41,7 @@ const { title, preview, links, description, status } = entry.data
         </span>
       </div>
     </div>
-    <p class='text-muted-foreground'>
+    <p class='text-muted-foreground text-sm'>
       {description}
     </p>
     <div class='flex justify-between'>
