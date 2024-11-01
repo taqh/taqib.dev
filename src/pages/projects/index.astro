@@ -9,8 +9,8 @@ const projects = await getCollection('projects', ({ data }) => data.draft !== tr
 ---
 
 <Layout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
-  <Container class='border-t'>
-    <section class='py-20 sm:border-x sm:bg-background min-h-[calc(100vh-88px)] sm:min-h-[calc(100vh-103px)] lg:min-h-[calc(100vh-120px)]'>
+  <Container class='border-t border-dashed'>
+    <section class='py-20 sm:border-x sm:border-dashed sm:bg-background min-h-[calc(100vh-88px)] sm:min-h-[calc(100vh-103px)] lg:min-h-[calc(100vh-120px)]'>
       <div class='max-w-2xl mx-auto mb-10 space-y-2'>
         <h1 class='font-medium text-2xl leading-[1.1] sm:text-3xl md:text-4xl italic'>
           Projects

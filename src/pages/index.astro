@@ -27,21 +27,21 @@ const projects = await getCollection('projects', ({ data }) => {
 ---
 
 <Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
-  <div class='divide-y'>
+  <div class='divide-y divide-dashed'>
     <!-- hero section -->
-    <Container class='border-t'>
+    <Container class='border-t border-dashed'>
       <section
-        class='overflow-x-hidden sm:border-x sm:bg-background py-16 lg:py-24 text-center flex items-center flex-col justify-center'
+        class='overflow-x-hidden sm:border-x sm:border-dashed sm:bg-background py-16 lg:py-24 flex items-center flex-col justify-center'
       >
         <div
           class='inline-flex items-center rounded-lg border px-3 py-1 text-sm md:text-base font-medium mb-4 bg-background'
         >
           <span>Hi there, I&apos;m Taqib</span>
         </div>
-        <h1 class='max-w-4xl text-4xl font-semibold md:text-5xl lg:text-6xl'>
+        <h1 class='max-w-4xl text-4xl font-semibold md:text-5xl lg:text-6xl text-center'>
           A
           <span
-            class='text-transparent inline-block bg-clip-text bg-gradient-to-r from-blue-700 to-fuchsia-600'
+            class='inline-block underline underline-offset-2 decoration-dashed decoration-emerald-500'
           >
             Frontend
           </span>
@@ -55,7 +55,7 @@ const projects = await getCollection('projects', ({ data }) => {
     <Container>
       <section
         id='about'
-        class='sm:border-x px-4 md:px-6 sm:bg-background space-y-12 py-8 md:py-12 lg:py-24'
+        class='sm:border-x sm:border-dashed px-4 md:px-6 sm:bg-background space-y-12 py-8 md:py-12 lg:py-24'
       >
         <div class='mx-auto flex flex-col space-y-4'>
           <h2
@@ -89,7 +89,7 @@ const projects = await getCollection('projects', ({ data }) => {
     <Container>
       <section
         id='projects'
-        class='sm:bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:px-6 md:px-10 lg:px-16'
+        class='sm:bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:border-dashed sm:px-6 md:px-10 lg:px-16'
       >
         <div class='mx-auto flex flex-col space-y-4 justify-center text-center'>
           <h2
@@ -122,7 +122,7 @@ const projects = await getCollection('projects', ({ data }) => {
     <Container>
       <section
         id='skills'
-        class='sm:border-x sm:px-14 py-8 md:py-12 lg:py-28 space-y-14 lg:space-y-20'
+        class='sm:border-x sm:border-dashed sm:px-14 py-8 md:py-12 lg:py-28 space-y-14 lg:space-y-20'
       >
         <div
           class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
@@ -157,7 +157,7 @@ const projects = await getCollection('projects', ({ data }) => {
             class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#06B6D4]'
           >
             <Tailwind />
-            <span>Tailwind CSS</span>
+            <span>Tailwind</span>
           </li>
           <li class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-black dark:hover:text-white'>
             <Nextjs />
@@ -205,7 +205,7 @@ const projects = await getCollection('projects', ({ data }) => {
     <Container>
       <section
         id='contact'
-        class='sm:border-x py-8 md:py-12 lg:py-24 space-y-10'
+        class='sm:border-x sm:border-dashed py-8 md:py-12 lg:py-24 space-y-10'
       >
         <div
           class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
@@ -238,9 +238,9 @@ const projects = await getCollection('projects', ({ data }) => {
                 class='w-fit relative after:absolute after:bg-foreground after:h-px after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
               >
                 <a
-                  href='mailto:taqib.ibrahim@gmail.com'
-                  class='bg-gradient-to-r from-blue-700 to-fuchsia-600 bg-clip-text text-transparent dark:bg-gradient-to-r dark:from-blue-500 dark:to-fuchsia-500'
-                  >taqib.ibrahim@gmail.com</a
+                  href='mailto:hello@taqib.dev'
+                  class='bg-gradient-to-r from-emerald-700 to-emerald-500 bg-clip-text text-transparent focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500'
+                  >hello@taqib.dev</a
                 >
               </p>
             </div>

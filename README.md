@@ -118,8 +118,8 @@ links:
   repo: ""
   live: ""
 preview:
-  src: "../../assets/quillstash.png"
-  alt: "A preview of the quillstash homepage"
+  src: "../../assets/someimage.png"
+  alt: "A brief description of the image"
 ---
 You can then add your project content here using markdown syntax.
 ```
