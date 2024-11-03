@@ -137,6 +137,7 @@ const projectsCollection = defineCollection({
     status: z.enum(["live", "dev"]),
     description: z.string(),
     image: z.string(),
+    draft: z.boolean().optional(), 
     preview: z
       .object({
         src: z.string(),
@@ -166,13 +167,6 @@ const projects = await getCollection("projects", ({ data }) => {
 });
 ```
 
-## References
-
-- [Astro Documentation](https://docs.astro.build/)
-- [TailwindCSS Documentation](https://tailwindcss.com/docs)
-- [TailwindCSS Typography](https://github.com/tailwindlabs/tailwindcss-typography)
-- [Learn Markdown](https://www.markdownguide.org/)
-
 ## License
 
-See the [License](LICENSE) file.
+See the [License](LICENSE.md) file.
