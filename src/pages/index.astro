@@ -28,59 +28,28 @@ const projects = await getCollection('projects', ({ data }) => {
 
 <Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
   <div class='divide-y divide-dashed'>
-    <!-- hero section -->
+    <!-- about section -->
     <Container class='border-t border-dashed'>
       <section
-        class='overflow-x-hidden sm:border-x sm:border-dashed sm:bg-background py-16 lg:py-24 flex items-center flex-col justify-center'
+        class='overflow-x-hidden sm:border-x sm:border-dashed sm:px-4 md:px-0 sm:bg-background py-14 md:py-16 lg:py-28 md:items-center flex flex-col justify-center'
       >
-        <div
-          class='inline-flex items-center rounded-lg border px-3 py-1 text-sm md:text-base font-medium mb-4 bg-background'
-        >
-          <span>Hi there, I&apos;m Taqib</span>
-        </div>
-        <h1 class='max-w-4xl text-4xl font-semibold md:text-5xl lg:text-6xl text-center'>
-          A
-          <span
-            class='inline-block underline underline-offset-2 decoration-dashed decoration-emerald-500'
-          >
-            Frontend
-          </span>
-          web developer crafting modern web applications.
+        <h1 class='text-3xl font-semibold md:text-4xl md:text-center mb-6'>
+          Hi there, I&apos;m Taqib
         </h1>
-        
-      </section>
-    </Container>
-
-    <!-- about section -->
-    <Container>
-      <section
-        id='about'
-        class='sm:border-x sm:border-dashed px-4 md:px-6 sm:bg-background space-y-12 py-8 md:py-12 lg:py-24'
-      >
-        <div class='mx-auto flex flex-col space-y-4'>
-          <h2
-            class='font-medium text-2xl leading-[1.1] sm:text-3xl md:text-4xl text-center mb-6'
+        <div class='space-y-4 md:text-center max-w-prose'>
+          <p
+            class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
-            About me
-          </h2>
-          <!--  -->
-          <div class='flex items-center justify-center'>
-            <div class='space-y-4 text-center max-w-prose'>
-              <p
-                class='max-w-prose leading-normal text-muted-foreground sm:text-lg sm:leading-7'
-              >
-                I'm a self-taught developer based in Abuja, Nigeria. I have a
-                passion for web development and love to create web applications
-                that are accessible, fast, and user-friendly.
-              </p>
-              <p
-                class='max-w-prose leading-normal text-muted-foreground sm:text-lg sm:leading-7'
-              >
-                Currently, learning about design systems and UI/UX fundamentals,
-                aiming to improve my web development skills and create visually appealing web experiences. 
-              </p>
-            </div>
-          </div>
+            I'm a self-taught developer based in Abuja, Nigeria. I have a
+            passion for web development and love to create web applications
+            that are accessible, fast, and user-friendly.
+          </p>
+          <p
+            class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
+          >
+            Currently, learning about design systems and UI/UX fundamentals,
+            aiming to improve my web development skills and create visually appealing web experiences. 
+          </p>
         </div>
       </section>
     </Container>
@@ -91,16 +60,16 @@ const projects = await getCollection('projects', ({ data }) => {
         id='projects'
         class='sm:bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:border-dashed sm:px-6 md:px-10 lg:px-16'
       >
-        <div class='mx-auto flex flex-col space-y-4 justify-center text-center'>
+        <div class='mx-auto flex flex-col space-y-4 justify-center md:text-center'>
           <h2
             class='font-semibold text-2xl leading-[1.1] sm:text-3xl md:text-4xl'
           >
             Projects
           </h2>
           <p
-            class='max-w-prose mx-auto leading-normal text-muted-foreground sm:text-lg sm:leading-7'
+            class='max-w-prose mx-auto leading-normal text-muted-foreground sm:leading-7'
           >
-            I Love learning and staying engaged through exciting new projects. Here
+            I love staying engaged through exciting new projects, here
             are a few I've spent my time on.
           </p>
         </div>
@@ -122,18 +91,18 @@ const projects = await getCollection('projects', ({ data }) => {
     <Container>
       <section
         id='skills'
-        class='sm:border-x sm:border-dashed sm:px-14 py-8 md:py-12 lg:py-28 space-y-14 lg:space-y-20'
+        class='sm:border-x sm:border-dashed sm:px-14 py-14 md:py-16 lg:py-28 space-y-14 lg:space-y-20'
       >
         <div
-          class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
+          class='mx-auto flex max-w-prose flex-col items-center justify-center gap-4 text-center'
         >
           <h2
-            class='font-medium text-3xl leading-[1.1] sm:text-3xl md:text-5xl'
+            class='font-medium text-3xl leading-[1.1] md:text-4xl'
           >
             Stack
           </h2>
           <p
-            class='max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7'
+            class='leading-normal text-muted-foreground sm:leading-7'
           >
             The technologies I work with most frequently
           </p>
@@ -208,18 +177,18 @@ const projects = await getCollection('projects', ({ data }) => {
         class='sm:border-x sm:border-dashed py-8 md:py-12 lg:py-24 space-y-10'
       >
         <div
-          class='mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center'
+          class='mx-auto flex max-w-[58rem] flex-col md:items-center justify-center gap-4 text-center'
         >
           <h2
-            class='font-medium text-3xl leading-[1.1] sm:text-3xl md:text-5xl'
+            class='font-medium text-3xl leading-[1.1] md:text-4xl'
           >
             Get in touch
           </h2>
           <p
-            class='max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7'
+            class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
             I'm actively seeking new opportunities to apply my skills and create
-            value. Whether you have a project in mind, a job opportunity, or
+            value. Whether you have a project in mind or
             just want to connect, I'd love to hear from you.
           </p>
         </div>
@@ -232,7 +201,7 @@ const projects = await getCollection('projects', ({ data }) => {
           >
             <div>
               <h3 class='font-semibold text-lg'>
-                You can contact me via email at
+                You can email me at
               </h3>
               <p
                 class='w-fit relative after:absolute after:bg-foreground after:h-px after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'

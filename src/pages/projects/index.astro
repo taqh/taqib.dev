@@ -27,7 +27,7 @@ const projects = await getCollection('projects', ({ data }) => data.draft !== tr
                 variant='card'
               >
                 <h2 class='font-semibold tracking-wide text-lg italic'>{project.data.title}</h2>
-                <p class='text-muted-foreground'>{project.data.description}</p>
+                <p class='text-muted-foreground font-mono text-sm'>{project.data.description}</p>
               </Link>
             </li>
           ))

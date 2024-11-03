@@ -14,12 +14,12 @@ const { title, preview, links, description, status } = entry.data
 ---
 
 <li
-  class={`flex flex-col gap-4 border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card`}
+  class={`flex flex-col gap-4 border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card max-w-md`}
 >
   {
     preview && (
       <div class='relative group overflow-hidden z-10 rounded-t-lg'>
-        <Image src={preview.src} alt={preview.alt} width={500} height={240} />
+        <Image src={preview.src} alt={preview.alt} width={448} height={240} />
       </div>
     )
   }

@@ -37,11 +37,11 @@ const { Content } = await entry.render();
         </div>
         <div class='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
           {entry.data.links.repo && <Link href={entry.data.links.repo} external> View repository </Link>}
-          {entry.data.links.live && <Link href={entry.data.links.live} external> Visit the site </Link>}
+          {entry.data.links.live && <Link href={entry.data.links.live} external> Visit website </Link>}
         </div>
       </section>
       <article
-        class='prose xl:prose-lg prose-taqib max-w-3xl prose-headings:font-mono mx-auto'
+        class='prose prose-taqib max-w-3xl prose-headings:font-mono mx-auto'
       >
         <Content />
       </article>
