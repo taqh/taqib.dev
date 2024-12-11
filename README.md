@@ -124,31 +124,34 @@ preview:
 You can then add your project content here using markdown syntax.
 ```
 
-The frontmatter can be customized to fit your needs. However you will need to update the schema in the `/content/config.ts` file to match your frontmatter.
+The frontmatter can be customized to fit your needs. However you will need to update the schema in the `/src/content.config.ts` file to match your frontmatter.
 
 ```typescript
-import { defineCollection } from "astro:collections";
+import { z, defineCollection } from "astro:content";
+import { glob } from 'astro/loaders';
 
 // this is my project collection schema update it to match your frontmatter
 const projectsCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    status: z.enum(["live", "dev"]),
-    description: z.string(),
-    image: z.string(),
-    draft: z.boolean().optional(), 
-    preview: z
-      .object({
-        src: z.string(),
-        alt: z.string(),
-      })
-      .optional(),
-    links: z.object({
-      repo: z.string().url().optional(),
-      live: z.string().url().optional(),
-    }),
-    technologies: z.array(z.string()),
+  loader: glob({ pattern: '**\/[^_]*.{md,mdx}', base: "./src/content/projects" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      status: z.enum(["live", "dev"]),
+      description: z.string(),
+      image: z.string(),
+      slug: z.string(),
+      draft: z.boolean().optional(),
+      preview: z
+        .object({
+          src: image(),
+          alt: z.string(),
+        })
+        .optional(),
+      links: z.object({
+        repo: z.string().url().optional(),
+        live: z.string().url().optional(),
+      }),
+      technologies: z.array(z.string()),
   }),
 });
 ```

@@ -1,19 +1,24 @@
 ---
 title: "Geotech4all"
 status: "live"
-description: "Website + CMS for a geoscience company that offers geological map making services and training on geological sofware such as ArcGIS and Petrel."
+description: "Website + Admin dashboard for a geoscience company."
 slug: "geotech4all"
 image: "/og-dark.png"  
 preview:
-  src: "../../assets/geotech.png"
+  src: "../../assets/geotech-og.jpg"
   alt: "A preview of the geotech4all homepage"
 technologies: ["Next.js", "MongoDB", "Typescript", "Framer Motion"]
 links:
-  repo: "https://github.com/geotech4all/geotech4all"
+  repo: "https://github.com/geotech4all/website"
   live: "https://www.geotech4all.com"
 ---
 
-![A preview of the quillstash homepage](../../assets/geotech.png)
+import ProseImage from '@/components/ProseImage.astro';
+import cover from '../../assets/geotech-og.jpg';
+import dashboard from '../../assets/geotech-dashboard.png';
+import event from '../../assets/event-form.png';
+
+<ProseImage src={cover} alt="A preview of the geotech4all hero section." />
 
 ## Project Overview
 
@@ -27,6 +32,8 @@ Website for geotech4all, a geoscience company that offers geological map making 
 
 3. Implement a responsive design that ensures optimal user experience across all devices.
 
+<ProseImage src={dashboard} alt="A preview of the geotech dashboard" caption='A preview of the geotech dashboard' />
+
 ## Features
 
 1. **Responsive UI:** I designed the site to be responsive and mobile-friendly, ensuring that users can access the site on any device.
@@ -35,15 +42,14 @@ Website for geotech4all, a geoscience company that offers geological map making 
 
 3. **Custom CMS/Admin app:** Beside the website, I also built a custom CMS for the Geotech4all team to manage the site content easily. They can create Events, Testimonials, and Blog posts, and update the site content without any technical knowledge
 
-![A preview of the geotech dashboard](../../assets/geotech-dashboard.png)
-![A preview of the geotech event creation form](../../assets/event-form.png)
+<ProseImage src={event} alt="A preview of the geotech event creation form" caption="A preview of the geotech event creation form" />
 
 ## Technology Stack
 
 - [Nextjs](https://nextjs.org): For its fullstack capabilities.
-- [Tailwind CSS](https://tailwindcss.com): For styling the site.
-- [Prisma ORM](https://prisma.io): Typescript ORM I used to query data from mongoDB.
-- [Framer Motion](https://www.framer.com/motion/): For animations and transitions.
+- [Tailwind CSS](https://tailwindcss.com): For styling both apps.
+- [Prisma ORM](https://prisma.io): Typescript ORM to query data from mongoDB.
+- [Motion](https://motion.dev): For animations and transitions.
 
 ## Outcome
 

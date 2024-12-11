@@ -22,7 +22,7 @@ const projects = await getCollection('projects', ({ data }) => data.draft !== tr
           projects.map((project) => (
             <li>
               <Link
-                href={`/projects/${project.slug}`}
+                href={`/projects/${project.data.slug}`}
                 class='space-y-1'
                 variant='card'
               >

@@ -5,28 +5,25 @@
 @layer base {
   :root {
     --foreground: 223 16% 9%;
-    --background: 40 60% 93%;
+    --background: 26 30% 95%;
     --muted-foreground: 220 11% 22%;
-    --border: 0 0% 85%;
+    --border: 0 0% 75%;
     --card: hsl 28, 76%, 95%;
 
-    --dot-bg-color: hsl(40, 60%, 93%);
+    --dot-bg-color: hsl(26, 30%, 95%);
     --dot-color: hsl(0, 0%, 85%);
     --dot-mask-color: hsl(30, 100%, 99%);
 
     --scrollbar-thumb: 0 0% 37%;
     --scrollbar-thumb-hover: 0 0% 40%;
-
-    --bg: hsl(40, 60%, 93%);
   }
 
   .dark {
     --foreground: 34 78% 91%;
     --background: 0, 0%, 10%;
     --muted-foreground: 33, 15%, 76%;
-    --border: 225 5% 18%;
+    --border: 220 5% 22%;
     --card: hsl 0, 0%, 10%;
-    --accent: ;
 
     --dot-bg-color: hsl(0, 0%, 10%);
     --dot-color: hsl(225, 5%, 16%);
@@ -55,7 +52,7 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/fonts/montserrat/Montserrat-VariableFont_wght.ttf") format("ttf");
+  src: url("/fonts/montserrat/MontserratVF.ttf") format("ttf");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

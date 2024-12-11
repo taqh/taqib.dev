@@ -3,7 +3,6 @@ import Layout from '@/layouts/Layout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import Container from '@/components/Container.astro';
 import { getCollection } from 'astro:content';
-import ContactForm from '@/components/ContactForm.astro';
 import React from '@/components/icons/React.astro';
 import Typescript from '@/components/icons/Typescript.astro';
 import Tailwind from '@/components/icons/Tailwind.astro';
@@ -17,13 +16,12 @@ import Sass from '@/components/icons/Sass.astro';
 import X from '@/components/icons/X.astro';
 import Github from '@/components/icons/Github.astro';
 import Discord from '@/components/icons/Discord.astro';
-import Linkedin from '@/components/icons/Linkedin.astro';
 import { SITE } from '@/lib/constants';
 import Link from '@/components/Link.astro';
 
 const projects = await getCollection('projects', ({ data }) => {
   return data.draft !== true;
-})
+});
 ---
 
 <Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
@@ -33,22 +31,21 @@ const projects = await getCollection('projects', ({ data }) => {
       <section
         class='overflow-x-hidden sm:border-x sm:border-dashed sm:px-4 md:px-0 sm:bg-background py-14 md:py-16 lg:py-28 md:items-center flex flex-col justify-center'
       >
-        <h1 class='text-3xl font-semibold md:text-4xl md:text-center mb-6'>
+        <h1 class='text-3xl font-medium md:text-4xl md:text-center mb-6 font-serif'>
           Hi there, I&apos;m Taqib
         </h1>
         <div class='space-y-4 md:text-center max-w-prose'>
           <p
             class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
-            I'm a self-taught developer based in Abuja, Nigeria. I have a
-            passion for web development and love to create web applications
-            that are accessible, fast, and user-friendly.
+            I'm a self-taught developer from Abuja, Nigeria. I love the web
+            and enjoy building web apps that are accessible, fast, and
+            easy to use.
           </p>
           <p
             class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
-            Currently, learning about design systems and UI/UX fundamentals,
-            aiming to improve my web development skills and create visually appealing web experiences. 
+            Right now, I’m diving into design systems and UI/UX fundamentals to level up my skills and craft visually stunning web experiences.
           </p>
         </div>
       </section>
@@ -60,7 +57,9 @@ const projects = await getCollection('projects', ({ data }) => {
         id='projects'
         class='sm:bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:border-dashed sm:px-6 md:px-10 lg:px-16'
       >
-        <div class='mx-auto flex flex-col space-y-4 justify-center md:text-center'>
+        <div
+          class='mx-auto flex flex-col space-y-4 justify-center md:text-center'
+        >
           <h2
             class='font-semibold text-2xl leading-[1.1] sm:text-3xl md:text-4xl'
           >
@@ -69,18 +68,21 @@ const projects = await getCollection('projects', ({ data }) => {
           <p
             class='max-w-prose mx-auto leading-normal text-muted-foreground sm:leading-7'
           >
-            I love staying engaged through exciting new projects, here
-            are a few I've spent my time on.
+            I love diving into exciting projects here are a few I’ve spent my time on.
           </p>
         </div>
         <!-- project list -->
-        <ul class='mx-auto grid justify-center gap-8 md:grid-cols-2'>
-          {projects.map((project) => <ProjectCard entry={project} />)}
+        <ul
+          class='mx-auto grid justify-center gap-8 grid-cols-[repeat(auto-fill,minmax(0,_320px))]'
+        >
+          {projects.slice(0,4).map((project) => <ProjectCard entry={project} />)}
         </ul>
         {
           projects.length > 4 && (
             <div class='flex justify-center mt-10'>
-              <Link forward href='/projects'>See All Projects</Link>
+              <Link forward href='/projects'>
+                See All Projects
+              </Link>
             </div>
           )
         }
@@ -91,77 +93,75 @@ const projects = await getCollection('projects', ({ data }) => {
     <Container>
       <section
         id='skills'
-        class='sm:border-x sm:border-dashed sm:px-14 py-14 md:py-16 lg:py-28 space-y-14 lg:space-y-20'
+        class='sm:border-x sm:border-dashed sm:px-16 py-14 md:py-16 lg:py-28 space-y-14 lg:space-y-20'
       >
         <div
           class='mx-auto flex max-w-prose flex-col items-center justify-center gap-4 text-center'
         >
-          <h2
-            class='font-medium text-3xl leading-[1.1] md:text-4xl'
-          >
-            Stack
-          </h2>
-          <p
-            class='leading-normal text-muted-foreground sm:leading-7'
-          >
+          <h2 class='font-medium text-3xl leading-[1.1] md:text-4xl'>Stack</h2>
+          <p class='leading-normal text-muted-foreground sm:leading-7'>
             The technologies I work with most frequently
           </p>
         </div>
         <ul
-          class='grid grid-cols-[repeat(auto-fill,_minmax(8.5rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center'
+          class='grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center'
         >
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#61DAFB]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#61DAFB]'
           >
             <React />
             <span>React.js</span>
           </li>
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#3178C6]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#3178C6]'
           >
             <Typescript />
             <span>Typescript</span>
           </li>
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#06B6D4]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#06B6D4]'
           >
             <Tailwind />
             <span>Tailwind</span>
           </li>
-          <li class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-black dark:hover:text-white'>
+          <li
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-black dark:hover:text-white'
+          >
             <Nextjs />
             <span>Next.js</span>
           </li>
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#47A248]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#47A248]'
           >
             <MongoDB />
             <span>MongoDB</span>
           </li>
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#CC6699]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#CC6699]'
           >
             <Sass />
             <span>Sass</span>
           </li>
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#2D3748] dark:hover:text-white'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#2D3748] dark:hover:text-white'
           >
             <Prisma />
             <span>Prisma</span>
           </li>
-          <li class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2'>
+          <li
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2'
+          >
             <AstroIcon />
             <span>Astro</span>
           </li>
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#4169E1]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#4169E1]'
           >
             <Postgres />
             <span>PostgreSQL</span>
           </li>
           <li
-            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row md:text-base gap-2 hover:text-[#5FA04E]'
+            class='cursor-pointer transition duration-300 flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#5FA04E]'
           >
             <Nodejs />
             <span>Node.js</span>
@@ -174,92 +174,64 @@ const projects = await getCollection('projects', ({ data }) => {
     <Container>
       <section
         id='contact'
-        class='sm:border-x sm:border-dashed py-8 md:py-12 lg:py-24 space-y-10'
+        class='sm:border-x sm:border-dashed py-8 md:py-12 lg:py-24 space-y-10 sm:px-14'
       >
         <div
           class='mx-auto flex max-w-[58rem] flex-col md:items-center justify-center gap-4 text-center'
         >
-          <h2
-            class='font-medium text-3xl leading-[1.1] md:text-4xl'
-          >
+          <h2 class='font-medium text-3xl leading-[1.1] md:text-4xl'>
             Get in touch
           </h2>
           <p
             class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
-            I'm actively seeking new opportunities to apply my skills and create
-            value. Whether you have a project in mind or
-            just want to connect, I'd love to hear from you.
+            I’m always open to new opportunities to apply my skills and make an impact. If you have a project in mind or just want to connect,
+            I'd love to hear from you.
           </p>
         </div>
 
         <div
-          class='grid gap-6 lg:grid-cols-2 sm:px-10 max-lg:max-w-md max-lg:mx-auto'
+          class='flex flex-col sm:flex-row gap-8 justify-center sm:justify-between max-sm:items-center max-sm:text-center'
         >
-          <div
-            class='flex flex-col gap-8 justify-center max-sm:items-center max-sm:text-center'
-          >
-            <div>
-              <h3 class='font-semibold text-lg'>
-                You can email me at
-              </h3>
-              <p
-                class='w-fit relative after:absolute after:bg-foreground after:h-px after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+          <div class='space-y-4'>
+            <h3 class='font-semibold text-lg'>You can email me at</h3>
+            <p
+              class='w-fit relative after:absolute after:bg-emerald-400 after:h-0.5 after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+            >
+              <a
+                href='mailto:hello@taqib.dev'
+                class='bg-gradient-to-r from-emerald-700 to-emerald-500 bg-clip-text text-transparent focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500'
+                >hello@taqib.dev</a
               >
-                <a
-                  href='mailto:hello@taqib.dev'
-                  class='bg-gradient-to-r from-emerald-700 to-emerald-500 bg-clip-text text-transparent focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500'
-                  >hello@taqib.dev</a
-                >
-              </p>
-            </div>
-            <div class='space-y-4'>
-              <h4 class='font-semibold text-lg'>Find me on</h4>
-              <ul class='flex gap-4'>
-                <li class='rounded-md'>
-                  <Link
-                    href='https://github.com/taqh'
-                    external
-                    variant='icon'
-                  >
-                    <Github />
-                    <span class="sr-only">Github</span>
-                  </Link>
-                </li>
-                <li class='rounded-md'>
-                  <Link
-                    href='https://x.com/rahimtkb'
-                    external
-                    variant='icon'
-                  >
-                    <X />
-                    <span class="sr-only">Twitter</span>
-                  </Link>
-                </li>
-                <li class='rounded-md'>
-                  <Link
-                    href='https://linkedin.com/in/taqib-ibrahim'
-                    external
-                    variant='icon'
-                  >
-                    <Linkedin />
-                    <span class="sr-only">Linkedin</span>
-                  </Link>
-                </li>
-                <li class='rounded-md'>
-                  <Link
-                    href='https://discord.com/users/851479949717798932'
-                    external
-                    variant='icon'
-                  >
-                    <Discord />
-                    <span class="sr-only">Discord</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            </p>
           </div>
-          <ContactForm />
+          <div class='space-y-4'>
+            <h4 class='font-semibold text-lg'>Find me on</h4>
+            <ul class='flex gap-4'>
+              <li class='rounded-md'>
+                <Link href='https://github.com/taqh' external variant='icon'>
+                  <Github />
+                  <span class='sr-only'>Github</span>
+                </Link>
+              </li>
+              <li class='rounded-md'>
+                <Link href='https://x.com/rahimtkb' external variant='icon'>
+                  <X />
+                  <span class='sr-only'>Twitter</span>
+                </Link>
+              </li>
+              <li class='rounded-md'>
+                <Link
+                  href='https://discord.com/users/851479949717798932'
+                  external
+                  variant='icon'
+                >
+                  <Discord />
+                  <span class='sr-only'>Discord</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
     </Container>
