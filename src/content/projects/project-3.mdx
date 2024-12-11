@@ -1,0 +1,67 @@
+---
+title: "Marble"
+status: "dev"
+description: "Super simple and easy-to-use headless CMS for blogs."
+slug: "marblecms"
+image: "/og-dark.png"
+preview:
+  src: "@/assets/marble-hero.png"
+  alt: "A preview of Marble's website hero section"
+technologies: ["Next.js", "Turborepo", "TypeScript", "Prisma", "Hono"]
+links:
+  repo: "https://github.com/taqh"
+---
+
+import ProseImage from '@/components/ProseImage.astro';
+import cover from '@/assets/marble-hero.png';
+import dashboard from '@/assets/marble-dashboard.png';
+
+<ProseImage src={cover} alt="A preview of Marble's website hero section" />
+
+## Project Overview
+
+Marble began as a personal project to help my sister manage her blog without the overwhelming complexity of traditional CMS solutions. The goal was to create an intuitive platform where she could effortlessly write, get AI assistance, and publish her content. It also allows her to invite friends for collaboration in a seamless, user-friendly way.
+
+## Objectives
+
+1. **Simplify blogging:** Provide a clean, minimalistic interface for managing blog content.
+2. **Leverage AI tools:** Integrate features for article outline generation, grammar correction, and content completion.
+3. **Developer-friendly API:** Build an easy-to-use REST API for fetching data.
+4. **Comprehensive documentation:** Write detailed guides for developers and users alike.
+
+## Features
+
+- **Minimalist dashboard:** A simple interface designed for effortless navigation and management of blog articles.
+- **AI-powered tools:** Assistance with content creation and refinement, making writing easier and faster.
+- **Collaborative workspaces:** Invite team members and assign roles for efficient collaboration.
+- **Developer APIs:** REST API for external integration with detailed documentation.
+
+<ProseImage src={dashboard} alt="A preview of Marble's CMS dashboard" caption='The CMS dashboard root page' />
+
+## Tech Stack
+
+- [Turborepo](https://turbo.build/repo): High-performance build system for managing the monorepo.
+- [Next.js](https://nextjs.org): Powering the dashboard for dynamic, server-rendered experiences.
+- [Astro](https://astro.build): Building the website and blog for fast, lightweight pages.
+- [Hono](https://hono.dev): For the backend API, optimized for simplicity and performance.
+- [TailwindCSS](https://tailwindcss.com): For creating consistent and responsive UI designs.
+- [Prisma ORM](https://prisma.io): Managing database schemas and queries with type safety, connected to Supabase.
+
+## Challenges & Learning
+
+Working on Marble has been an incredible learning journey. Here are some of the key challenges I faced:
+
+- **Mastering Turborepo:** Configuring a monorepo setup that seamlessly integrates Next.js, Astro, and Hono was a steep learning curve, but it taught me a lot about modular codebases and efficient builds.
+- **Database design:** Understanding and implementing database structures to handle organizations, workspaces, sites, and user roles was a deep dive into relational data modeling.
+- **UI/UX design:** Designing and implementing the landing and marketing pages while simultaneously taking a design course has been both challenging and rewarding. It’s taught me the importance of cohesive branding and accessibility.
+- **Balancing simplicity and features:** Ensuring the CMS remains intuitive while offering advanced capabilities like AI integration required constant iteration and user testing.
+
+## Status & Future Plans
+
+The project is still in development, and I’m happy with the progress so far. My next steps include:
+
+- Completing the AI-powered content tools.
+- Enhancing the documentation for both developers and end users.
+- Launching a beta version to gather feedback and refine the platform further.
+- Launching a package/client library to simplify integration for developers who prefer not to use the REST API directly.
+- Implementing rate limiting to ensure fair API usage and protect server resources.

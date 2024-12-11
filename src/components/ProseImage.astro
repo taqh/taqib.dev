@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  class?: string;
+  caption?: string;
+}
+const { src, alt, class: className, caption } = Astro.props;
+---
+
+<div>
+  <Image src={src} alt='A preview of the quillstash homepage.' class={`rounded-lg ${className && className}`} />
+  {caption && <p class="text-xs text-muted-foreground text-center italic -mt-5">{caption}</p>}
+</div>

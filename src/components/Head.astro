@@ -1,7 +1,6 @@
 ---
 import "@/styles/global.css";
-import { ViewTransitions } from "astro:transitions";
-import { fade } from 'astro:transitions';
+import { ClientRouter, fade } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -42,5 +41,4 @@ const { title, description, image = "/og-dark.png" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-
-<ViewTransitions transition:animate={fade({duration: 0.6})} />
+<ClientRouter />

@@ -1,0 +1,60 @@
+---
+title: "StashBot"
+status: "live"
+description: "A notification bot for the Quillstash Discord server, enhanced with Google's Gemini AI."
+slug: "stashbot"
+image: "/og-dark.png"
+technologies: ["Hono", "Discord.js", "TypeScript"]
+links:
+  repo: "https://github.com/taqh/stashbot"
+---
+
+import notification from '@/assets/stashbot.png';
+import prompt from '@/assets/stashbot-prompt.png';
+import ProseImage from '@/components/ProseImage.astro';
+
+## Project Overview
+
+StashBot is a custom-built support bot for the [Quillstash](https://quillstash.com) Discord server, designed to enhance community engagement and provide real-time AI-powered assistance. By notifying members of newly published articles, StashBot ensures that all authors receive equal attention, fostering a more connected and interactive community. 
+
+Additionally, the integration of Google's Gemini AI brings cutting-edge conversational capabilities directly into the server, offering members quick, AI-driven support and interaction.
+
+## Objectives
+
+1. **Boost Community Engagement**: Notify members about new articles to drive conversations and readership.
+2. **Foster Inclusivity**: Ensure every author's work is equally highlighted to promote a supportive environment.
+3. **Enhance User Experience**: Provide real-time AI assistance through integrated Gemini-powered slash commands.
+
+<ProseImage src={notification} alt="A screenshot of StashBot's notification on the server" caption="A notification from StashBot about a published article" />
+
+## Features
+
+1. **Real-Time Notifications**: Alerts members about new content published on Quillstash, driving immediate interaction.
+2. **AI-Powered Chat Commands**: Includes commands like `/prompt`, enabling members to chat with Google's Gemini AI for creative ideas or assistance.
+3. **Seamless Integration**: StashBot operates smoothly within the Discord ecosystem, blending utility and accessibility.
+
+<ProseImage src={prompt} alt="A screenshot of StashBot's reply to my prompts" caption="StashBot's reply to my prompt about Rust" />
+
+## Technology Stack
+
+- [Hono](https://hono.dev): Lightweight Node.js framework for backend logic and API routing.
+- [Discord.js](https://discord.js.org): Simplifies interaction with the Discord API for bot development.
+- [Google's Gemini](https://ai.google.dev/gemini-api): Powers conversational AI and text generation capabilities.
+- [TypeScript](https://typescriptlang.org): Ensures type safety and improved code maintainability.
+
+## Challenges & Learning
+
+Developing StashBot taught me:
+- **API Integration:** Working with Discord's API and Google's Gemini API improved my skills in handling third-party service integrations.
+- **Real-Time Systems:** Building notification systems required efficient logic for real-time updates and alerts.
+- **Community Engagement Design:** Crafting features that actively promote inclusivity and collaboration improved my understanding of user-centric design.
+
+## Future Plans
+
+To further enhance StashBot’s functionality, I plan to:
+
+1. **Introduce Writer Leaderboards**: Track published posts per writer and recognize active contributors.
+2. **Implement Rewards Systems**: Celebrate milestones with fun announcements, badges, or special roles within the server.
+3. **Expand AI Capabilities**: Add more conversational features powered by Gemini to make StashBot a creative partner for writers.
+4. **Optimize Performance**: Implement rate limiting and caching mechanisms to ensure smooth operation and prevent API spamming.
+
