@@ -1,54 +1,58 @@
-<div id='blob'></div>
-<div id='blur'></div>
+<div id='dot'></div>
 
 <style>
-  #blob {
-    background-color: white;
-    height: 200px;
+  #dot {
+    height: 8px;
     aspect-ratio: 1;
     position: fixed;
     left: 50%;
     top: 50%;
     translate: -50% -50%;
     border-radius: 50%;
-    background: linear-gradient(to right, aquamarine, mediumpurple);
-    animation: rotate 20s infinite;
-    /* filter: blur(200px); */
-    z-index: -1;
-  }
-
-  #blur {
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    z-index: -1;
-    /* backdrop-filter: blur(200px); */
-  }
-
-  @keyframes rotate {
-    from {
-      rotate: 0deg;
-    }
-    50% {
-      scale: 1 1.5;
-    }
-    to {
-      rotate: 360deg;
-    }
+    background: hsl(var(--foreground));
+    z-index: 1;
+    pointer-events: none;
   }
 </style>
 
 <script>
-  const blob = document.getElementById("blob");
+  function setupTracker() {
+    const dot = document.getElementById('dot');
 
-  document.body.onpointermove = (event) => {
-    const { clientX, clientY } = event;
+    function handlePointerMove(event: PointerEvent) {
+      const { clientX, clientY } = event;
 
-    if (blob) {
-      blob.animate({
-        left: `${clientX}px`,
-        top: `${clientY}px`
-      }, { duration: 3000, fill: "forwards" });
+      if (dot) {
+        dot.animate(
+          {
+            left: `${clientX}px`,
+            top: `${clientY}px`,
+          },
+          { duration: 3000, fill: 'forwards' }
+        );
+      }
     }
-  };
+
+    document.body.addEventListener('pointermove', handlePointerMove);
+
+    return () => {
+      document.body.removeEventListener('pointermove', handlePointerMove);
+    };
+  }
+
+  // Initialize on page load
+  let cleanup: (() => void) | undefined;
+
+  document.addEventListener('astro:page-load', () => {
+    cleanup?.();
+    cleanup = setupTracker();
+  });
+
+  // Cleanup before page transitions
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.();
+  });
+
+  // Initial setup
+  cleanup = setupTracker();
 </script>

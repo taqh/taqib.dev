@@ -23,7 +23,7 @@ const projects = await getCollection('projects', ({ data }) => data.draft !== tr
             <li>
               <Link
                 href={`/projects/${project.data.slug}`}
-                class='space-y-1'
+                class='space-y-1 relative z-10 backdrop-blur-md hover:backdrop-blur-md hover:border-emerald-700 dark:hover:border-emerald-500 border border-dashed p-4 rounded-md transition duration-300'
                 variant='card'
               >
                 <h2 class='font-semibold tracking-wide text-lg italic'>{project.data.title}</h2>
