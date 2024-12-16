@@ -12,6 +12,11 @@
     background: hsl(var(--foreground));
     z-index: 1;
     pointer-events: none;
+    display: none;
+
+    @media screen and (min-width: 600px) {
+      display: block;
+    }
   }
 </style>
 

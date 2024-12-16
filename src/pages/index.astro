@@ -31,21 +31,23 @@ const projects = await getCollection('projects', ({ data }) => {
       <section
         class='overflow-x-hidden sm:border-x sm:border-dashed sm:px-4 md:px-0 sm:bg-background py-20 sm:py-24 lg:py-28 md:items-center flex flex-col justify-center'
       >
-        <h1 class='text-3xl font-medium md:text-4xl md:text-center mb-6 font-serif'>
+        <h1
+          class='text-3xl font-medium md:text-4xl md:text-center mb-6 font-serif'
+        >
           Hi there, I&apos;m Taqib
         </h1>
         <div class='space-y-4 md:text-center max-w-prose text-sm sm:text-base'>
           <p
             class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
-            I'm a self-taught developer from Abuja, Nigeria. I love the web
-            and enjoy building web apps that are accessible, fast, and
-            easy to use.
+            I'm a self-taught developer from Abuja, Nigeria. I love the web and
+            enjoy building web apps that are accessible, fast, and easy to use.
           </p>
           <p
             class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
-            Right now, I’m diving into design systems and UI/UX fundamentals to level up my skills and craft visually stunning web experiences.
+            Right now, I’m diving into design systems and UI/UX fundamentals to
+            level up my skills and craft visually stunning web experiences.
           </p>
         </div>
       </section>
@@ -68,19 +70,28 @@ const projects = await getCollection('projects', ({ data }) => {
           <p
             class='max-w-prose mx-auto leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
           >
-            I love diving into exciting projects here are a few I’ve spent my time on.
+            I love diving into exciting projects here are a few I’ve spent my
+            time on.
           </p>
         </div>
         <!-- project list -->
         <ul
           class='mx-auto grid justify-center gap-8 grid-cols-[repeat(auto-fill,minmax(0,_320px))]'
         >
-          {projects.slice(0,4).map((project) => <ProjectCard entry={project} />)}
+          {
+            projects
+              .slice(0, 4)
+              .map((project) => <ProjectCard entry={project} />)
+          }
         </ul>
         {
           projects.length > 4 && (
             <div class='flex justify-center mt-10'>
-              <Link forward href='/projects'>
+              <Link
+                forward
+                href='/projects'
+                class='hover:border-emerald-300 dark:hover:border-emerald-500 hover:bg-background/80 hover:backdrop-blur-sm relative z-10'
+              >
                 See All Projects
               </Link>
             </div>
@@ -99,7 +110,9 @@ const projects = await getCollection('projects', ({ data }) => {
           class='mx-auto flex max-w-prose flex-col items-center justify-center gap-4 text-center'
         >
           <h2 class='font-medium text-3xl leading-[1.1] md:text-4xl'>Stack</h2>
-          <p class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'>
+          <p
+            class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
+          >
             The technologies I work with most frequently
           </p>
         </div>
@@ -185,15 +198,18 @@ const projects = await getCollection('projects', ({ data }) => {
           <p
             class='max-w-prose leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
           >
-            I’m always open to new opportunities to apply my skills and make an impact. If you have a project in mind or just want to connect,
-            I'd love to hear from you.
+            I’m always open to new opportunities to apply my skills and make an
+            impact. If you have a project in mind or just want to connect, I'd
+            love to hear from you.
           </p>
         </div>
 
         <div
           class='flex flex-col sm:flex-row gap-10 justify-center sm:justify-between max-sm:items-center max-sm:text-center'
         >
-          <div class='space-y-3 sm:space-y-4 flex flex-col items-center sm:items-start'>
+          <div
+            class='space-y-3 sm:space-y-4 flex flex-col items-center sm:items-start'
+          >
             <h3 class='font-semibold text-lg'>You can email me at</h3>
             <p
               class='w-fit relative after:absolute after:bg-emerald-400 after:h-0.5 after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
@@ -210,13 +226,23 @@ const projects = await getCollection('projects', ({ data }) => {
             <h4 class='font-semibold text-lg'>Find me on</h4>
             <ul class='flex gap-4'>
               <li class='rounded-md'>
-                <Link href='https://github.com/taqh' external variant='icon'>
+                <Link
+                  href='https://github.com/taqh'
+                  external
+                  variant='icon'
+                  class='hover:bg-border'
+                >
                   <Github />
                   <span class='sr-only'>Github</span>
                 </Link>
               </li>
               <li class='rounded-md'>
-                <Link href='https://x.com/rahimtkb' external variant='icon'>
+                <Link
+                  href='https://x.com/rahimtkb'
+                  external
+                  variant='icon'
+                  class='hover:bg-border'
+                >
                   <X />
                   <span class='sr-only'>Twitter</span>
                 </Link>
@@ -226,6 +252,7 @@ const projects = await getCollection('projects', ({ data }) => {
                   href='https://discord.com/users/851479949717798932'
                   external
                   variant='icon'
+                  class='hover:bg-border'
                 >
                   <Discord />
                   <span class='sr-only'>Discord</span>
