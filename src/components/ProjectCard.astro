@@ -3,14 +3,14 @@ import Github from './icons/Github.astro';
 import Globe from './icons/Globe.astro';
 import Link from './Link.astro';
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content'
+import type { CollectionEntry } from 'astro:content';
 
 type Props = {
-  entry: CollectionEntry<'projects'>
-}
+  entry: CollectionEntry<'projects'>;
+};
 
 const { entry } = Astro.props as Props;
-const { title, preview, links, description, status } = entry.data
+const { title, preview, links, description, status } = entry.data;
 ---
 
 <li
@@ -19,7 +19,13 @@ const { title, preview, links, description, status } = entry.data
   {
     preview && (
       <div class='relative group z-10 rounded-t-md min-h-[180px]'>
-        <Image src={preview.src} alt={preview.alt} width={320} height={180}  class="object-cover size-full"/>
+        <Image
+          src={preview.src}
+          alt={preview.alt}
+          width={320}
+          height={180}
+          class='object-cover size-full'
+        />
       </div>
     )
   }
@@ -45,7 +51,11 @@ const { title, preview, links, description, status } = entry.data
       {description}
     </p>
     <div class='flex justify-between'>
-      <Link href={`/${entry.collection}/${entry.data.slug}`}>Details</Link>
+      <Link
+        href={`/${entry.collection}/${entry.data.slug}`}
+        class='hover:border-emerald-300 dark:hover:border-emerald-500'
+        >Details</Link
+      >
       <div class='flex items-center gap-4'>
         {
           links.repo && (

@@ -13,7 +13,7 @@ const { href, external, forward, class: classNames, variant, ...attrs } = Astro.
 <a
   href={href}
   target={external ? '_blank' : '_self'}
-  class={`group font-sans rounded-md hover:bg-border focus-visible:bg-border flex border border-dashed cursor-pointer transition focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 duration-300 focus-visible:outline-offset-2 ${variant === 'card' ? 'flex-col hover:bg-background/80 p-4 text-base' : variant === 'icon' ? 'p-2 border-none' : 'px-4 py-2 items-center justify-center text-sm'} ${classNames}`}
+  class={`group font-sans rounded-md flex border border-dashed cursor-pointer transition focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 duration-300 focus-visible:outline-offset-2 ${variant === 'card' ? 'flex-col hover:bg-background/80 backdrop-blur-sm p-4 text-base' : variant === 'icon' ? 'p-2 border-none' : variant === "button"? "hover:bg-border focus-visible:bg-border": 'px-4 py-2 items-center justify-center text-sm'} ${classNames}`}
   {...attrs}
 >
   <slot />
@@ -48,7 +48,7 @@ const { href, external, forward, class: classNames, variant, ...attrs } = Astro.
         stroke-width='2'
         stroke-linecap='round'
         stroke-linejoin='round'
-        class='translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-4 transition duration-300 lucide lucide-arrow-right'
+        class='translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300 lucide lucide-arrow-right'
       >
         <path d='M5 12h14' />
         <path d='m12 5 7 7-7 7' />
