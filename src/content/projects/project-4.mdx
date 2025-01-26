@@ -1,42 +1,56 @@
 ---
-title: "Would you bot"
+title: "Geotech4all"
 status: "live"
-description: "Elevate your server's engagement with wouldyoubot."
-slug: "wouldyoubot"
-image: "/og-dark.png"
-draft: false
+description: "Website + Admin dashboard for a geoscience company."
+slug: "geotech4all"
+image: "/og-dark.png"  
 preview:
-  src: "@/assets/wouldyou.png"
-  alt: "A preview of the wouldyoubot on discord"
-technologies: ["Next.js", "Prisma ORM", "Typescript", "Framer Motion"]
+  src: "../../assets/geotech-og.jpg"
+  alt: "A preview of the geotech4all homepage"
+technologies: ["Next.js", "MongoDB", "Typescript", "Motion"]
 links:
-  repo: "https://github.com/Would-You-Bot/website-app"
-  live: "https://wouldyoubot.gg"
+  repo: "https://github.com/geotech4all/website"
+  live: "https://www.geotech4all.com"
 ---
 
 import ProseImage from '@/components/ProseImage.astro';
-import cover from '@/assets/wouldyou.png';
+import cover from '../../assets/geotech-og.jpg';
+import dashboard from '../../assets/geotech-dashboard.png';
+import event from '../../assets/event-form.png';
 
-<ProseImage src={cover} alt="A preview of the wouldyoubot homepage" />
+<ProseImage src={cover} alt="A preview of the geotech4all hero section." />
 
 ## Project Overview
 
-The **Would You Bot** website app serves as a companion platform for a Discord bot designed to elevate server engagement through features like user voting, daily messages, and server-specific customization.
+Website for geotech4all, a geoscience company that offers geological map making services and training on geological sofware such as ArcGIS and Petrel. The site is built with Next.js and uses MongoDB as the database. The site is hosted on Vercel and the database is hosted on MongoDB Atlas.
 
-## My Contributions
+## Objectives
 
-I worked primarily on the **Question Packs** feature, which allows users to create, customize, and manage collections of questions for their servers. My contributions included:
+1. Develop a user-friendly website that showcases the services offered by Geotech4all.
 
-- Developing the user interface for question pack management using **Next.js** and **TailwindCSS**.
-- API integrations for storing, retrieving, searching, filtering and updating question packs.
-- Enhancing user interactions with animations and transitions built using **Motion**.
+2. Create a content management system (CMS) that allows the Geotech4all team to easily update and manage the site content.
+
+3. Implement a responsive design that ensures optimal user experience across all devices.
+
+<ProseImage src={dashboard} alt="A preview of the geotech dashboard" caption='A preview of the geotech dashboard' />
+
+## Features
+
+1. **Responsive UI:** I designed the site to be responsive and mobile-friendly, ensuring that users can access the site on any device.
+
+2. **SEO/Metadata:** I implemented SEO best practices, and followed OG specifications to improve the site's search engine visibility.
+
+3. **Custom CMS/Admin app:** Beside the website, I also built a custom CMS for the Geotech4all team to manage the site content easily. They can create Events, Testimonials, and Blog posts, and update the site content without any technical knowledge
+
+<ProseImage src={event} alt="A preview of the geotech event creation form" caption="A preview of the geotech event creation form" />
 
 ## Technology Stack
 
-- [Next.js](https://nextjs.org): Leveraged for its full-stack capabilities and server-side rendering features.
-- [Tailwind](https://tailwindcss.com): Used for creating responsive and consistent styling.
-- [Motion](https://motion.dev): Utilized for smooth animations and UI transitions.
+- [Nextjs](https://nextjs.org): For its fullstack capabilities.
+- [Tailwind CSS](https://tailwindcss.com): For styling both apps.
+- [Prisma ORM](https://prisma.io): Typescript ORM to query data from mongoDB.
+- [Motion](https://motion.dev): For animations and transitions.
 
-## Attribution
+## Outcome
 
-This project was built by the [Would You team](https://wouldyoubot.gg/team), and [contributors](https://github.com/Would-You-Bot/website-app/graphs/contributors).
+The Geotech4all website has been live for a few months now and has received positive feedback from users. The team at Geotech4all has been able to easily update the site content using the custom CMS I built for them. The site has also seen an increase in traffic and engagement, thanks to the SEO optimizations. Overall, the project has been a success.

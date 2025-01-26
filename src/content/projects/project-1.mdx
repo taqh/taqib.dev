@@ -1,72 +1,68 @@
 ---
-title: "Quillstash"
-status: "live"
-description: "Open-source content platform for writers with over 20k page views."
-slug: "quillstash"
+title: "Marble"
+status: "dev"
+description: "A super simple, slightly opinionated headless CMS for managing your blog."
+slug: "marblecms"
 image: "/og-dark.png"
 preview:
-  src: "@/assets/quillstash-og.png"
-  alt: "A preview of the Quillstash homepage."
-technologies: ["Next.js", "Drizzle ORM", "TypeScript"]
+  src: "@/assets/marble-hero.png"
+  alt: "A preview of Marble's website hero section"
+technologies: ["Turborepo", "Astro", "Next.js", "Hono", "TypeScript"]
 links:
-  repo: "https://github.com/ibrahimdoba/quillstash"
-  live: "https://quillstash.com"
+  repo: "https://github.com/taqh"
+  live: "https://marblecms-web.vercel.app"
 ---
 
 import ProseImage from '@/components/ProseImage.astro';
-import cover from '@/assets/quillstash-og.png';
-import explore from '@/assets/explore.png';
+import cover from '@/assets/marble-hero.png';
+import dashboard from '@/assets/marble-dashboard.png';
 
-<ProseImage src={cover} alt="A preview of the Quillstash homepage." />
+<ProseImage src={cover} alt="A preview of Marble's website hero section" />
 
 ## Project Overview
 
-Quillstash is an open-source content publishing platform built in collaboration with [Ibrahim](https://ibrahimdoba.vercel.app). Designed to provide a seamless, ad-free writing and reading experience, Quillstash aims to empower writers while fostering an active community. 
-
-Since its launch in September 2024, Quillstash has grown steadily, achieving **over 20,000 page views**, including **3,000 in just the first 30 days**, and now averages **4,000 monthly views**. The platform currently hosts a group of **10 active writers**, and the community is expanding every day.
+Marble began as a personal project to help my sister manage her blog without the overwhelming complexity of traditional CMS solutions. The goal was to create an intuitive platform where she could effortlessly write, get AI assistance, and publish her content. It also allows her to invite friends for collaboration in a seamless, user-friendly way.
 
 ## Objectives
 
-1. **Simplify Publishing**: Deliver an intuitive and ad-free platform for both readers and writers.
-2. **Empower Writers**: Provide tools like AI-powered SEO and OG image generation to help writers amplify their reach.
-3. **Foster Community Growth**: Build an inclusive and active community of content creators and readers.
+1. **Simplify blogging:** Provide a clean, minimalistic interface for managing blog content.
+2. **Leverage AI tools:** Integrate features for article outline generation, grammar correction, and content completion.
+3. **Developer-friendly API:** Build an easy-to-use REST API for fetching data.
+4. **Comprehensive documentation:** Write detailed guides for developers and users alike.
 
 ## Features
 
-1. **Dynamic OpenGraph Image Generation**: Automatically generates OG images for each post, featuring the author's name and article title. If the description is omitted, Google's Gemini AI crafts an SEO-optimized one.
-2. **Modern, Minimalist UI**: The site is designed to be distraction-free and straightforward, offering a clean user experience compared to most platforms.
-3. **Simple Editor**: A no-frills text editor tailored for writers to focus purely on content creation.
-4. **Discord Integration**: To build community engagement, Quillstash includes a Discord bot that notifies the server when new articles are published.
-5. **SEO Optimization Tools**: Using SEMrush for keyword research ensures writers' content is discoverable and aligned with search trends.
+- **Minimalist dashboard:** A simple interface designed for effortless navigation and management of blog articles.
+- **AI-powered tools:** Assistance with content creation and refinement, making writing easier and faster.
+- **Collaborative workspaces:** Invite team members and assign roles for efficient collaboration.
+- **Developer APIs:** REST API for external integration with detailed documentation.
 
-<ProseImage src={explore} alt="A preview of the Quillstash explore page." />
+<ProseImage src={dashboard} alt="A preview of Marble's CMS dashboard" caption='The CMS dashboard' />
 
-## Technology Stack
+## Tech Stack
 
-- [Next.js](https://nextjs.org): Powering the fullstack application with SSG and SSR capabilities.
-- [TailwindCSS](https://tailwindcss.com): For fast and responsive UI design.
-- [Drizzle ORM](https://drizzle.team): Typescript ORM used with a NeonDB PostgreSQL database.
-- [Google's Gemini](https://ai.google.dev/gemini-api): Used for AI-driven OpenGraph descriptions.
-- [SEMrush](https://www.semrush.com): Leveraged for keyword research and content optimization.
+- [Turborepo](https://turbo.build/repo): High-performance build system for managing the monorepo.
+- [Next.js](https://nextjs.org): Powering the dashboard for dynamic, server-rendered experiences.
+- [Astro](https://astro.build): Building the website and blog for fast, lightweight pages.
+- [Hono](https://hono.dev): For the backend API, optimized for simplicity and performance.
+- [TailwindCSS](https://tailwindcss.com): For creating consistent and responsive UI designs.
+- [Prisma ORM](https://prisma.io): Managing database schemas and queries with type safety, connected to Supabase.
 
 ## Challenges & Learning
 
-Building Quillstash taught me invaluable lessons:
-- **SEO & Optimization**: Learning the intricacies of keyword research and trend analysis to drive organic growth.
-- **Dynamic Content Management**: Implementing systems for real-time OG generation and article management.
-- **Community Building**: Strategizing to engage writers and readers beyond just publishing content.
+Working on Marble has been an incredible learning journey. Here are some of the key challenges I faced:
 
-## Outcome
+- **Mastering Turborepo:** Configuring a monorepo setup that seamlessly integrates Next.js, Astro, and Hono was a steep learning curve, but it taught me a lot about modular codebases and efficient builds.
+- **Database design:** Understanding and implementing database structures to handle organizations, workspaces, sites, and user roles was a deep dive into relational data modeling.
+- **UI/UX design:** Designing and implementing the landing and marketing pages while simultaneously taking a design course has been both challenging and rewarding. It’s taught me the importance of cohesive branding and accessibility.
+- **Balancing simplicity and features:** Ensuring the CMS remains intuitive while offering advanced capabilities like AI integration required constant iteration and user testing.
 
-Quillstash has successfully established itself as a modern, full-stack content platform. In just three months:
-- **Over 20,000 page views**, with consistent monthly growth.
-- **10 active writers**, contributing a diverse array of content.
-- A growing Discord community actively engaging with the platform.
+## Status & Future Plans
 
-## Future Plans
+The project is still in development, and I’m happy with the progress so far. My next steps include:
 
-Looking ahead, we plan to:
-- Expand community features, such as writer leaderboards and collaborative tools.
-- Introduce advanced analytics for authors to track content performance.
-- Enhance AI capabilities to assist writers further with editing and publishing workflows.
-
+- Completing the AI-powered content tools.
+- Enhancing the documentation for both developers and end users.
+- Launching a beta version to gather feedback and refine the platform further.
+- Launching a package/client library to simplify integration for developers who prefer not to use the REST API directly.
+- Implementing rate limiting to ensure fair API usage and protect server resources.

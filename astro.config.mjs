@@ -8,7 +8,7 @@ import vercel from "@astrojs/vercel";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), mdx()],
-  site: "https://taqib.vercel.app",
+  site: "https://taqib.dev",
   output: "server",
   adapter: vercel({
     webAnalytics: { enabled: true }
