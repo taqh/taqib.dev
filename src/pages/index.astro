@@ -31,14 +31,14 @@ const projects = await getCollection('projects', ({ data }) => {
       <section
         class='overflow-x-hidden sm:border-x sm:border-dashed sm:pl-8 lg:pl-16 sm:bg-background py-20 sm:py-24 lg:py-28 md:items- flex flex-col justify-'
       >
-        <h1 class='text-3xl font-semibold md:text-4xl mb-6 font-sans'>
-          Hi there, I&apos;m Taqib
+        <h1 class='text-3xl font-semibold xl mb-6 font-sans'>
+          Hello there, I&apos;m Taqib
         </h1>
-        <div class='space-y-4 max-w-prose text-sm sm:text-base'>
+        <div class='space-y-4 max-w-prose'>
           <p
             class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
           >
-            I'm a self-taught developer from Abuja, Nigeria. I love the web and
+            A self-taught developer from Abuja, Nigeria. I love the web and
             enjoy building web apps that are accessible, fast, and easy to use.
           </p>
           <p
@@ -48,55 +48,47 @@ const projects = await getCollection('projects', ({ data }) => {
             level up my skills and craft visually stunning web experiences.
           </p>
         </div>
-        <div class='py-4 flex items-center gap-6 mt-4'>
-          <div
-            class='w-fit relative after:absolute after:bg-foreground after:h-0.5 after:w-2/3 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+        <div class='py-4 flex items-center gap-6 mt-4 text-sm sm:text-base'>
+          <a
+            href='https://github.com/taqh'
+            target='_blank'
+            class='text-muted-foreground hover:text-foreground flex items-center group font-mono'
           >
-            <a
-              href='https://github.com/taqh'
-              target='_blank'
-              class='text-muted-foreground hover:text-foreground flex items-center group font-mono'
+            <span>Github</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke-width='1.5'
+              stroke='currentColor'
+              class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
             >
-              <span>Github</span>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke-width='1.5'
-                stroke='currentColor'
-                class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
-              </svg>
-            </a>
-          </div>
-          <div
-            class='w-fit relative after:absolute after:bg-foreground after:h-0.5 after:w-2/3 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
+            </svg>
+          </a>
+          <a
+            href='https://x.com/retaqib'
+            target='_blank'
+            class='text-muted-foreground hover:text-foreground flex items-center group font-mono'
           >
-            <a
-              href='https://x.com/retaqib'
-              target='_blank'
-              class='text-muted-foreground hover:text-foreground flex items-center group font-mono'
+            <span>X(Twitter)</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke-width='1.5'
+              stroke='currentColor'
+              class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
             >
-              <span>X(Twitter)</span>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke-width='1.5'
-                stroke='currentColor'
-                class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
-              </svg>
-            </a>
-          </div>
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
+            </svg>
+          </a>
         </div>
       </section>
     </Container>
@@ -107,9 +99,7 @@ const projects = await getCollection('projects', ({ data }) => {
         id='projects'
         class='sm:bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:border-dashed sm:px-6 md:px-10 lg:px-16'
       >
-        <div
-          class='mx-auto flex flex-col space-y-4'
-        >
+        <div class='mx-auto flex flex-col space-y-4'>
           <h2
             class='font-semibold text-2xl leading-[1.1] sm:text-3xl md:text-4xl'
           >
