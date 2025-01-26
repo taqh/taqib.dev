@@ -1,8 +1,6 @@
 ---
 import Github from './icons/Github.astro';
 import Globe from './icons/Globe.astro';
-import Link from './Link.astro';
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 type Props = {
@@ -10,80 +8,87 @@ type Props = {
 };
 
 const { entry } = Astro.props as Props;
-const { title, preview, links, description, status } = entry.data;
+const { title, preview, links, description, status, technologies } = entry.data;
 ---
 
 <li
-  class={`flex flex-col gap-2 border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card max-w-md overflow-hidden`}
+  class='flex flex-col gap-4 justify-between border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card overflow-hidden px-4 pt-2 pb-4'
 >
-  {
-    preview && (
-      <div class='relative group z-10 rounded-t-md min-h-[180px]'>
-        <Image
-          src={preview.src}
-          alt={preview.alt}
-          width={320}
-          height={180}
-          class='object-cover size-full'
-        />
-      </div>
-    )
-  }
-  <div class='flex flex-col gap-2 px-4 pt-2 pb-4'>
-    <div class='flex justify-between'>
-      <h2 class='font-medium text-lg lg:text-xl tracking-wider font-sans'>
-        {title}
-      </h2>
-      <div
-        class='inline-flex items-center rounded-lg px-2 py-1 text-sm font-medium'
+  <div class='flex flex-col gap-2'>
+    <div class='flex justify-between items-center'>
+      <a
+        href={`/${entry.collection}/${entry.data.slug}`}
+        class='hover:underline font-mono flex items-center group'
       >
-        <span class='relative flex h-2 w-2 mr-2'>
-          <span
-            class={`absolute inline-flex h-full w-full animate-ping rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
-          ></span>
-          <span
-            class={`relative inline-flex h-2 w-2 rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'}`}
-          ></span>
-        </span>
+        <p class='font-medium lg:text-lg font-sans'>
+          {title}
+        </p>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke-width='1.5'
+          stroke='currentColor'
+          class='size-4 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
+        >
+          <path
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            d='M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3'></path>
+        </svg>
+      </a>
+
+      <div class='flex items-center gap-2'>
+        {
+          links.repo && (
+            <a
+              href={links.repo}
+              target="_blank"
+              class='rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border'
+            >
+              <span class='sr-only'>view source code on github</span>
+              <Github />
+            </a>
+          )
+        }
+        {
+          links.live && (
+            <a
+              href={links.live}
+              target="_blank"
+              class='rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border'
+
+            >
+              <span class='sr-only'>view the live site</span>
+              <Globe />
+            </a>
+          )
+        }
+        <!-- <div
+          class='inline-flex items-center rounded-lg px-2 py-1 text-sm font-medium'
+        >
+          <span class='relative flex h-2 w-2 mr-2'>
+            <span
+              class={`absolute inline-flex h-full w-full animate-ping rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
+            ></span>
+            <span
+              class={`relative inline-flex h-2 w-2 rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'}`}
+            ></span>
+          </span>
+        </div> -->
       </div>
     </div>
     <p class='text-muted-foreground text-sm'>
       {description}
     </p>
-    <div class='flex justify-between'>
-      <Link
-        href={`/${entry.collection}/${entry.data.slug}`}
-        class='hover:border-emerald-300 dark:hover:border-emerald-500'
-        >Details</Link
-      >
-      <div class='flex items-center gap-4'>
-        {
-          links.repo && (
-            <Link
-              href={links.repo}
-              external
-              variant='icon'
-              class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
-            >
-              <span class='sr-only'>view source code on github</span>
-              <Github />
-            </Link>
-          )
-        }
-        {
-          links.live && (
-            <Link
-              href={links.live}
-              external
-              variant='icon'
-              class='rounded-md p-2 text-sm w-fit transition duration-300 hover:bg-border'
-            >
-              <span class='sr-only'>view the live site</span>
-              <Globe />
-            </Link>
-          )
-        }
-      </div>
-    </div>
   </div>
+  <ul class='flex items-center gap-3 flex-wrap mt-auto'>
+    {
+      technologies.map((tech) => (
+        <li class='bg-background/80 py-1 px-2 text-xs border rounded-md font-mono'>
+          {tech}
+        </li>
+      ))
+    }
+  </ul>
 </li>

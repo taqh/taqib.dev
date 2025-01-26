@@ -34,28 +34,28 @@
   }
 }
 
-@font-face {
-  font-family: "GeistMono";
-  src: url("/fonts/geist/GeistMonoVF.woff") format("woff");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/geist/GeistVF.woff") format("woff");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/montserrat/MontserratVF.ttf") format("ttf");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
+@layer base {
+  @font-face {
+    font-family: 'Manrope';
+    src: url('/fonts/Manrope-Variable.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "GeistMono";
+    src: url("/fonts/geist/GeistMonoVF.woff") format("woff");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Literata";
+    src: url("/fonts/geist/Literata-Variable.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
 }
 
 @layer base {
@@ -64,7 +64,7 @@
   }
 
   html {
-    font-family: GeistMono, system-ui, sans-serif;
+    font-family: Manrope, system-ui, sans-serif;
     background: hsl(var(--background));
     color: hsl(var(--foreground));
     scroll-behavior: smooth;
@@ -74,19 +74,6 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  article > *:not(h1, h2, h3, h4, h5, h6) {
-    font-family: "Geist", system-ui, sans-serif;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Montserrat", system-ui, sans-serif;
   }
 }
 

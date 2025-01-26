@@ -11,6 +11,12 @@ const { src, alt, class: className, caption } = Astro.props;
 ---
 
 <div>
-  <Image src={src} alt='A preview of the quillstash homepage.' class={`rounded-lg ${className && className}`} />
-  {caption && <p class="text-xs text-muted-foreground text-center italic -mt-5">{caption}</p>}
+  <Image src={src} alt={alt} class={`${className ? className : ''} border border-dashed`} />
+  {
+    caption && (
+      <p class='text-xs text-muted-foreground text-center w-fit -mt-5 mx-auto'>
+        {caption}
+      </p>
+    )
+  }
 </div>

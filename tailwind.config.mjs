@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Geist", ...defaultTheme.fontFamily.sans],
+        sans: ["Manrope", ...defaultTheme.fontFamily.sans],
         mono: ["Geist Mono", ...defaultTheme.fontFamily.mono],
-        serif: ["Montserrat", ...defaultTheme.fontFamily.serif],
+        serif: ["Literata", ...defaultTheme.fontFamily.serif],
       },
       colors: {
         card: "hsl(var(--card))",
@@ -24,7 +24,7 @@ export default {
       typography: ({ theme }) => ({
         taqib: {
           css: {
-            '--tw-prose-body': 'hsl(var(--foreground))',
+            '--tw-prose-body': 'hsl(var(--muted-foreground))',
             '--tw-prose-headings': 'hsl(var(--foreground))',
             '--tw-prose-lead': 'hsl(var(--foreground))',
             '--tw-prose-links': 'hsl(var(--foreground))',
