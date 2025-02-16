@@ -5,6 +5,7 @@ import Container from '@/components/Container.astro';
 import { SITE } from '@/lib/constants';
 import Link from '@/components/Link.astro';
 import Prose from '@/components/Prose.astro';
+import { Image } from "astro:assets";
 
 export const prerender = true;
 
@@ -57,6 +58,13 @@ const { Content } = await render(entry);
           }
         </div>
       </section>
+      {
+        entry.data.preview && (
+        <div>
+          <Image src={entry.data.preview.src} alt={entry.data.preview.alt} class="w-full max-w-3xl mx-auto mb-8 border border-dashed" />
+        </div>
+        )
+      }
       <Prose>
         <Content />
       </Prose>
