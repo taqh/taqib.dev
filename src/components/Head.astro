@@ -16,6 +16,8 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f2ee" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1a1a" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Favicons -->
@@ -23,7 +25,7 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="MyWebSite" />
+<meta name="apple-mobile-web-app-title" content="Taqib" />
 <link rel="manifest" href="/site.webmanifest" />
 
 <!-- Canonical URL -->
