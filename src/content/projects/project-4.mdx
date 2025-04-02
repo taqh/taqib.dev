@@ -1,54 +1,61 @@
 ---
-title: "Geotech4all"
+title: "StashBot"
 status: "live"
-description: "Website + Admin dashboard for a geoscience company."
-slug: "geotech4all"
-image: "/og-dark.png"  
-preview:
-  src: "../../assets/geotech-og.jpg"
-  alt: "A preview of the geotech4all homepage"
-technologies: ["Next.js", "MongoDB", "Typescript", "Motion"]
+description: "A notification bot for the Quillstash Discord server, enhanced with Google's Gemini."
+slug: "stashbot"
+image: "/og-dark.png"
+draft: false
+technologies: ["Hono", "Discord.js", "TypeScript"]
 links:
-  repo: "https://github.com/geotech4all/website"
-  live: "https://www.geotech4all.com"
+  repo: "https://github.com/taqh/stashbot"
 ---
 
+import notification from '@/assets/stashbot.png';
+import prompt from '@/assets/stashbot-prompt.png';
 import ProseImage from '@/components/ProseImage.astro';
-import cover from '../../assets/geotech-og.jpg';
-import dashboard from '../../assets/geotech-dashboard.png';
-import event from '../../assets/event-form.png';
 
 ## Project Overview
 
-Website for geotech4all, a geoscience company that offers geological map making services and training on geological sofware such as ArcGIS and Petrel. The site is built with Next.js and uses MongoDB as the database. The site is hosted on Vercel and the database is hosted on MongoDB Atlas.
+StashBot is a custom-built support bot for the [Quillstash](https://quillstash.com) Discord server, designed to enhance community engagement and provide real-time AI-powered assistance. By notifying members of newly published articles, StashBot ensures that all authors receive equal attention, fostering a more connected and interactive community. 
+
+Additionally, the integration of Google's Gemini AI brings cutting-edge conversational capabilities directly into the server, offering members quick, AI-driven support and interaction.
 
 ## Objectives
 
-1. Develop a user-friendly website that showcases the services offered by Geotech4all.
+1. **Boost Community Engagement**: Notify members about new articles to drive conversations and readership.
+2. **Foster Inclusivity**: Ensure every author's work is equally highlighted to promote a supportive environment.
+3. **Enhance User Experience**: Provide real-time AI assistance through integrated Gemini-powered slash commands.
 
-2. Create a content management system (CMS) that allows the Geotech4all team to easily update and manage the site content.
-
-3. Implement a responsive design that ensures optimal user experience across all devices.
-
-<ProseImage src={dashboard} alt="A preview of the geotech dashboard" caption='A preview of the geotech dashboard' />
+<ProseImage src={notification} alt="A screenshot of StashBot's notification on the server" caption="A notification from StashBot about a published article" />
 
 ## Features
 
-1. **Responsive UI:** I designed the site to be responsive and mobile-friendly, ensuring that users can access the site on any device.
+1. **Real-Time Notifications**: Alerts members about new content published on Quillstash, driving immediate interaction.
+2. **AI-Powered Chat Commands**: Includes commands like `/prompt`, enabling members to chat with Google's Gemini AI for creative ideas or assistance.
+3. **Seamless Integration**: StashBot operates smoothly within the Discord ecosystem, blending utility and accessibility.
 
-2. **SEO/Metadata:** I implemented SEO best practices, and followed OG specifications to improve the site's search engine visibility.
-
-3. **Custom CMS/Admin app:** Beside the website, I also built a custom CMS for the Geotech4all team to manage the site content easily. They can create Events, Testimonials, and Blog posts, and update the site content without any technical knowledge
-
-<ProseImage src={event} alt="A preview of the geotech event creation form" caption="A preview of the geotech event creation form" />
+<ProseImage src={prompt} alt="A screenshot of StashBot's reply to my prompts" caption="StashBot's reply to my prompt about Rust" />
 
 ## Technology Stack
 
-- [Nextjs](https://nextjs.org): For its fullstack capabilities.
-- [Tailwind CSS](https://tailwindcss.com): For styling both apps.
-- [Prisma ORM](https://prisma.io): Typescript ORM to query data from mongoDB.
-- [Motion](https://motion.dev): For animations and transitions.
+- [Hono](https://hono.dev): Lightweight Node.js framework for backend logic and API routing.
+- [Discord.js](https://discord.js.org): Simplifies interaction with the Discord API for bot development.
+- [Google's Gemini](https://ai.google.dev/gemini-api): Powers conversational AI and text generation capabilities.
+- [TypeScript](https://typescriptlang.org): Ensures type safety and improved code maintainability.
 
-## Outcome
+## Challenges & Learning
 
-The Geotech4all website has been live for a few months now and has received positive feedback from users. The team at Geotech4all has been able to easily update the site content using the custom CMS I built for them. The site has also seen an increase in traffic and engagement, thanks to the SEO optimizations. Overall, the project has been a success.
+Developing StashBot taught me:
+- **API Integration:** Working with Discord's API and Google's Gemini API improved my skills in handling third-party service integrations.
+- **Real-Time Systems:** Building notification systems required efficient logic for real-time updates and alerts.
+- **Community Engagement Design:** Crafting features that actively promote inclusivity and collaboration improved my understanding of user-centric design.
+
+## Future Plans
+
+To further enhance StashBot’s functionality, I plan to:
+
+1. **Introduce Writer Leaderboards**: Track published posts per writer and recognize active contributors.
+2. **Implement Rewards Systems**: Celebrate milestones with fun announcements, badges, or special roles within the server.
+3. **Expand AI Capabilities**: Add more conversational features powered by Gemini to make StashBot a creative partner for writers.
+4. **Optimize Performance**: Implement rate limiting and caching mechanisms to ensure smooth operation and prevent API spamming.
+
