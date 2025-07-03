@@ -16,14 +16,18 @@ const { title, preview, links, description, status, technologies } = entry.data;
 >
   <div class='flex flex-col gap-2'>
     <div class='flex justify-between items-center'>
-      <a
+      <!-- <a
         href={`/${entry.collection}/${entry.data.slug}`}
-        class='hover:underline font-mono flex items-center group'
+        class='hover:underline flex items-center group'
       >
-        <p class='font-medium lg:text-lg font-sans'>
+        <p class='font-medium lg:text-lg font-serif'>
           {title}
         </p>
-      </a>
+      </a> -->
+      
+      <p class='font-medium lg:text-lg font-serif'>
+        {title}
+      </p>
 
       <div class='flex items-center gap-2'>
         {

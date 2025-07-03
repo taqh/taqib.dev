@@ -8,7 +8,6 @@ import Typescript from '@/components/icons/Typescript.astro';
 import Tailwind from '@/components/icons/Tailwind.astro';
 import Nextjs from '@/components/icons/Nextjs.astro';
 import Nodejs from '@/components/icons/Nodejs.astro';
-import MongoDB from '@/components/icons/MongoDB.astro';
 import Postgres from '@/components/icons/Postgres.astro';
 import AstroIcon from '@/components/icons/AstroIcon.astro';
 import Prisma from '@/components/icons/Prisma.astro';
@@ -25,257 +24,257 @@ const projects = await getCollection('projects', ({ data }) => {
 ---
 
 <Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
-  <div class='divide-y divide-dashed'>
+  <!-- <div class='divide-y divide-dashed'> -->
+  <div>
     <!-- about section -->
-    <Container class='border-t border-dashed'>
-      <section
-        class='overflow-x-hidden sm:border-x sm:border-dashed sm:pl-8 lg:pl-16 sm:bg-background py-20 sm:py-24 lg:py-28 md:items- flex flex-col justify-'
-      >
-        <h1 class='text-2xl sm:text-3xl font-medium mb-6 font-sans'>
-          Hello there, I&apos;m Taqib
-        </h1>
-        <div class='space-y-4 max-w-prose'>
-          <p
-            class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
+     <div class="border-t border-dashed">
+      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+        <Container>
+          <section
+            class='overflow-x-hidden py-20 sm:py-24 lg:py-28 flex flex-col text-justify'
           >
-            A self-taught developer from Abuja, Nigeria. I love the web and
-            enjoy building web apps that are accessible, fast, and easy to use.
-          </p>
-          <p
-            class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
-          >
-            Right now, I’m diving into design systems and UI/UX fundamentals to
-            level up my skills and craft visually stunning web experiences.
-          </p>
-        </div>
-        <div class='py-4 flex items-center gap-6 mt-4 text-sm sm:text-base'>
-          <a
-            href='https://github.com/taqh'
-            target='_blank'
-            class='text-muted-foreground hover:text-foreground flex items-center group font-mono'
-          >
-            <span>Github</span>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke-width='1.5'
-              stroke='currentColor'
-              class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
-            </svg>
-          </a>
-          <a
-            href='https://x.com/retaqib'
-            target='_blank'
-            class='text-muted-foreground hover:text-foreground flex items-center group font-mono'
-          >
-            <span>X(Twitter)</span>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke-width='1.5'
-              stroke='currentColor'
-              class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
-            </svg>
-          </a>
-        </div>
-      </section>
-    </Container>
+            <h1 class='text-2xl sm:text-3xl font-medium mb-4 font-serif'>
+              Hi there, I&apos;m Taqib
+            </h1>
+            <div class='space-y-4 max-w-prose'>
+              <p
+                class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
+              >
+                A self-taught developer from Abuja, Nigeria. I love the web and
+                enjoy building web apps that are accessible, fast, and easy to use.
+                Right now, I'm diving into design systems and UI/UX fundamentals.
+              </p>
+            </div>
+            <div class='py-4 flex items-center gap-6 mt-4 text-sm sm:text-base'>
+              <a
+                href='https://github.com/taqh'
+                target='_blank'
+                class='text-muted-foreground hover:text-foreground text-base sm:text-sm flex items-center group font-mono'
+              >
+                <span>Github</span>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke-width='1.5'
+                  stroke='currentColor'
+                  class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
+                </svg>
+              </a>
+              <a
+                href='https://x.com/retaqib'
+                target='_blank'
+                class='text-muted-foreground hover:text-foreground text-base sm:text-sm flex items-center group font-mono'
+              >
+                <span>X(Twitter)</span>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke-width='1.5'
+                  stroke='currentColor'
+                  class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
+                </svg>
+              </a>
+            </div>
+          </section>
+        </Container>
+      </div>
+     </div>
 
     <!-- projects section -->
-    <Container>
-      <section
-        id='projects'
-        class='sm:bg-background space-y-12 py-8 md:py-12 lg:py-24 sm:border-x sm:border-dashed sm:px-6 md:px-10 lg:px-16'
-      >
-        <div class='mx-auto flex flex-col space-y-4'>
-          <h2
-            class='font-medium text-2xl leading-[1.1] sm:text-3xl'
+     <div>
+      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+        <Container>
+          <section
+            id='projects'
+            class='space-y-12 pb-8 md:pb-12 lg:pb-24'
           >
-            Projects
-          </h2>
-          <p
-            class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
-          >
-            A couple of projects I’ve worked on.
-          </p>
-        </div>
-        <!-- project list -->
-        <ul class='mx-auto grid gap-8 grid-cols-1 lg:grid-cols-2'>
-          {
-            projects
-              .slice(0, 4)
-              .map((project) => <ProjectCard entry={project} />)
-          }
-        </ul>
-        {
-          projects.length > 4 && (
-            <div class='flex justify-center mt-10'>
-              <Link
-                forward
-                href='/projects'
-                class='hover:border-emerald-300 dark:hover:border-emerald-500 hover:bg-background/80 hover:backdrop-blur-sm relative z-10 font-mono'
+            <div class='mx-auto flex flex-col gap-2'>
+              <h2
+                class='font-medium text-2xl leading-[1.1] sm:text-3xl font-serif'
               >
-                See All Projects
-              </Link>
+                Projects
+              </h2>
+              <p
+                class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
+              >
+                A couple of projects I’ve worked on.
+              </p>
             </div>
-          )
-        }
-      </section>
-    </Container>
+            <!-- project list -->
+            <ul class='mx-auto grid gap-8 grid-cols-1 lg:grid-cols-2'>
+              {
+                projects
+                  .slice(0, 4)
+                  .map((project) => <ProjectCard entry={project} />)
+              }
+            </ul>
+            {
+              projects.length > 4 && (
+                <div class='flex justify-center mt-10'>
+                  <Link
+                    forward
+                    href='/projects'
+                    class='hover:border-emerald-300 dark:hover:border-emerald-500 hover:bg-background/80 hover:backdrop-blur-sm relative z-10 font-mono'
+                  >
+                    See All Projects
+                  </Link>
+                </div>
+              )
+            }
+          </section>
+        </Container>
+      </div>
+     </div>
 
     <!-- technologies section -->
-    <Container>
-      <section
-        id='skills'
-        class='sm:border-x sm:border-dashed sm:px-16 py-14 md:py-16 lg:py-28 space-y-14 lg:space-y-20'
-      >
-        <div
-          class='mx-auto flex max-w-prose flex-col items-center justify-center gap-4 text-center'
-        >
-          <h2 class='font-medium text-2xl sm:text-3xl leading-[1.1]'>Stack</h2>
-          <p
-            class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
+     <div>
+      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+        <Container>
+          <section
+            id='skills'
+            class='pb-14 md:pb-16 lg:pb-28 space-y-14 lg:space-y-20'
           >
-            The technologies I work with most frequently
-          </p>
-        </div>
-        <ul
-          class='grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center font-mono'
-        >
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <React />
-            <span>React.js</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <Typescript />
-            <span>Typescript</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <Tailwind />
-            <span>Tailwind</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <Nextjs />
-            <span>Next.js</span>
-          </li>
-          <li
-            class='flex items-center flex-col text-sm md:flex-row gap-2 hover:text-[#2D3748] dark:hover:text-white'
-          >
-            <Prisma />
-            <span>Prisma</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <AstroIcon />
-            <span>Astro</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <Hono />
-            <span>Hono</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <Postgres />
-            <span>PostgreSQL</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <Nodejs />
-            <span>Node.js</span>
-          </li>
-          <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
-            <MongoDB />
-            <span>MongoDB</span>
-          </li>
-        </ul>
-      </section>
-    </Container>
-
-    <!-- contact section -->
-    <Container>
-      <section
-        id='contact'
-        class='sm:border-x sm:border-dashed py-8 md:py-12 lg:py-24 space-y-10 sm:px-14'
-      >
-        <div
-          class='mx-auto flex max-w-[58rem] flex-col md:items-center justify-center gap-4 text-center'
-        >
-          <h2 class='font-medium text-2xl sm:text-3xl leading-[1.1]'>
-            Get in touch
-          </h2>
-          <p
-            class='max-w-prose leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
-          >
-            I’m always open to new opportunities to apply my skills and make an
-            impact. If you have a project in mind or just want to connect, I'd
-            love to hear from you.
-          </p>
-        </div>
-
-        <div
-          class='flex flex-col sm:flex-row gap-10 justify-center sm:justify-between max-sm:items-center max-sm:text-center'
-        >
-          <div
-            class='space-y-3 sm:space-y-4 flex flex-col items-center sm:items-start'
-          >
-            <h3 class='font-semibold text-lg'>You can email me at</h3>
-            <p
-              class='w-fit relative after:absolute after:bg-emerald-400 after:h-0.5 after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+            <div
+              class='flex max-w-prose flex-col items-start justify-center gap-2 text-center'
             >
-              <a
-                href='mailto:hello@taqib.dev'
-                class='bg-gradient-to-r from-emerald-700 to-emerald-500 bg-clip-text text-transparent focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500'
-                >hello@taqib.dev</a
+              <h2 class='font-medium text-2xl sm:text-3xl leading-[1.1] font-serif'>Stack</h2>
+              <p
+                class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
               >
-            </p>
-          </div>
-          <!--  -->
-          <div class='space-y-4'>
-            <h4 class='font-semibold text-lg'>Find me on</h4>
-            <ul class='flex gap-4'>
-              <li class='rounded-md'>
-                <a
-                  href='https://github.com/taqh'
-                  target='_blank'
-                  class='inline-flex p-1.5 rounded-md z-10 bg-background/80 hover:backdrop-blur-sm border border-transparent hover:border-border'
-                >
-                  <Github />
-                  <span class='sr-only'>Github</span>
-                </a>
+                The technologies I work with most frequently
+              </p>
+            </div>
+            <ul
+              class='grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center font-mono'
+            >
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <React />
+                <span>React.js</span>
               </li>
-              <li class='rounded-md'>
-                <a
-                  href='https://x.com/retaqib'
-                  target='_blank'
-                  class='inline-flex p-1.5 rounded-md z-10 bg-background/80 hover:backdrop-blur-sm border border-transparent hover:border-border'
-                >
-                  <X />
-                  <span class='sr-only'>Twitter</span>
-                </a>
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <Typescript />
+                <span>Typescript</span>
               </li>
-              <li class='rounded-md'>
-                <a
-                  href='https://discord.com/users/851479949717798932'
-                  target='_blank'
-                  class='inline-flex p-1.5 rounded-md z-10 bg-background/80 hover:backdrop-blur-sm border border-transparent hover:border-border'
-                >
-                  <Discord />
-                  <span class='sr-only'>Discord</span>
-                </a>
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <Tailwind />
+                <span>Tailwind</span>
+              </li>
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <Nextjs />
+                <span>Next.js</span>
+              </li>
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <AstroIcon />
+                <span>Astro</span>
+              </li>
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <Hono />
+                <span>Hono</span>
+              </li>
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <Postgres />
+                <span>PostgreSQL</span>
+              </li>
+              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+                <Nodejs />
+                <span>Node.js</span>
               </li>
             </ul>
-          </div>
-        </div>
-      </section>
-    </Container>
+          </section>
+        </Container>
+      </div>
+     </div>
+
+    <!-- contact section -->
+     <div>
+      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+        <Container>
+          <section
+            id='contact'
+            class='pb-8 md:py-12 lg:py-24 space-y-10'
+          >
+            <div
+              class='mx-auto flex max-w-[58rem] flex-col md:items-center justify-center gap-2 text-center'
+            >
+              <h2 class='font-medium text-2xl sm:text-3xl leading-[1.1] font-serif'>
+                Get in touch
+              </h2>
+              <p
+                class='max-w-prose leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
+              >
+                How to reach me.
+              </p>
+            </div>
+    
+            <div
+              class='flex flex-col sm:flex-row gap-10 justify-center sm:justify-between max-sm:items-center max-sm:text-center'
+            >
+              <div
+                class='space-y-3 sm:space-y-2 flex flex-col items-center sm:items-start'
+              >
+                <h3 class='font-medium font-serif text-lg'>You can email me at</h3>
+                <p
+                  class='w-fit relative after:absolute after:bg-emerald-400 after:h-0.5 after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+                >
+                  <a
+                    href='mailto:hello@taqib.dev'
+                    class='text-foreground text-base sm:text-sm focus-visible:outline-dashed focus-visible:underline focus-visible:underline-offset-2 focus-visible:underline-emerald-500'
+                    >hello@taqib.dev</a
+                  >
+                </p>
+              </div>
+              <!--  -->
+              <div class='space-y-2'>
+                <h4 class='font-medium font-serif text-lg'>Find me on</h4>
+                <ul class='flex gap-4'>
+                  <li class='rounded-md'>
+                    <a
+                      href='https://github.com/taqh'
+                      target='_blank'
+                      class='inline-flex p-1.5 text-muted-foreground hover:text-foreground'
+                    >
+                      <Github />
+                      <span class='sr-only'>Github</span>
+                    </a>
+                  </li>
+                  <li class='rounded-md'>
+                    <a
+                      href='https://x.com/retaqib'
+                      target='_blank'
+                      class='inline-flex p-1.5 text-muted-foreground hover:text-foreground'
+                    >
+                      <X />
+                      <span class='sr-only'>Twitter</span>
+                    </a>
+                  </li>
+                  <li class='rounded-md'>
+                    <a
+                      href='https://discord.com/users/851479949717798932'
+                      target='_blank'
+                      class='inline-flex p-1.5 text-muted-foreground hover:text-foreground'
+                    >
+                      <Discord />
+                      <span class='sr-only'>Discord</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </Container>
+      </div>
+     </div>
   </div>
 </Layout>

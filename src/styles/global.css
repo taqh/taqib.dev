@@ -150,20 +150,6 @@
   }
 }
 
-/* scrollbar styles */
-::-webkit-scrollbar {
-  width: 0.525rem;
-}
-::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--scrollbar-thumb));
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--scrollbar-thumb-hover));
-}
-::-webkit-scrollbar-track {
-  background: hsl(var(--background) / 0.8);
-}
-
 /* theme switch animation styles */
 ::view-transition-old(root),
 ::view-transition-new(root) {
