@@ -1,5 +1,5 @@
 export const SITE = {
-  TITLE: "Taqib",
+  TITLE: "Taqib Ibrahim",
   DESCRIPTION: "Web developer",
 };
 
