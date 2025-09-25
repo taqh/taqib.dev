@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 interface Props {
   src: ImageMetadata;
@@ -11,10 +11,14 @@ const { src, alt, class: className, caption } = Astro.props;
 ---
 
 <div>
-  <Image src={src} alt={alt} class={`${className ? className : ''} border border-dashed`} />
+  <Image
+    src={src}
+    alt={alt}
+    class={`${className ? className : ""} border border-dashed`}
+  />
   {
     caption && (
-      <p class='text-xs text-muted-foreground text-center w-fit -mt-5 mx-auto'>
+      <p class="text-xs text-muted-foreground text-center w-fit -mt-5 mx-auto">
         {caption}
       </p>
     )

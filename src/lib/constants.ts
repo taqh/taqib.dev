@@ -5,5 +5,6 @@ export const SITE = {
 
 export const PROJECTS = {
   TITLE: "Projects - Taqib",
-  DESCRIPTION: "A list of my projects with links to repositories or live demos.",
+  DESCRIPTION:
+    "A list of my projects with links to repositories or live demos.",
 };

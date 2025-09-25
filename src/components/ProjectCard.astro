@@ -1,10 +1,10 @@
 ---
-import Github from './icons/Github.astro';
-import Globe from './icons/Globe.astro';
-import type { CollectionEntry } from 'astro:content';
+import Github from "./icons/Github.astro";
+import Globe from "./icons/Globe.astro";
+import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  entry: CollectionEntry<'projects'>;
+  entry: CollectionEntry<"projects">;
 };
 
 const { entry } = Astro.props as Props;
@@ -12,10 +12,10 @@ const { title, preview, links, description, status, technologies } = entry.data;
 ---
 
 <li
-  class='flex flex-col gap-4 justify-between border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card overflow-hidden px-4 pt-2 pb-4'
+  class="flex flex-col gap-4 justify-between border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card overflow-hidden px-4 pt-2 pb-4"
 >
-  <div class='flex flex-col gap-2'>
-    <div class='flex justify-between items-center'>
+  <div class="flex flex-col gap-2">
+    <div class="flex justify-between items-center">
       <!-- <a
         href={`/${entry.collection}/${entry.data.slug}`}
         class='hover:underline flex items-center group'
@@ -24,20 +24,20 @@ const { title, preview, links, description, status, technologies } = entry.data;
           {title}
         </p>
       </a> -->
-      
-      <p class='font-medium lg:text-lg font-serif'>
+
+      <p class="font-medium lg:text-lg font-serif">
         {title}
       </p>
 
-      <div class='flex items-center gap-2'>
+      <div class="flex items-center gap-2">
         {
           links.repo && (
             <a
               href={links.repo}
-              target='_blank'
-              class='rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border'
+              target="_blank"
+              class="rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border"
             >
-              <span class='sr-only'>view source code on github</span>
+              <span class="sr-only">view source code on github</span>
               <Github />
             </a>
           )
@@ -46,10 +46,10 @@ const { title, preview, links, description, status, technologies } = entry.data;
           links.live && (
             <a
               href={links.live}
-              target='_blank'
-              class='rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border'
+              target="_blank"
+              class="rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border"
             >
-              <span class='sr-only'>view the live site</span>
+              <span class="sr-only">view the live site</span>
               <Globe />
             </a>
           )
@@ -68,14 +68,14 @@ const { title, preview, links, description, status, technologies } = entry.data;
         </div> -->
       </div>
     </div>
-    <p class='text-muted-foreground text-sm'>
+    <p class="text-muted-foreground text-sm">
       {description}
     </p>
   </div>
-  <ul class='flex items-center gap-3 flex-wrap mt-auto'>
+  <ul class="flex items-center gap-3 flex-wrap mt-auto">
     {
       technologies.map((tech) => (
-        <li class='bg-background/80 py-1 px-2 text-xs border rounded-md font-mono'>
+        <li class="bg-background/80 py-1 px-2 text-xs border rounded-md font-mono">
           {tech}
         </li>
       ))

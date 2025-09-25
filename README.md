@@ -128,11 +128,14 @@ The frontmatter can be customized to fit your needs. However you will need to up
 
 ```typescript
 import { z, defineCollection } from "astro:content";
-import { glob } from 'astro/loaders';
+import { glob } from "astro/loaders";
 
 // this is my project collection schema update it to match your frontmatter
 const projectsCollection = defineCollection({
-  loader: glob({ pattern: '**\/[^_]*.{md,mdx}', base: "./src/content/projects" }),
+  loader: glob({
+    pattern: "**/[^_]*.{md,mdx}",
+    base: "./src/content/projects",
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -152,7 +155,7 @@ const projectsCollection = defineCollection({
         live: z.string().url().optional(),
       }),
       technologies: z.array(z.string()),
-  }),
+    }),
 });
 ```
 

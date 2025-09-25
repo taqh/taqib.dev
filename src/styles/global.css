@@ -36,8 +36,8 @@
 
 @layer base {
   @font-face {
-    font-family: 'Manrope';
-    src: url('/fonts/Manrope-Variable.ttf') format('truetype');
+    font-family: "Manrope";
+    src: url("/fonts/Manrope-Variable.ttf") format("truetype");
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;

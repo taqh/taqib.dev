@@ -1,57 +1,64 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-interface Props extends HTMLAttributes<'a'> {
+import type { HTMLAttributes } from "astro/types";
+interface Props extends HTMLAttributes<"a"> {
   href: string;
   external?: boolean;
   forward?: boolean;
   class?: string;
-  variant?: 'card' | 'icon' | 'button';
+  variant?: "card" | "icon" | "button";
 }
-const { href, external, forward, class: classNames, variant, ...attrs } = Astro.props;
+const {
+  href,
+  external,
+  forward,
+  class: classNames,
+  variant,
+  ...attrs
+} = Astro.props;
 ---
 
 <a
   href={href}
-  target={external ? '_blank' : '_self'}
-  class={`group font-sans rounded-md flex border border-dashed cursor-pointer transition focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 duration-300 focus-visible:outline-offset-2 ${variant === 'card' ? 'flex-col hover:bg-background/80 backdrop-blur-sm p-4 text-base' : variant === 'icon' ? 'p-2 border-none' : variant === "button"? "hover:bg-border focus-visible:bg-border": 'px-4 py-2 items-center justify-center text-sm'} ${classNames}`}
+  target={external ? "_blank" : "_self"}
+  class={`group font-sans rounded-md flex border border-dashed cursor-pointer transition focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 duration-300 focus-visible:outline-offset-2 ${variant === "card" ? "flex-col hover:bg-background/80 backdrop-blur-sm p-4 text-base" : variant === "icon" ? "p-2 border-none" : variant === "button" ? "hover:bg-border focus-visible:bg-border" : "px-4 py-2 items-center justify-center text-sm"} ${classNames}`}
   {...attrs}
 >
   <slot />
   {
-    external && variant !== 'icon' && (
+    external && variant !== "icon" && (
       <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='16'
-        height='16'
-        viewBox='0 0 24 24'
-        fill='none'
-        stroke='currentColor'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        class='translate-x-1.5 group-hover:-translate-y-0.5 group-hover:translate-x-2.5 group-focus-visible:-translate-y-0.5 group-focus-visible:translate-x-3 transition duration-300 lucide lucide-arrow-up-right'
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="translate-x-1.5 group-hover:-translate-y-0.5 group-hover:translate-x-2.5 group-focus-visible:-translate-y-0.5 group-focus-visible:translate-x-3 transition duration-300 lucide lucide-arrow-up-right"
       >
-        <path d='M7 7h10v10' />
-        <path d='M7 17 17 7' />
+        <path d="M7 7h10v10" />
+        <path d="M7 17 17 7" />
       </svg>
     )
   }
   {
     forward && (
       <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='16'
-        height='16'
-        viewBox='0 0 24 24'
-        fill='none'
-        stroke='currentColor'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        class='translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300 lucide lucide-arrow-right'
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300 lucide lucide-arrow-right"
       >
-        <path d='M5 12h14' />
-        <path d='m12 5 7 7-7 7' />
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
       </svg>
     )
   }

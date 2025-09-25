@@ -1,24 +1,24 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import ProjectCard from '@/components/ProjectCard.astro';
-import Container from '@/components/Container.astro';
-import { getCollection } from 'astro:content';
-import React from '@/components/icons/React.astro';
-import Typescript from '@/components/icons/Typescript.astro';
-import Tailwind from '@/components/icons/Tailwind.astro';
-import Nextjs from '@/components/icons/Nextjs.astro';
-import Nodejs from '@/components/icons/Nodejs.astro';
-import Postgres from '@/components/icons/Postgres.astro';
-import AstroIcon from '@/components/icons/AstroIcon.astro';
-import Prisma from '@/components/icons/Prisma.astro';
-import X from '@/components/icons/X.astro';
-import Github from '@/components/icons/Github.astro';
-import Discord from '@/components/icons/Discord.astro';
-import { SITE } from '@/lib/constants';
-import Link from '@/components/Link.astro';
-import Hono from '@/components/icons/Hono.astro';
+import Layout from "@/layouts/Layout.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Container from "@/components/Container.astro";
+import { getCollection } from "astro:content";
+import React from "@/components/icons/React.astro";
+import Typescript from "@/components/icons/Typescript.astro";
+import Tailwind from "@/components/icons/Tailwind.astro";
+import Nextjs from "@/components/icons/Nextjs.astro";
+import Nodejs from "@/components/icons/Nodejs.astro";
+import Postgres from "@/components/icons/Postgres.astro";
+import AstroIcon from "@/components/icons/AstroIcon.astro";
+import Prisma from "@/components/icons/Prisma.astro";
+import X from "@/components/icons/X.astro";
+import Github from "@/components/icons/Github.astro";
+import Discord from "@/components/icons/Discord.astro";
+import { SITE } from "@/lib/constants";
+import Link from "@/components/Link.astro";
+import Hono from "@/components/icons/Hono.astro";
 
-const projects = await getCollection('projects', ({ data }) => {
+const projects = await getCollection("projects", ({ data }) => {
   return data.draft !== true;
 });
 ---
@@ -27,93 +27,95 @@ const projects = await getCollection('projects', ({ data }) => {
   <!-- <div class='divide-y divide-dashed'> -->
   <div>
     <!-- about section -->
-     <div class="border-t border-dashed">
-      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+    <div class="border-t border-dashed">
+      <div
+        class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
+      >
         <Container>
           <section
-            class='overflow-x-hidden py-20 sm:py-24 lg:py-28 flex flex-col text-justify'
+            class="overflow-x-hidden py-20 sm:py-24 lg:py-28 flex flex-col text-justify"
           >
-            <h1 class='text-2xl sm:text-3xl font-medium mb-4 font-serif'>
+            <h1 class="text-2xl sm:text-3xl font-medium mb-4 font-serif">
               Hi there, I&apos;m Taqib
             </h1>
-            <div class='space-y-4 max-w-prose'>
+            <div class="space-y-4 max-w-prose">
               <p
-                class='max-w-prose leading-normal text-muted-foreground sm:leading-7'
+                class="max-w-prose leading-normal text-muted-foreground sm:leading-7"
               >
                 A self-taught developer from Abuja, Nigeria. I love the web and
-                enjoy building web apps that are accessible, fast, and easy to use.
-                Right now, I'm diving into design systems and UI/UX fundamentals.
+                enjoy building web apps that are accessible, fast, and easy to
+                use. Right now, I'm diving into design systems and UI/UX
+                fundamentals.
               </p>
             </div>
-            <div class='py-4 flex items-center gap-6 mt-4 text-sm sm:text-base'>
+            <div class="py-4 flex items-center gap-6 mt-4 text-sm sm:text-base">
               <a
-                href='https://github.com/taqh'
-                target='_blank'
-                class='text-muted-foreground hover:text-foreground text-base sm:text-sm flex items-center group font-mono'
+                href="https://github.com/taqh"
+                target="_blank"
+                class="text-muted-foreground hover:text-foreground text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>Github</span>
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke-width='1.5'
-                  stroke='currentColor'
-                  class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
                 >
                   <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
                 </svg>
               </a>
               <a
-                href='https://x.com/retaqib'
-                target='_blank'
-                class='text-muted-foreground hover:text-foreground text-base sm:text-sm flex items-center group font-mono'
+                href="https://x.com/retaqib"
+                target="_blank"
+                class="text-muted-foreground hover:text-foreground text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>X(Twitter)</span>
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke-width='1.5'
-                  stroke='currentColor'
-                  class='size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300'
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
                 >
                   <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    d='m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25'></path>
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
                 </svg>
               </a>
             </div>
           </section>
         </Container>
       </div>
-     </div>
+    </div>
 
     <!-- projects section -->
-     <div>
-      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+    <div>
+      <div
+        class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
+      >
         <Container>
-          <section
-            id='projects'
-            class='space-y-12 pb-8 md:pb-12 lg:pb-24'
-          >
-            <div class='mx-auto flex flex-col gap-2'>
+          <section id="projects" class="space-y-12 pb-8 md:pb-12 lg:pb-24">
+            <div class="mx-auto flex flex-col gap-2">
               <h2
-                class='font-medium text-2xl leading-[1.1] sm:text-3xl font-serif'
+                class="font-medium text-2xl leading-[1.1] sm:text-3xl font-serif"
               >
                 Projects
               </h2>
               <p
-                class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
+                class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
               >
                 A couple of projects I’ve worked on.
               </p>
             </div>
             <!-- project list -->
-            <ul class='mx-auto grid gap-8 grid-cols-1 lg:grid-cols-2'>
+            <ul class="mx-auto grid gap-8 grid-cols-1 lg:grid-cols-2">
               {
                 projects
                   .slice(0, 4)
@@ -122,11 +124,11 @@ const projects = await getCollection('projects', ({ data }) => {
             </ul>
             {
               projects.length > 4 && (
-                <div class='flex justify-center mt-10'>
+                <div class="flex justify-center mt-10">
                   <Link
                     forward
-                    href='/projects'
-                    class='hover:border-emerald-300 dark:hover:border-emerald-500 hover:bg-background/80 hover:backdrop-blur-sm relative z-10 font-mono'
+                    href="/projects"
+                    class="hover:border-emerald-300 dark:hover:border-emerald-500 hover:bg-background/80 hover:backdrop-blur-sm relative z-10 font-mono"
                   >
                     See All Projects
                   </Link>
@@ -136,58 +138,64 @@ const projects = await getCollection('projects', ({ data }) => {
           </section>
         </Container>
       </div>
-     </div>
+    </div>
 
     <!-- technologies section -->
-     <div>
-      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+    <div>
+      <div
+        class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
+      >
         <Container>
           <section
-            id='skills'
-            class='pb-14 md:pb-16 lg:pb-28 space-y-14 lg:space-y-20'
+            id="skills"
+            class="pb-14 md:pb-16 lg:pb-28 space-y-14 lg:space-y-20"
           >
             <div
-              class='flex max-w-prose flex-col items-start justify-center gap-2 text-center'
+              class="flex max-w-prose flex-col items-start justify-center gap-2 text-center"
             >
-              <h2 class='font-medium text-2xl sm:text-3xl leading-[1.1] font-serif'>Stack</h2>
+              <h2
+                class="font-medium text-2xl sm:text-3xl leading-[1.1] font-serif"
+              >
+                Stack
+              </h2>
               <p
-                class='leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
+                class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
               >
                 The technologies I work with most frequently
               </p>
             </div>
             <ul
-              class='grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center font-mono'
+              class="grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center font-mono"
             >
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <React />
                 <span>React.js</span>
               </li>
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <Typescript />
                 <span>Typescript</span>
               </li>
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <Tailwind />
                 <span>Tailwind</span>
               </li>
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <Nextjs />
                 <span>Next.js</span>
               </li>
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <AstroIcon />
                 <span>Astro</span>
               </li>
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <Hono />
                 <span>Hono</span>
               </li>
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <Postgres />
                 <span>PostgreSQL</span>
               </li>
-              <li class='flex items-center flex-col text-sm md:flex-row gap-2'>
+              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
                 <Nodejs />
                 <span>Node.js</span>
               </li>
@@ -195,78 +203,81 @@ const projects = await getCollection('projects', ({ data }) => {
           </section>
         </Container>
       </div>
-     </div>
+    </div>
 
     <!-- contact section -->
-     <div>
-      <div class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+    <div>
+      <div
+        class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
+      >
         <Container>
-          <section
-            id='contact'
-            class='pb-8 md:py-12 lg:py-24 space-y-10'
-          >
+          <section id="contact" class="pb-8 md:py-12 lg:py-24 space-y-10">
             <div
-              class='mx-auto flex max-w-[58rem] flex-col md:items-center justify-center gap-2 text-center'
+              class="mx-auto flex max-w-[58rem] flex-col md:items-center justify-center gap-2 text-center"
             >
-              <h2 class='font-medium text-2xl sm:text-3xl leading-[1.1] font-serif'>
+              <h2
+                class="font-medium text-2xl sm:text-3xl leading-[1.1] font-serif"
+              >
                 Get in touch
               </h2>
               <p
-                class='max-w-prose leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base'
+                class="max-w-prose leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
               >
                 How to reach me.
               </p>
             </div>
-    
+
             <div
-              class='flex flex-col sm:flex-row gap-10 justify-center sm:justify-between max-sm:items-center max-sm:text-center'
+              class="flex flex-col sm:flex-row gap-10 justify-center sm:justify-between max-sm:items-center max-sm:text-center"
             >
               <div
-                class='space-y-3 sm:space-y-2 flex flex-col items-center sm:items-start'
+                class="space-y-3 sm:space-y-2 flex flex-col items-center sm:items-start"
               >
-                <h3 class='font-medium font-serif text-lg'>You can email me at</h3>
+                <h3 class="font-medium font-serif text-lg">
+                  You can email me at
+                </h3>
                 <p
-                  class='w-fit relative after:absolute after:bg-emerald-400 after:h-0.5 after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300'
+                  class="w-fit relative after:absolute after:bg-emerald-400 after:h-0.5 after:w-1/2 after:top-auto after:bottom-0 after:left-0 after:scale-x-0 after:origin-right hover:after:scale-x-100 lg:hover:after:origin-left transition after:transition after:duration-300"
                 >
                   <a
-                    href='mailto:hello@taqib.dev'
-                    class='text-foreground text-base sm:text-sm focus-visible:outline-dashed focus-visible:underline focus-visible:underline-offset-2 focus-visible:underline-emerald-500'
+                    href="mailto:hello@taqib.dev"
+                    class="text-foreground text-base sm:text-sm focus-visible:outline-dashed focus-visible:underline focus-visible:underline-offset-2 focus-visible:underline-emerald-500"
                     >hello@taqib.dev</a
                   >
                 </p>
               </div>
               <!--  -->
-              <div class='space-y-2'>
-                <h4 class='font-medium font-serif text-lg'>Find me on</h4>
-                <ul class='flex gap-4'>
-                  <li class='rounded-md'>
+              <div class="space-y-2">
+                <h4 class="font-medium font-serif text-lg">Find me on</h4>
+                <ul class="flex gap-4">
+                  <li class="rounded-md">
                     <a
-                      href='https://github.com/taqh'
-                      target='_blank'
-                      class='inline-flex p-1.5 text-muted-foreground hover:text-foreground'
+                      href="https://github.com/taqh"
+                      target="_blank"
+                      class="inline-flex p-1.5 text-muted-foreground hover:text-foreground"
                     >
                       <Github />
-                      <span class='sr-only'>Github</span>
+                      <span class="sr-only">Github</span>
                     </a>
                   </li>
-                  <li class='rounded-md'>
+                  <li class="rounded-md">
                     <a
-                      href='https://x.com/retaqib'
-                      target='_blank'
-                      class='inline-flex p-1.5 text-muted-foreground hover:text-foreground'
+                      href="https://x.com/retaqib"
+                      target="_blank"
+                      class="inline-flex p-1.5 text-muted-foreground hover:text-foreground"
                     >
                       <X />
-                      <span class='sr-only'>Twitter</span>
+                      <span class="sr-only">Twitter</span>
                     </a>
                   </li>
-                  <li class='rounded-md'>
+                  <li class="rounded-md">
                     <a
-                      href='https://discord.com/users/851479949717798932'
-                      target='_blank'
-                      class='inline-flex p-1.5 text-muted-foreground hover:text-foreground'
+                      href="https://discord.com/users/851479949717798932"
+                      target="_blank"
+                      class="inline-flex p-1.5 text-muted-foreground hover:text-foreground"
                     >
                       <Discord />
-                      <span class='sr-only'>Discord</span>
+                      <span class="sr-only">Discord</span>
                     </a>
                   </li>
                 </ul>
@@ -275,6 +286,6 @@ const projects = await getCollection('projects', ({ data }) => {
           </section>
         </Container>
       </div>
-     </div>
+    </div>
   </div>
 </Layout>

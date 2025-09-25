@@ -1,13 +1,15 @@
 ---
-import Container from './Container.astro';
-import ThemeToggle from './ThemeToggle.astro';
+import Container from "./Container.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <header>
-  <div class="w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
+  <div
+    class="w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
+  >
     <Container class="h-10 py-5 max-w-none">
       <nav
-        class='sm:bg-background flex items-center justify-end h-full sm:px-6 md:px-10 lg:px-16'
+        class="sm:bg-background flex items-center justify-end h-full sm:px-6 md:px-10 lg:px-16"
       >
         <div>
           <ThemeToggle />

@@ -1,4 +1,4 @@
-<div id='dot'></div>
+<div id="dot"></div>
 
 <style>
   #dot {
@@ -26,7 +26,7 @@
 
 <script>
   function setupTracker() {
-    const dot = document.getElementById('dot');
+    const dot = document.getElementById("dot");
 
     function handlePointerMove(event: PointerEvent) {
       const { clientX, clientY } = event;
@@ -37,28 +37,28 @@
             left: `${clientX}px`,
             top: `${clientY}px`,
           },
-          { duration: 3000, fill: 'forwards' }
+          { duration: 3000, fill: "forwards" },
         );
       }
     }
 
-    document.body.addEventListener('pointermove', handlePointerMove);
+    document.body.addEventListener("pointermove", handlePointerMove);
 
     return () => {
-      document.body.removeEventListener('pointermove', handlePointerMove);
+      document.body.removeEventListener("pointermove", handlePointerMove);
     };
   }
 
   // Initialize on page load
   let cleanup: (() => void) | undefined;
 
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:page-load", () => {
     cleanup?.();
     cleanup = setupTracker();
   });
 
   // Cleanup before page transitions
-  document.addEventListener('astro:before-swap', () => {
+  document.addEventListener("astro:before-swap", () => {
     cleanup?.();
   });
 

@@ -1,28 +1,28 @@
 ---
-import Container from './Container.astro';
+import Container from "./Container.astro";
 ---
 
 <footer class="border-t border-dashed">
-  <div class="w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background">
-    <Container class='h-10 py-8'>
-      <div
-        class='h-full flex justify-between items-center my-auto'
-      >
-        <div class='text-center md:text-left'>
-          <p class='text-foreground text-sm'>
+  <div
+    class="w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
+  >
+    <Container class="h-10 py-8">
+      <div class="h-full flex justify-between items-center my-auto">
+        <div class="text-center md:text-left">
+          <p class="text-foreground text-sm">
             © Taqib {new Date().getFullYear()}.
           </p>
         </div>
-        <div class='flex space-x-8'>
+        <div class="flex space-x-8">
           <a
-            target='_blank'
-            href='https://github.com/taqh/taqib.dev'
-            class='text-sm text-foreground hover:underline underline-offset-[3px] decoration-dashed focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500'
+            target="_blank"
+            href="https://github.com/taqh/taqib.dev"
+            class="text-sm text-foreground hover:underline underline-offset-[3px] decoration-dashed focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500"
           >
             Source
           </a>
         </div>
       </div>
-  </Container>
+    </Container>
   </div>
 </footer>

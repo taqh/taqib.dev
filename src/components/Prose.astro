@@ -1,12 +1,12 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'article'> {}
+interface Props extends HTMLAttributes<"article"> {}
 const { class: classNames, ...attrs } = Astro.props;
 ---
 
 <article
-  class='prose max-w-2xl prose-taqib prose-headings:font-serif prose-headings:font-normal prose-p:text-justify mx-auto prose-p:font-sans prose-img:rounded-none'
+  class="prose max-w-2xl prose-taqib prose-headings:font-serif prose-headings:font-normal prose-p:text-justify mx-auto prose-p:font-sans prose-img:rounded-none"
 >
   <slot />
 </article>

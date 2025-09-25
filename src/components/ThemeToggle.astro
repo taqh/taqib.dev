@@ -1,38 +1,38 @@
 <div>
   <button
-    id='themeToggle'
-    class='bg-background/80 hover:backdrop-blur-sm rounded-md grid place-content-center size-10 transition duration-300 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 relative z-10'
+    id="themeToggle"
+    class="bg-background/80 hover:backdrop-blur-sm rounded-md grid place-content-center size-10 transition duration-300 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 relative z-10"
   >
-    <span class='sr-only'>Toggle website theme</span>
+    <span class="sr-only">Toggle website theme</span>
     <svg
-      aria-hidden='true'
-      class='sun'
-      xmlns='http://www.w3.org/2000/svg'
-      width='20'
-      height='20'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
-      ><circle cx='12' cy='12' r='5'></circle><path
-        d='M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4'
+      aria-hidden="true"
+      class="sun"
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><circle cx="12" cy="12" r="5"></circle><path
+        d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
       ></path></svg
     >
     <svg
-      aria-hidden='true'
-      class='moon'
-      xmlns='http://www.w3.org/2000/svg'
-      width='20'
-      height='20'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
-      ><path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'></path></svg
+      aria-hidden="true"
+      class="moon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
     >
   </button>
 </div>
@@ -54,29 +54,29 @@
 </style>
 
 <script>
-  function getSystemTheme(): 'dark' | 'light' {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+  function getSystemTheme(): "dark" | "light" {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   }
 
-  function getCurrentTheme(): 'dark' | 'light' {
-    return document.documentElement.classList.contains('dark')
-      ? 'dark'
-      : 'light';
+  function getCurrentTheme(): "dark" | "light" {
+    return document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
   }
 
-  function setTheme(theme: 'dark' | 'light') {
-    localStorage.setItem('theme', theme);
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+  function setTheme(theme: "dark" | "light") {
+    localStorage.setItem("theme", theme);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   }
 
   function initializeTheme() {
-    const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
+    const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
     const theme = savedTheme || getSystemTheme();
     setTheme(theme);
   }
@@ -86,7 +86,7 @@
     const y = event.clientY;
     const endRadius = Math.hypot(
       Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
+      Math.max(y, window.innerHeight - y),
     );
 
     const doc = document as Document & {
@@ -95,7 +95,7 @@
       };
     };
 
-    const newTheme = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+    const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
 
     if (!doc.startViewTransition) {
       setTheme(newTheme);
@@ -111,46 +111,46 @@
         ];
         document.documentElement.animate(
           {
-            clipPath: newTheme === 'dark' ? [...clipPath].reverse() : clipPath,
+            clipPath: newTheme === "dark" ? [...clipPath].reverse() : clipPath,
           },
           {
             duration: 400,
-            easing: 'ease-in',
+            easing: "ease-in",
             pseudoElement:
-              newTheme === 'dark'
-                ? '::view-transition-old(root)'
-                : '::view-transition-new(root)',
-          }
+              newTheme === "dark"
+                ? "::view-transition-old(root)"
+                : "::view-transition-new(root)",
+          },
         );
       });
     }
   }
 
   // Initialize theme on page load
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:page-load", () => {
     initializeTheme();
     document
-      .getElementById('themeToggle')
-      ?.addEventListener('click', toggleTheme);
+      .getElementById("themeToggle")
+      ?.addEventListener("click", toggleTheme);
   });
 </script>
 
 <script is:inline>
   function applyTheme() {
     const theme =
-      localStorage.getItem('theme') ||
-      (window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light');
+      localStorage.getItem("theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
 
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   }
 
   // Apply theme immediately and after page transitions
   applyTheme();
-  document.addEventListener('astro:after-swap', applyTheme);
+  document.addEventListener("astro:after-swap", applyTheme);
 </script>

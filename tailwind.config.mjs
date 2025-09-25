@@ -18,42 +18,42 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         muted: {
-          foreground: 'hsl(var(--muted-foreground))',
+          foreground: "hsl(var(--muted-foreground))",
         },
       },
       typography: ({ theme }) => ({
         taqib: {
           css: {
-            '--tw-prose-body': 'hsl(var(--muted-foreground))',
-            '--tw-prose-headings': 'hsl(var(--foreground))',
-            '--tw-prose-lead': 'hsl(var(--foreground))',
-            '--tw-prose-links': 'hsl(var(--foreground))',
-            '--tw-prose-bold': 'hsl(var(--foreground))',
-            '--tw-prose-counters': 'hsl(var(--foreground))',
-            '--tw-prose-bullets': 'hsl(var(--foreground))',
-            '--tw-prose-hr': 'hsl(var(--border))',
-            '--tw-prose-quotes': 'hsl(var(--foreground))',
-            '--tw-prose-quote-borders': 'hsl(var(--border))',
-            '--tw-prose-captions': 'hsl(var(--muted-foreground))',
-            '--tw-prose-code': 'hsl(var(--foreground))',
-            '--tw-prose-pre-code': theme('colors.zinc.100'),
-            '--tw-prose-pre-bg': theme('colors.zinc.800'),
-            '--tw-prose-th-borders': 'hsl(var(--border))',
-            '--tw-prose-td-borders': 'hsl(var(--border))'
+            "--tw-prose-body": "hsl(var(--muted-foreground))",
+            "--tw-prose-headings": "hsl(var(--foreground))",
+            "--tw-prose-lead": "hsl(var(--foreground))",
+            "--tw-prose-links": "hsl(var(--foreground))",
+            "--tw-prose-bold": "hsl(var(--foreground))",
+            "--tw-prose-counters": "hsl(var(--foreground))",
+            "--tw-prose-bullets": "hsl(var(--foreground))",
+            "--tw-prose-hr": "hsl(var(--border))",
+            "--tw-prose-quotes": "hsl(var(--foreground))",
+            "--tw-prose-quote-borders": "hsl(var(--border))",
+            "--tw-prose-captions": "hsl(var(--muted-foreground))",
+            "--tw-prose-code": "hsl(var(--foreground))",
+            "--tw-prose-pre-code": theme("colors.zinc.100"),
+            "--tw-prose-pre-bg": theme("colors.zinc.800"),
+            "--tw-prose-th-borders": "hsl(var(--border))",
+            "--tw-prose-td-borders": "hsl(var(--border))",
           },
         },
         DEFAULT: {
           css: {
             a: {
-              fontWeight: 'normal',
-              textDecoration: 'underline',
-              textDecorationStyle: 'dashed',
-              textDecorationThickness: '1px',
-              textUnderlineOffset: '2px',
-              '&:hover': {
-                  textDecorationStyle: 'solid',
-              }
-            }
+              fontWeight: "normal",
+              textDecoration: "underline",
+              textDecorationStyle: "dashed",
+              textDecorationThickness: "1px",
+              textUnderlineOffset: "2px",
+              "&:hover": {
+                textDecorationStyle: "solid",
+              },
+            },
           },
         },
       }),
