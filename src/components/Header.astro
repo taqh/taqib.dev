@@ -5,12 +5,18 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 <header>
   <div
-    class="w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
+    class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden bg-background"
   >
-    <Container class="h-10 py-5 max-w-none">
-      <nav
-        class="sm:bg-background flex items-center justify-end h-full sm:px-6 md:px-10 lg:px-16"
-      >
+    <Container class="h-10 py-5">
+      <nav class="sm:bg-background flex items-center justify-between h-full">
+        <div class="flex items-center gap-4">
+          <a
+            href="/"
+            class="hover:underline underline-offset-[2px] decoration-dashed focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors font-medium font-serif"
+          >
+            taqib.dev
+          </a>
+        </div>
         <div>
           <ThemeToggle />
         </div>

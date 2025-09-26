@@ -1,0 +1,35 @@
+---
+type Props = {
+  href: string;
+  title: string;
+};
+
+const { href, title } = Astro.props;
+---
+
+<a
+  href={href}
+  title="Back to blog"
+  class="relative z-[101] grid place-content-center size-9 rounded-full group border bg-card backdrop-blur-md transition-colors duration-300 ease-in-out"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="size-4 stroke-2 fill-none stroke-current"
+  >
+    <line
+      x1="5"
+      y1="12"
+      x2="19"
+      y2="12"
+      class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+    ></line>
+    <polyline
+      points="12 5 5 12 12 19"
+      class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+    ></polyline>
+  </svg>
+  <p class="sr-only">
+    {title}
+  </p>
+</a>

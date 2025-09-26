@@ -7,8 +7,11 @@
     --foreground: 223 16% 9%;
     --background: 26 30% 95%;
     --muted-foreground: 220 11% 22%;
-    --border: 0 0% 75%;
-    --card: hsl 28, 76%, 95%;
+    --muted: 44 18% 88%;
+    --border: 0 0% 86%;
+    --card: 45 21% 93%;
+
+    --accent: 167 70% 45%;
 
     --dot-bg-color: hsl(26, 30%, 95%);
     --dot-color: hsl(0, 0%, 85%);
@@ -20,41 +23,17 @@
 
   .dark {
     --foreground: 34 78% 91%;
-    --background: 0, 0%, 10%;
+    --background: 0 0% 10%;
     --muted-foreground: 33, 15%, 76%;
-    --border: 220 5% 22%;
-    --card: hsl 0, 0%, 10%;
+    --muted: 0 0% 24%;
+    --border: 220 5% 18%;
+    --card: 0 0% 17%;
+
+    --accent: 167 70% 55%;
 
     --dot-bg-color: hsl(0, 0%, 10%);
     --dot-color: hsl(225, 5%, 16%);
     --dot-mask-color: hsl(223 16% 9%);
-
-    --scrollbar-thumb: 0, 0%, 53%;
-    --scrollbar-thumb-hover: 0, 0%, 33%;
-  }
-}
-
-@layer base {
-  @font-face {
-    font-family: "Manrope";
-    src: url("/fonts/Manrope-Variable.ttf") format("truetype");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "GeistMono";
-    src: url("/fonts/geist/GeistMonoVF.woff") format("woff");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Literata";
-    src: url("/fonts/geist/Literata-Variable.ttf") format("truetype");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
   }
 }
 
@@ -64,7 +43,7 @@
   }
 
   html {
-    font-family: Manrope, system-ui, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     background: hsl(var(--background));
     color: hsl(var(--foreground));
     scroll-behavior: smooth;
@@ -75,16 +54,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  html.dark .shiki,
+  html.dark .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
 }
 
 @layer utilities {
-  .text-gradient {
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-image: linear-gradient(to-right, from #1d4ed8 to #c026d3);
-  }
-
   .bg-dot::before {
     content: "";
     position: absolute;
@@ -104,49 +82,6 @@
       var(--dot-mask-color)
     );
     mask-image: linear-gradient(0deg, transparent 5%, var(--dot-mask-color));
-  }
-
-  .card {
-    position: relative;
-  }
-
-  .card::after {
-    width: 1px;
-    height: 70px;
-    background: linear-gradient(transparent, mediumslateblue, transparent);
-    position: absolute;
-    left: -1px;
-    top: 65%;
-    content: "";
-    transition:
-      top 600ms ease,
-      opacity 600ms ease;
-
-    opacity: 0;
-  }
-
-  .card:hover::after {
-    opacity: 1;
-    top: 25%;
-  }
-
-  .card::before {
-    width: 1px;
-    height: 70px;
-    background: linear-gradient(transparent, mediumslateblue, transparent);
-    position: absolute;
-    right: -1px;
-    top: 25%;
-    content: "";
-    transition:
-      top 600ms ease,
-      opacity 600ms ease;
-
-    opacity: 0;
-  }
-  .card:hover::before {
-    opacity: 1;
-    top: 65%;
   }
 }
 

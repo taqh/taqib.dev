@@ -1,0 +1,36 @@
+---
+import Container from "@/components/Container.astro";
+import PostCard from "@/components/PostCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { SITE } from "@/lib/constants";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+---
+
+<Layout title={`Blog - ${SITE.TITLE}`} description={SITE.DESCRIPTION}>
+  <div class="border-t border-dashed h-full">
+    <div
+      class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden h-full bg-background"
+    >
+      <Container class="py-20 sm:py-24 lg:py-28">
+        <div class="mb-10 space-y-2">
+          <h1
+            class="font-medium font-serif text-2xl leading-[1.1] sm:text-3xl md:text-4xl"
+          >
+            Notes
+          </h1>
+        </div>
+        <ul class="flex flex-col gap-6">
+          {
+            posts.map((post) => (
+              <li>
+                <PostCard entry={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </Container>
+    </div>
+  </div>
+</Layout>

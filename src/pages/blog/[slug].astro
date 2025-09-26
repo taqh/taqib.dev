@@ -1,0 +1,73 @@
+---
+import BackLink from "@/components/BackLink.astro";
+import Container from "@/components/Container.astro";
+import Prose from "@/components/Prose.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import { SITE } from "@/lib/constants";
+import { calculateReadTime, formatDate } from "@/lib/utils";
+import { getCollection } from "astro:content";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("posts");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const formattedDate = formatDate(entry.data.publishedAt);
+const readTime = calculateReadTime(entry.data.content);
+---
+
+<BlogLayout
+  title={`${entry.data.title} - ${SITE.TITLE}`}
+  description={SITE.DESCRIPTION}
+  image={entry.data.coverImage}
+>
+  <div class="h-full">
+    <div
+      class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] relative lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden h-full bg-background/60 backdrop-blur-md z-[101]"
+    >
+      <Container class="py-20">
+        <section
+          class="flex items-center max-w-2xl mb-24 mx-auto justify-between"
+        >
+          <BackLink href="/" title="Back home" />
+          <ThemeToggle />
+        </section>
+        <section class="max-w-3xl mx-auto mb-6 md:mb-14 space-y-6">
+          <div class="flex flex-col gap-4 max-w-2xl mx-auto">
+            <h1
+              class="text-3xl font-medium font-serif lg:text-4xl text-balance leading-[1.2] mb-2"
+            >
+              {entry.data.title}
+            </h1>
+            <div class="flex items-center gap-6 justify-btween">
+              <div class="flex items-center gap-2">
+                <span class="h-4 w-0.5 bg-border shrink-0"></span>
+                <time
+                  datetime={entry.data.publishedAt.toISOString()}
+                  class="text-muted-foreground text-sm sm:text-base"
+                  >{formattedDate}</time
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-4 w-0.5 bg-border shrink-0"></span>
+                <p class="text-muted-foreground text-sm sm:text-base">
+                  {readTime} minute read
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Prose>
+          <div set:html={entry.data.content} />
+        </Prose>
+      </Container>
+    </div>
+  </div>
+</BlogLayout>

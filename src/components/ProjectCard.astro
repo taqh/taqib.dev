@@ -1,72 +1,52 @@
 ---
-import Github from "./icons/Github.astro";
-import Globe from "./icons/Globe.astro";
 import type { CollectionEntry } from "astro:content";
+import Github from "./icons/Github.astro";
 
 type Props = {
   entry: CollectionEntry<"projects">;
 };
 
 const { entry } = Astro.props as Props;
-const { title, preview, links, description, status, technologies } = entry.data;
+const { title, links, description, technologies } = entry.data;
 ---
 
 <li
-  class="flex flex-col gap-4 justify-between border border-dashed rounded-lg backdrop-blur-md card z-10 bg-card overflow-hidden px-4 pt-2 pb-4"
+  class="flex flex-col gap-4 justify-between border rounded-md hover:bg-card backdrop-blur-md z-10 overflow-hidden p-4 pb-4"
 >
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-2.5">
     <div class="flex justify-between items-center">
-      <!-- <a
-        href={`/${entry.collection}/${entry.data.slug}`}
-        class='hover:underline flex items-center group'
+      <a
+        href={links.live}
+        target="_blank"
+        class="group hover:underline flex gap-1 items-center group focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors"
       >
-        <p class='font-medium lg:text-lg font-serif'>
+        <p class="font-medium font-serif">
           {title}
         </p>
-      </a> -->
-
-      <p class="font-medium lg:text-lg font-serif">
-        {title}
-      </p>
-
-      <div class="flex items-center gap-2">
-        {
-          links.repo && (
-            <a
-              href={links.repo}
-              target="_blank"
-              class="rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border"
-            >
-              <span class="sr-only">view source code on github</span>
-              <Github />
-            </a>
-          )
-        }
-        {
-          links.live && (
-            <a
-              href={links.live}
-              target="_blank"
-              class="rounded-md p-2 text-sm w-fit transition duration-300 border border-transparent hover:border-border"
-            >
-              <span class="sr-only">view the live site</span>
-              <Globe />
-            </a>
-          )
-        }
-        <!-- <div
-          class='inline-flex items-center rounded-lg px-2 py-1 text-sm font-medium'
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-3 group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5 transition duration-300"
         >
-          <span class='relative flex h-2 w-2 mr-2'>
-            <span
-              class={`absolute inline-flex h-full w-full animate-ping rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'} opacity-75`}
-            ></span>
-            <span
-              class={`relative inline-flex h-2 w-2 rounded-full ${status === 'dev' ? 'bg-yellow-400' : 'bg-green-400'}`}
-            ></span>
-          </span>
-        </div> -->
-      </div>
+          <path d="M7 7h10v10"></path>
+          <path d="M7 17 17 7"></path>
+        </svg>
+      </a>
+      <a
+        href={links.repo}
+        target="_blank"
+        class="rounded-md w-fit transition duration-300 border border-transparent hover:border-border focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
+      >
+        <span class="sr-only">view the source code on github</span>
+        <Github />
+      </a>
     </div>
     <p class="text-muted-foreground text-sm">
       {description}
@@ -75,7 +55,7 @@ const { title, preview, links, description, status, technologies } = entry.data;
   <ul class="flex items-center gap-3 flex-wrap mt-auto">
     {
       technologies.map((tech) => (
-        <li class="bg-background/80 py-1 px-2 text-xs border rounded-md font-mono">
+        <li class="bg-background/80 py-1 px-2 text-xs border rounded-md">
           {tech}
         </li>
       ))

@@ -6,7 +6,8 @@ const { class: classNames, ...attrs } = Astro.props;
 ---
 
 <article
-  class="prose max-w-2xl prose-taqib prose-headings:font-serif prose-headings:font-normal prose-p:text-justify mx-auto prose-p:font-sans prose-img:rounded-none"
+  {...attrs}
+  class={`prose prose-taqib max-w-2xl prose-headings:font-medium prose-headings:text-balance prose-headings:font-serif prose-code:before:content-none prose-code:after:content-none my-6 mx-auto ${classNames}`}
 >
   <slot />
 </article>

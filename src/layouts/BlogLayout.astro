@@ -1,8 +1,6 @@
 ---
-import Footer from "@/components/Footer.astro";
-import Header from "@/components/Header.astro";
-import Tracker from "@/components/Tracker.astro";
 import Head from "@/components/Head.astro";
+import Tracker from "@/components/Tracker.astro";
 import "@/styles/global.css";
 // import BackToTop from '@/components/BackToTop.astro'
 
@@ -16,11 +14,9 @@ const { title, description, image } = Astro.props;
   <body
     class="bg-dot grid grid-rows-[auto_1fr_auto] overflow-x-hidden relative"
   >
-    <Header />
     <main>
       <slot />
     </main>
-    <Footer />
     <!-- <BackToTop /> -->
     <Tracker />
   </body>

@@ -1,5 +1,8 @@
 import { z, defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { highlightContent } from "./lib/marble/highlight";
+import { fetchPosts } from "./lib/marble/queries";
+import { postSchema } from "./lib/marble/types";
 
 const projectCollection = defineCollection({
   loader: glob({
@@ -28,6 +31,22 @@ const projectCollection = defineCollection({
     }),
 });
 
+const postCollection = defineCollection({
+  loader: async () => {
+    const posts = await fetchPosts("?exclude=legal");
+    // Must return an array of entries with an id property
+    // or an object with IDs as keys and entries as values
+    return Promise.all(
+      posts.map(async (post) => ({
+        ...post,
+        content: await highlightContent(post.content),
+      })),
+    );
+  },
+  schema: postSchema,
+});
+
 export const collections = {
   projects: projectCollection,
+  posts: postCollection,
 };

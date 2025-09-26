@@ -1,56 +1,41 @@
 ---
 import Container from "@/components/Container.astro";
-import { getCollection } from "astro:content";
+import ProjectCard from "@/components/ProjectCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { PROJECTS } from "@/lib/constants";
-import Link from "@/components/Link.astro";
+import { SITE } from "@/lib/constants";
+import { getCollection } from "astro:content";
 
-const projects = await getCollection(
-  "projects",
-  ({ data }) => data.draft !== true,
-);
+const projects = await getCollection("projects");
 ---
 
-<Layout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
-  <Container class="border-t border-dashed">
-    <section
-      class="py-20 sm:border-x sm:border-dashed sm:bg-background min-h-[calc(100vh-88px)] sm:min-h-[calc(100vh-103px)] lg:min-h-[calc(100vh-120px)]"
+<Layout title={`Projects - ${SITE.TITLE}`} description={SITE.DESCRIPTION}>
+  <div class="border-t border-dashed h-full">
+    <div
+      class="sm:w-[calc(100%-48px)] md:w-[calc(100%-96px)] lg:w-[calc(100%-144px)] sm:border-x mx-auto sm:border-dashed overflow-x-hidden h-full bg-background"
     >
-      <div class="max-w-2xl mx-auto mb-10 space-y-2">
-        <h1 class="font-medium text-2xl leading-[1.1] sm:text-3xl md:text-4xl">
-          Projects
-        </h1>
-        <p class="text-muted-foreground text-sm">
-          A collection of projects I've worked on or currently working on.
-        </p>
-      </div>
-      <ul class="flex flex-col gap-6 max-w-2xl mx-auto">
-        {
-          projects.map((project) => (
-            <li>
-              <Link
-                href={`/projects/${project.data.slug}`}
-                class="flex flex-col gap-1 relative z-10 hover:border-emerald-300 dark:hover:border-emerald-500 border border-dashed p-4 rounded-md transition duration-300"
-                variant="card"
-              >
-                <h2 class="font-semibold tracking-wide">
-                  {project.data.title}
-                </h2>
-                <p class="text-muted-foreground font-mono text-sm">
-                  {project.data.description}
-                </p>
-                <ul class="flex items-center gap-3 mt-2">
-                  {project.data.technologies.map((tag) => (
-                    <li class="bg-background/80 py-1 px-2 text-xs border rounded-md font-mono">
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </Link>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-  </Container>
+      <Container class="py-20 sm:py-24 lg:py-28">
+        <div class="flex flex-col gap-6">
+          <div class="space-y-2">
+            <h1
+              class="font-medium font-serif text-2xl leading-[1.1] sm:text-3xl md:text-4xl"
+            >
+              Projects
+            </h1>
+            <p class="text-muted-foreground text-sm">
+              A list of projects I've worked on or currently working on.
+            </p>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {
+              projects.map((project) => (
+                <li>
+                  <ProjectCard entry={project} />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </Container>
+    </div>
+  </div>
 </Layout>
