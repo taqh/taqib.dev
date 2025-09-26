@@ -37,7 +37,7 @@ export default {
             "--tw-prose-quote-borders": "hsl(var(--border))",
             "--tw-prose-captions": "hsl(var(--muted-foreground))",
             "--tw-prose-code": "hsl(var(--foreground))",
-            "--tw-prose-code-bg": "hsl(var(--card))",
+            "--tw-prose-code-bg": "hsl(var(--muted))",
             "--tw-prose-pre-code": theme("colors.zinc.100"),
             "--tw-prose-pre-bg": theme("colors.zinc.800"),
             "--tw-prose-th-borders": "hsl(var(--border))",

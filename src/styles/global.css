@@ -55,11 +55,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* html.dark .shiki,
+  html.dark .shiki,
   html.dark .shiki span {
     color: var(--shiki-dark) !important;
     background-color: var(--shiki-dark-bg) !important;
-  } */
+  }
 }
 
 @layer utilities {
@@ -82,6 +82,14 @@
       var(--dot-mask-color)
     );
     mask-image: linear-gradient(0deg, transparent 5%, var(--dot-mask-color));
+  }
+
+  /* code blocks overflow for some reason so i magic numbered the max width and it works */
+  .prose pre.shiki {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    max-width: calc(100vw - 3rem);
   }
 }
 

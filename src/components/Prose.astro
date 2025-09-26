@@ -8,7 +8,10 @@ const { class: classNames, ...attrs } = Astro.props;
 
 <article
   {...attrs}
-  class={cn("prose prose-taqib w-full prose-headings:font-medium prose-headings:text-balance prose-headings:font-serif prose-code:before:content-none prose-code:after:content-none", classNames)}
+  class={cn(
+    "prose prose-taqib w-full prose-headings:font-medium prose-headings:text-balance prose-headings:font-serif prose-code:before:content-none prose-code:after:content-none",
+    classNames,
+  )}
 >
   <slot />
 </article>

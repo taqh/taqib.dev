@@ -4,7 +4,6 @@ import Container from "@/components/Container.astro";
 import Prose from "@/components/Prose.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import BlogLayout from "@/layouts/BlogLayout.astro";
-import { SITE } from "@/lib/constants";
 import { calculateReadTime, formatDate } from "@/lib/utils";
 import { getCollection } from "astro:content";
 
@@ -24,7 +23,7 @@ const readTime = calculateReadTime(entry.data.content);
 ---
 
 <BlogLayout
-  title={`${entry.data.title} - ${SITE.TITLE}`}
+  title={entry.data.title}
   description={entry.data.description}
   image={entry.data.coverImage}
 >
