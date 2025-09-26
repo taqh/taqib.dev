@@ -25,7 +25,7 @@ const readTime = calculateReadTime(entry.data.content);
 
 <BlogLayout
   title={`${entry.data.title} - ${SITE.TITLE}`}
-  description={SITE.DESCRIPTION}
+  description={entry.data.description}
   image={entry.data.coverImage}
 >
   <div class="h-full">
