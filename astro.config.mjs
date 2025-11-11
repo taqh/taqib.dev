@@ -12,6 +12,7 @@ export default defineConfig({
   integrations: [tailwind(), mdx(), sitemap()],
   site: "https://taqib.dev",
   output: "server",
+  trailingSlash: "never",
   adapter: vercel({
     webAnalytics: { enabled: true },
   }),
