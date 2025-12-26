@@ -1,14 +1,24 @@
 import { defineCollection, z } from "astro:content";
 import { highlightContent } from "./highlight";
 
-const key = import.meta.env.MARBLE_WORKSPACE_KEY;
+const key = import.meta.env.MARBLE_API_KEY;
 const url = import.meta.env.MARBLE_API_URL;
 
+if (!url || !key) {
+  throw new Error(
+    "Missing MARBLE_API_URL or MARBLE_API_KEY in environment variables",
+  );
+}
+
 export async function fetchPosts(queryParams = ""): Promise<Post[]> {
-  const fullUrl = `${url}/${key}/posts${queryParams}`;
+  const fullUrl = `${url}/posts${queryParams}`;
 
   try {
-    const response = await fetch(fullUrl);
+    const response = await fetch(fullUrl, {
+      headers: {
+        Authorization: `Bearer ${key}`,
+      },
+    });
 
     if (!response.ok) {
       console.error(`Failed to fetch posts from ${fullUrl}:`, {
