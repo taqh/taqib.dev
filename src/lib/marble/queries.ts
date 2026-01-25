@@ -1,106 +1,55 @@
-import { defineCollection, z } from "astro:content";
-import { highlightContent } from "./highlight";
+import { marble } from "./client";
 
-const key = import.meta.env.MARBLE_API_KEY;
-const url = import.meta.env.MARBLE_API_URL;
-
-if (!url || !key) {
-  throw new Error(
-    "Missing MARBLE_API_URL or MARBLE_API_KEY in environment variables",
-  );
-}
-
-export async function fetchPosts(queryParams = ""): Promise<Post[]> {
-  const fullUrl = `${url}/posts${queryParams}`;
-
+export async function fetchPosts() {
   try {
-    const response = await fetch(fullUrl, {
-      headers: {
-        Authorization: `Bearer ${key}`,
-      },
-    });
+    const response = await marble.posts.list();
+    const allPosts = [];
 
-    if (!response.ok) {
-      console.error(`Failed to fetch posts from ${fullUrl}:`, {
-        status: response.status,
-        statusText: response.statusText,
-        url: fullUrl,
-      });
-      return [];
+    for await (const page of response) {
+      if (page.result.posts) {
+        allPosts.push(...page.result.posts);
+      }
     }
 
-    const data = await response.json();
-    return data.posts as Post[];
+    return { posts: allPosts };
   } catch (error) {
-    console.error(`Error fetching posts from ${fullUrl}:`, error);
-    return [];
+    console.error("Error fetching posts:", error);
+    return { posts: [] };
   }
 }
 
-const postSchema = z.object({
-  id: z.string(),
-  slug: z.string(),
-  title: z.string(),
-  content: z.string(),
-  description: z.string(),
-  coverImage: z.string().url().nullable().optional(),
-  publishedAt: z.coerce.date(),
-  updatedAt: z.coerce.date(),
-  authors: z.array(
-    z.object({
-      id: z.string(),
-      name: z.string(),
-      image: z.string().url().nullable().optional(),
-    }),
-  ),
-  category: z.object({
-    id: z.string(),
-    name: z.string(),
-    slug: z.string(),
-  }),
-  tags: z.array(
-    z.object({
-      id: z.string(),
-      name: z.string(),
-      slug: z.string(),
-    }),
-  ),
-  attribution: z
-    .object({
-      author: z.string(),
-      url: z.string().url(),
-    })
-    .nullable(),
-});
-type Post = z.infer<typeof postSchema>;
+export async function fetchCategories() {
+  try {
+    const response = await marble.categories.list();
+    const allCategories = [];
 
-const articleCollection = defineCollection({
-  loader: async () => {
-    const posts = await fetchPosts("?exclude=legal");
-    // Must return an array of entries with an id property
-    // or an object with IDs as keys and entries as values
-    return Promise.all(
-      posts.map(async (post) => ({
-        ...post,
-        content: await highlightContent(post.content),
-      })),
-    );
-  },
-  schema: postSchema,
-});
+    for await (const page of response) {
+      if (page.result.categories) {
+        allCategories.push(...page.result.categories);
+      }
+    }
 
-const page = defineCollection({
-  loader: async () => {
-    const posts = await fetchPosts("?category=legal");
+    return { categories: allCategories };
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return { categories: [] };
+  }
+}
 
-    return posts.map((post) => ({
-      ...post,
-      // Astro uses the id as a key to get the entry
-      // We can't know the id of the post so we use the slug
-      id: post.slug,
-    }));
-  },
-  schema: postSchema,
-});
+export async function fetchTags() {
+  try {
+    const response = await marble.tags.list();
+    const allTags = [];
 
-export const collections = { posts: articleCollection, page };
+    for await (const page of response) {
+      if (page.result.tags) {
+        allTags.push(...page.result.tags);
+      }
+    }
+
+    return { tags: allTags };
+  } catch (error) {
+    console.error("Error fetching tags:", error);
+    return { tags: [] };
+  }
+}
