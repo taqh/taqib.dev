@@ -1,6 +1,6 @@
 # Website
 
-My portfolio website built with Astro, TailwindCSS and MDX
+My portfolio website built with Astro, TailwindCSS and Marble CMS
 
 ## 🚀 Project Structure
 
