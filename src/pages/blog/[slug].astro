@@ -27,37 +27,36 @@ const readTime = calculateReadTime(entry.data.content);
   description={entry.data.description}
   image={entry.data.coverImage}
 >
-    <Container class="py-12 md:px-0 lg:px-0 max-w-prose">
-      <section class="flex items-center mb-24 justify-between">
-        <BackLink href="/" title="Back home" />
-        <ThemeToggle />
-      </section>
-      <header class="flex flex-col gap-4 mb-6 md:mb-14">
-        <h1
-          class="text-xl sm:text-2xl lg:text-3xl font-medium font-serif text-balance leading-[1.2] mb-2"
-        >
-
-          {entry.data.title}
-        </h1>
-        <div class="flex items-center gap-6 justify-btween">
-          <div class="flex items-center gap-2">
-            <span class="h-4 w-0.5 bg-border shrink-0"></span>
-            <time
-              datetime={entry.data.publishedAt.toISOString()}
-              class="text-muted-foreground text-sm sm:text-base"
-              >{formattedDate}</time
-            >
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="h-4 w-0.5 bg-border shrink-0"></span>
-            <p class="text-muted-foreground text-sm sm:text-base">
-              {readTime} minute read
-            </p>
-          </div>
+  <Container class="py-12 md:px-0 lg:px-0 max-w-prose">
+    <section class="flex items-center mb-24 justify-between">
+      <BackLink href="/" title="Back home" />
+      <ThemeToggle />
+    </section>
+    <header class="flex flex-col gap-4 mb-6 md:mb-14">
+      <h1
+        class="text-xl sm:text-2xl lg:text-3xl font-medium font-serif text-balance leading-[1.2] mb-2"
+      >
+        {entry.data.title}
+      </h1>
+      <div class="flex items-center gap-6 justify-btween">
+        <div class="flex items-center gap-2">
+          <span class="h-4 w-0.5 bg-border shrink-0"></span>
+          <time
+            datetime={entry.data.publishedAt.toISOString()}
+            class="text-muted-foreground text-sm sm:text-base"
+            >{formattedDate}</time
+          >
         </div>
-      </header>
-      <Prose>
-        <div set:html={entry.data.content} />
-      </Prose>
-    </Container>
+        <div class="flex items-center gap-2">
+          <span class="h-4 w-0.5 bg-border shrink-0"></span>
+          <p class="text-muted-foreground text-sm sm:text-base">
+            {readTime} minute read
+          </p>
+        </div>
+      </div>
+    </header>
+    <Prose>
+      <div set:html={entry.data.content} />
+    </Prose>
+  </Container>
 </BlogLayout>

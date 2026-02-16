@@ -23,35 +23,245 @@ const posts = await getCollection("posts");
   <div>
     <!-- about section -->
     <section id="about">
-        <Container>
-            <div
-            class="overflow-x-hidden py-16 sm:py-20 lg:py-24 flex flex-col text-justify"
-          >
-            <div class="flex justify-between items-center mb-4">
-                <h1 class="text-xl sm:text-2xl font-medium font-serif">
-                Hi there, I&apos;m Taqib
-                </h1>
-                <ThemeToggle />
-            </div>
-            <div class="space-y-4">
-              <p
-                class="leading-normal text-muted-foreground sm:leading-7"
+      <Container>
+        <div
+          class="overflow-x-hidden py-16 sm:py-20 lg:py-24 flex flex-col text-justify"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl sm:text-2xl font-medium font-serif">
+              Hi there, I&apos;m Taqib
+            </h1>
+            <ThemeToggle />
+          </div>
+          <div class="space-y-4">
+            <p class="leading-normal text-muted-foreground sm:leading-7">
+              A self-taught developer from Abuja, Nigeria. I love the web and
+              enjoy building web apps that are accessible, and easy to use.
+              Right now I'm working on <a
+                href="https://marblecms.com?ref=taqib.dev"
+                target="_blank"
+                class="text-accent underline-offset-2 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors"
+                >Marble</a
+              >, a simple headless CMS, and learning design along the way.
+            </p>
+          </div>
+          <div class="py-4 flex items-center gap-6 mt-4 text-sm sm:text-base">
+            <a
+              href="https://github.com/taqh"
+              target="_blank"
+              class="text-muted-foreground rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
+            >
+              <span>Github</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
               >
-                A self-taught developer from Abuja, Nigeria. I love the web and
-                enjoy building web apps that are accessible, and easy to use.
-                Right now I'm working on <a
-                  href="https://marblecms.com?ref=taqib.dev"
-                  target="_blank"
-                  class="text-accent underline-offset-2 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors"
-                  >Marble</a
-                >, a simple headless CMS, and learning design along the way.
-              </p>
-            </div>
-            <div class="py-4 flex items-center gap-6 mt-4 text-sm sm:text-base">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+              </svg>
+            </a>
+            <a
+              href="mailto:hello@taqib.dev"
+              target="_blank"
+              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
+            >
+              <span>Mail</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+              </svg>
+            </a>
+            <a
+              href="https://x.com/retaqib"
+              target="_blank"
+              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
+            >
+              <span>Twitter</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <!-- projects section -->
+    <section id="projects">
+      <Container>
+        <div
+          id="projects"
+          class="flex flex-col justify-between gap-6 pb-6 md:pb-10 lg:pb-16"
+        >
+          <div class="flex flex-col">
+            <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
+              Projects
+            </h2>
+            <p
+              class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
+            >
+              A couple of projects I’ve worked on.
+            </p>
+          </div>
+          <!-- project list -->
+          <ul class="grid gap-4 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+            {
+              PROJECTS.slice(0, 4).map((project) => (
+                <ProjectCard entry={project} />
+              ))
+            }
+          </ul>
+          {
+            PROJECTS.length > 4 && (
+              <div class="flex justify-center mt-10">
+                <ViewAll href="/projects"> See All </ViewAll>
+              </div>
+            )
+          }
+        </div>
+      </Container>
+    </section>
+
+    <!-- posts section -->
+    <section id="posts">
+      <Container>
+        <div class="flex flex-col justify-between gap-6 pb-6 md:pb-10 lg:pb-16">
+          <div class="flex flex-col">
+            <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
+              Notes
+            </h2>
+            <p
+              class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
+            >
+              My attempts at writing.
+            </p>
+          </div>
+          <!-- project list -->
+          <ul class="grid gap-8">
+            {posts.slice(0, 4).map((post) => <PostCard entry={post} />)}
+          </ul>
+          {
+            posts.length > 4 && (
+              <div class="flex justify-center mt-10">
+                <ViewAll href="/blog"> See All</ViewAll>
+              </div>
+            )
+          }
+        </div>
+      </Container>
+    </section>
+
+    <!-- technologies section -->
+    <div>
+      <Container>
+        <section
+          id="skills"
+          class="pb-10 md:pb-12 lg:pb-20 flex flex-col gap-14 lg:gap-20"
+        >
+          <div
+            class="flex max-w-prose flex-col items-start justify-center text-center"
+          >
+            <h2 class="font-medium text-lg sm:text-xl leading-[1.1] font-serif">
+              Stack
+            </h2>
+            <p
+              class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
+            >
+              The technologies I work with most frequently
+            </p>
+          </div>
+          <ul
+            class="grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center font-mono"
+          >
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <React />
+              <span>React.js</span>
+            </li>
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <Typescript />
+              <span>Typescript</span>
+            </li>
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <Tailwind />
+              <span>Tailwind</span>
+            </li>
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <Nextjs />
+              <span>Next.js</span>
+            </li>
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <AstroIcon />
+              <span>Astro</span>
+            </li>
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <Hono />
+              <span>Hono</span>
+            </li>
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <Postgres />
+              <span>PostgreSQL</span>
+            </li>
+            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
+              <Nodejs />
+              <span>Node.js</span>
+            </li>
+          </ul>
+        </section>
+      </Container>
+    </div>
+
+    <!-- contact section -->
+    <section id="contact">
+      <Container>
+        <div
+          class="pb-8 md:py-10 lg:py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-10"
+        >
+          <div
+            class="flex flex-col items-center justify-center md:justify-start md:items-start"
+          >
+            <h2 class="font-medium text-lg sm:text-xl leading-[1.1] font-serif">
+              Get in touch
+            </h2>
+            <p
+              class="max-w-prose md:sr-only leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
+            >
+              How to reach me.
+            </p>
+          </div>
+
+          <div class="flex justify-center">
+            <div
+              class="flex items-center flex-wrap justify-center gap-6 text-sm sm:text-base"
+            >
               <a
                 href="https://github.com/taqh"
                 target="_blank"
-                class="text-muted-foreground rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
+                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>Github</span>
                 <svg
@@ -71,7 +281,7 @@ const posts = await getCollection("posts");
               <a
                 href="mailto:hello@taqib.dev"
                 target="_blank"
-                class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
+                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>Mail</span>
                 <svg
@@ -91,7 +301,7 @@ const posts = await getCollection("posts");
               <a
                 href="https://x.com/retaqib"
                 target="_blank"
-                class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
+                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>Twitter</span>
                 <svg
@@ -110,230 +320,8 @@ const posts = await getCollection("posts");
               </a>
             </div>
           </div>
-        </Container>
-    </section>
-
-    <!-- projects section -->
-    <section id="projects">
-        <Container>
-          <div
-            id="projects"
-            class="flex flex-col justify-between gap-6 pb-6 md:pb-10 lg:pb-16"
-          >
-            <div class="flex flex-col">
-              <h2
-                class="font-medium text-lg leading-[1.1] sm:text-xl font-serif"
-              >
-                Projects
-              </h2>
-              <p
-                class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
-              >
-                A couple of projects I’ve worked on.
-              </p>
-            </div>
-            <!-- project list -->
-            <ul class="grid gap-4 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-              {
-                PROJECTS
-                  .slice(0, 4)
-                  .map((project) => <ProjectCard entry={project} />)
-              }
-            </ul>
-            {
-              PROJECTS.length > 4 && (
-                <div class="flex justify-center mt-10">
-                  <ViewAll href="/projects"> See All </ViewAll>
-                </div>
-              )
-            }
-          </div>
-        </Container>
-    </section>
-
-    <!-- posts section -->
-    <section id="posts">
-        <Container>
-          <div
-            class="flex flex-col justify-between gap-6 pb-6 md:pb-10 lg:pb-16"
-          >
-            <div class="flex flex-col">
-              <h2
-                class="font-medium text-lg leading-[1.1] sm:text-xl font-serif"
-              >
-                Notes
-              </h2>
-              <p
-                class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
-              >
-                My attempts at writing.
-              </p>
-            </div>
-            <!-- project list -->
-            <ul class="grid gap-8">
-              {posts.slice(0, 4).map((post) => <PostCard entry={post} />)}
-            </ul>
-            {
-              posts.length > 4 && (
-                <div class="flex justify-center mt-10">
-                  <ViewAll href="/blog"> See All</ViewAll>
-                </div>
-              )
-            }
-          </div>
-        </Container>
-    </section>
-
-    <!-- technologies section -->
-    <div>
-        <Container>
-          <section
-            id="skills"
-            class="pb-10 md:pb-12 lg:pb-20 flex flex-col gap-14 lg:gap-20"
-          >
-            <div
-              class="flex max-w-prose flex-col items-start justify-center text-center"
-            >
-              <h2
-                class="font-medium text-lg sm:text-xl leading-[1.1] font-serif"
-              >
-                Stack
-              </h2>
-              <p
-                class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
-              >
-                The technologies I work with most frequently
-              </p>
-            </div>
-            <ul
-              class="grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center font-mono"
-            >
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <React />
-                <span>React.js</span>
-              </li>
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <Typescript />
-                <span>Typescript</span>
-              </li>
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <Tailwind />
-                <span>Tailwind</span>
-              </li>
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <Nextjs />
-                <span>Next.js</span>
-              </li>
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <AstroIcon />
-                <span>Astro</span>
-              </li>
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <Hono />
-                <span>Hono</span>
-              </li>
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <Postgres />
-                <span>PostgreSQL</span>
-              </li>
-              <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-                <Nodejs />
-                <span>Node.js</span>
-              </li>
-            </ul>
-          </section>
-        </Container>
-    </div>
-
-    <!-- contact section -->
-    <section id="contact">
-        <Container>
-          <div
-            class="pb-8 md:py-10 lg:py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-10"
-          >
-            <div
-              class="flex flex-col items-center justify-center md:justify-start md:items-start"
-            >
-              <h2
-                class="font-medium text-lg sm:text-xl leading-[1.1] font-serif"
-              >
-                Get in touch
-              </h2>
-              <p
-                class="max-w-prose md:sr-only leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
-              >
-                How to reach me.
-              </p>
-            </div>
-
-            <div class="flex justify-center">
-              <div
-                class="flex items-center flex-wrap justify-center gap-6 text-sm sm:text-base"
-              >
-                <a
-                  href="https://github.com/taqh"
-                  target="_blank"
-                  class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-                >
-                  <span>Github</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
-                  </svg>
-                </a>
-                <a
-                  href="mailto:hello@taqib.dev"
-                  target="_blank"
-                  class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-                >
-                  <span>Mail</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
-                  </svg>
-                </a>
-                <a
-                  href="https://x.com/retaqib"
-                  target="_blank"
-                  class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-                >
-                  <span>Twitter</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </Container>
+        </div>
+      </Container>
     </section>
   </div>
 </Layout>

@@ -10,9 +10,7 @@ const { title, description, image } = Astro.props;
   <head>
     <Head title={title} description={description} image={image} />
   </head>
-  <body
-    class="grid grid-rows-[auto_1fr_auto] overflow-x-hidden relative"
-  >
+  <body class="grid grid-rows-[auto_1fr_auto] overflow-x-hidden relative">
     <main>
       <slot />
     </main>
