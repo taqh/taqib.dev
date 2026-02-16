@@ -1,64 +1,47 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import Github from "./icons/Github.astro";
-
 type Props = {
-  entry: CollectionEntry<"projects">;
+  entry: {
+    title: string;
+    links: {
+      repo: string;
+      live: string;
+    };
+    description: string;
+  };
 };
 
 const { entry } = Astro.props as Props;
-const { title, links, description, technologies } = entry.data;
+const { title, links, description } = entry;
 ---
 
-<li
-  class="flex flex-col gap-4 justify-between border rounded-md hover:bg-card backdrop-blur-md z-10 overflow-hidden p-4 pb-4"
->
-  <div class="flex flex-col gap-2.5">
-    <div class="flex justify-between items-center">
-      <a
-        href={links.live}
-        target="_blank"
-        class="group hover:underline flex gap-1 items-center group focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors"
-      >
+<li>
+  <a
+    href={links.live}
+    target="_blank"
+    class="group flex flex-col gap-4 justify-between border rounded-md hover:bg-card backdrop-blur-md z-10 overflow-hidden p-4 pb-4 transition-colors duration-300 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent h-full"
+  >
+    <div class="flex flex-col gap-2.5">
+      <div class="flex justify-between items-center">
         <p class="font-medium font-serif">
           {title}
         </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
           fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-3 group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5 transition duration-300"
+          class="size-4 text-muted-foreground group-hover:text-foreground transition-colors"
         >
-          <path d="M7 7h10v10"></path>
-          <path d="M7 17 17 7"></path>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
         </svg>
-      </a>
-      <a
-        href={links.repo}
-        target="_blank"
-        class="rounded-md w-fit transition duration-300 border border-transparent hover:border-border focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
-      >
-        <span class="sr-only">view the source code on github</span>
-        <Github />
-      </a>
+      </div>
+      <p class="text-muted-foreground text-sm">
+        {description}
+      </p>
     </div>
-    <p class="text-muted-foreground text-sm">
-      {description}
-    </p>
-  </div>
-  <ul class="flex items-center gap-3 flex-wrap mt-auto">
-    {
-      technologies.map((tech) => (
-        <li class="bg-background/80 py-1 px-2 text-xs border rounded-md">
-          {tech}
-        </li>
-      ))
-    }
-  </ul>
+  </a>
 </li>

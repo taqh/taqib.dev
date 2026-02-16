@@ -3,8 +3,13 @@ export const SITE = {
   DESCRIPTION: "Web developer",
 };
 
-export const PROJECTS = {
-  TITLE: "Projects - Taqib",
-  DESCRIPTION:
-    "A list of my projects with links to repositories or live demos.",
-};
+export const PROJECTS = [
+  {
+    title: "Marble",
+    description: "A simple, headless CMS for managing blogs.",
+    links: {
+      repo: "https://github.com/usemarble",
+      live: "https://marblecms.com",
+    },
+  },
+];

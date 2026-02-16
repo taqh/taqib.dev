@@ -8,11 +8,7 @@ import { getCollection } from "astro:content";
 const posts = await getCollection("posts");
 ---
 
-<Layout title={`Blog - ${SITE.TITLE}`} description={SITE.DESCRIPTION}>
-  <div class="border-t border-dashed h-full">
-    <div
-      class="sm:w-[calc(100%-100px)] sm:border-x mx-auto sm:border-dashed h-full bg-background"
-    >
+  <Layout title={`Blog - ${SITE.TITLE}`} description={SITE.DESCRIPTION}>
       <Container class="py-20 sm:py-24 lg:py-28">
         <div class="mb-10 space-y-2">
           <h1
@@ -31,6 +27,4 @@ const posts = await getCollection("posts");
           }
         </ul>
       </Container>
-    </div>
-  </div>
-</Layout>
+  </Layout>

@@ -27,9 +27,6 @@ const readTime = calculateReadTime(entry.data.content);
   description={entry.data.description}
   image={entry.data.coverImage}
 >
-  <div
-    class="relative sm:w-[calc(100%-100px)] sm:border-x mx-auto sm:border-dashed h-full bg-background/60 backdrop-blur-md z-[101]"
-  >
     <Container class="py-12 md:px-0 lg:px-0 max-w-prose">
       <section class="flex items-center mb-24 justify-between">
         <BackLink href="/" title="Back home" />
@@ -37,8 +34,9 @@ const readTime = calculateReadTime(entry.data.content);
       </section>
       <header class="flex flex-col gap-4 mb-6 md:mb-14">
         <h1
-          class="text-3xl font-medium font-serif lg:text-4xl text-balance leading-[1.2] mb-2"
+          class="text-xl sm:text-2xl lg:text-3xl font-medium font-serif text-balance leading-[1.2] mb-2"
         >
+
           {entry.data.title}
         </h1>
         <div class="flex items-center gap-6 justify-btween">
@@ -62,5 +60,4 @@ const readTime = calculateReadTime(entry.data.content);
         <div set:html={entry.data.content} />
       </Prose>
     </Container>
-  </div>
 </BlogLayout>

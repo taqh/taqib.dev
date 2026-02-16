@@ -1,6 +1,5 @@
 ---
 import Footer from "@/components/Footer.astro";
-import Header from "@/components/Header.astro";
 import Head from "@/components/Head.astro";
 import "@/styles/global.css";
 
@@ -14,7 +13,6 @@ const { title, description, image } = Astro.props;
   <body
     class="grid grid-rows-[auto_1fr_auto] overflow-x-hidden relative"
   >
-    <Header />
     <main>
       <slot />
     </main>
