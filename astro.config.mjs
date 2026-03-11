@@ -16,24 +16,22 @@ export default defineConfig({
   adapter: vercel({
     webAnalytics: { enabled: true },
   }),
-  experimental: {
-    fonts: [
-      {
-        name: "Inter",
-        cssVariable: "--font-inter",
-        provider: fontProviders.google(),
-        weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-        styles: ["normal"],
-        subsets: ["latin"],
-      },
-      {
-        name: "Literata",
-        cssVariable: "--font-literata",
-        provider: fontProviders.google(),
-        weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-        styles: ["normal"],
-        subsets: ["latin"],
-      },
-    ],
-  },
+  fonts: [
+    {
+      name: "Inter",
+      cssVariable: "--font-inter",
+      provider: fontProviders.google(),
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      styles: ["normal"],
+      subsets: ["latin"],
+    },
+    {
+      name: "Literata",
+      cssVariable: "--font-literata",
+      provider: fontProviders.google(),
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      styles: ["normal"],
+      subsets: ["latin"],
+    },
+  ],
 });
