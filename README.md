@@ -127,7 +127,8 @@ You can then add your project content here using markdown syntax.
 The frontmatter can be customized to fit your needs. However you will need to update the schema in the `/src/content.config.ts` file to match your frontmatter.
 
 ```typescript
-import { z, defineCollection } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 // this is my project collection schema update it to match your frontmatter
@@ -162,7 +163,7 @@ const projectsCollection = defineCollection({
 To get content from the project collection, use astro's getCollection function.
 
 ```typescript
-import { getCollection } from "astro:collections";
+import { getCollection } from "astro:content";
 
 // this will return an array of all projects in the collection
 const projects = await getCollection("projects");
