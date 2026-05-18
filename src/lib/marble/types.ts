@@ -6,14 +6,14 @@ export const postSchema = z.object({
   title: z.string(),
   content: z.string(),
   description: z.string(),
-  coverImage: z.string().url().nullable().optional(),
+  coverImage: z.url().nullable().optional(),
   publishedAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
   authors: z.array(
     z.object({
       id: z.string(),
       name: z.string(),
-      image: z.string().url().nullable().optional(),
+      image: z.url().nullable().optional(),
     }),
   ),
   category: z.object({
@@ -31,7 +31,7 @@ export const postSchema = z.object({
   attribution: z
     .object({
       author: z.string(),
-      url: z.string().url(),
+      url: z.url(),
     })
     .nullable(),
 });

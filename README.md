@@ -152,8 +152,8 @@ const projectsCollection = defineCollection({
         })
         .optional(),
       links: z.object({
-        repo: z.string().url().optional(),
-        live: z.string().url().optional(),
+        repo: z.url().optional(),
+        live: z.url().optional(),
       }),
       technologies: z.array(z.string()),
     }),
