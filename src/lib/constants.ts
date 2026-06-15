@@ -26,7 +26,7 @@ export const PROJECTS = [
       "An open-source internet radio control suite for running a single-station broadcast",
     links: {
       repo: "https://github.com/helloworld-ng/rdio",
-      live: "https://www.helloworld.ng/projects/rdio/",
+      live: "https://github.com/helloworld-ng/rdio",
     },
   },
 ];
