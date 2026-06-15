@@ -1,6 +1,6 @@
 export const SITE = {
   TITLE: "Taqib Ibrahim",
-  DESCRIPTION: "Web developer",
+  DESCRIPTION: "Software Engineer",
 };
 
 export const PROJECTS = [
