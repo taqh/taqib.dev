@@ -29,4 +29,12 @@ export const PROJECTS = [
       live: "https://github.com/helloworld-ng/rdio",
     },
   },
+  {
+    title: "GRVL",
+    description: "A shared planner for organizing group trips",
+    links: {
+      repo: "https://app.grvl.ai",
+      live: "https://grvl.ai",
+    },
+  },
 ];
