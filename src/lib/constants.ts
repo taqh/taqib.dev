@@ -20,4 +20,13 @@ export const PROJECTS = [
       live: "https://fablepod.com?ref=taqib.dev",
     },
   },
+  {
+    title: "Rdio",
+    description:
+      "An open-source internet radio control suite for running a single-station broadcast",
+    links: {
+      repo: "https://github.com/helloworld-ng/rdio",
+      live: "https://www.helloworld.ng/projects/rdio/",
+    },
+  },
 ];
