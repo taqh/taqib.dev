@@ -1,13 +1,5 @@
 ---
 import Container from "@/components/Container.astro";
-import AstroIcon from "@/components/icons/AstroIcon.astro";
-import Hono from "@/components/icons/Hono.astro";
-import Nextjs from "@/components/icons/Nextjs.astro";
-import Nodejs from "@/components/icons/Nodejs.astro";
-import Postgres from "@/components/icons/Postgres.astro";
-import React from "@/components/icons/React.astro";
-import Tailwind from "@/components/icons/Tailwind.astro";
-import Typescript from "@/components/icons/Typescript.astro";
 import PostCard from "@/components/PostCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import ViewAll from "@/components/ViewAll.astro";
@@ -176,65 +168,6 @@ const posts = await getCollection("posts");
         </div>
       </Container>
     </section>
-
-    <!-- technologies section -->
-    <div>
-      <Container>
-        <section
-          id="skills"
-          class="pb-10 md:pb-12 lg:pb-20 flex flex-col gap-14 lg:gap-20"
-        >
-          <div
-            class="flex max-w-prose flex-col items-start justify-center text-center"
-          >
-            <h2 class="font-medium text-lg sm:text-xl leading-[1.1] font-serif">
-              Stack
-            </h2>
-            <p
-              class="leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
-            >
-              The technologies I use frequently
-            </p>
-          </div>
-          <ul
-            class="grid grid-cols-[repeat(auto-fill,_minmax(8rem,_1fr))] gap-10 lg:gap-y-14 max-sm:place-items-center font-mono"
-          >
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <React />
-              <span>React.js</span>
-            </li>
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <Typescript />
-              <span>Typescript</span>
-            </li>
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <Tailwind />
-              <span>Tailwind</span>
-            </li>
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <Nextjs />
-              <span>Next.js</span>
-            </li>
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <AstroIcon />
-              <span>Astro</span>
-            </li>
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <Hono />
-              <span>Hono</span>
-            </li>
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <Postgres />
-              <span>PostgreSQL</span>
-            </li>
-            <li class="flex items-center flex-col text-sm md:flex-row gap-2">
-              <Nodejs />
-              <span>Node.js</span>
-            </li>
-          </ul>
-        </section>
-      </Container>
-    </div>
 
     <!-- contact section -->
     <section id="contact">
