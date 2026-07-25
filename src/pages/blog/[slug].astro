@@ -1,35 +1,65 @@
 ---
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import BackLink from "@/components/BackLink.astro";
 import Container from "@/components/Container.astro";
 import Prose from "@/components/Prose.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import { calculateReadTime, formatDate } from "@/lib/utils";
-import { getCollection } from "astro:content";
 
 export const prerender = true;
 
+type BlogEntry = CollectionEntry<"articles"> | CollectionEntry<"posts">;
+
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("posts");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
+  const [articles, remotePosts] = await Promise.all([
+    getCollection("articles", ({ data }) => !data.draft),
+    getCollection("posts"),
+  ]);
+  const localSlugs = new Set(articles.map((articleEntry) => articleEntry.id));
+  const entries: BlogEntry[] = [
+    ...articles,
+    ...remotePosts.filter((postEntry) => !localSlugs.has(postEntry.data.slug)),
+  ];
+
+  return entries.map((blogEntry) => ({
+    params: {
+      slug:
+        blogEntry.collection === "articles"
+          ? blogEntry.id
+          : blogEntry.data.slug,
+    },
+    props: { entry: blogEntry },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry } = Astro.props as { entry: BlogEntry };
+const isLocalArticle = entry.collection === "articles";
+const renderedArticle = isLocalArticle ? await render(entry) : undefined;
+const Content = renderedArticle?.Content;
 const formattedDate = formatDate(entry.data.publishedAt);
-const readTime = calculateReadTime(entry.data.content);
+const readTime = isLocalArticle
+  ? (entry.data.readingTime ?? calculateReadTime(entry.body ?? ""))
+  : calculateReadTime(entry.data.content);
+const image =
+  entry.collection === "posts"
+    ? (entry.data.coverImage ?? undefined)
+    : entry.data.image;
+const remoteContent =
+  entry.collection === "posts" ? entry.data.content : undefined;
 ---
 
 <BlogLayout
-  title={entry.data.title}
   description={entry.data.description}
-  image={entry.data.coverImage}
+  image={image}
+  title={entry.data.title}
 >
-  <Container class="py-12 md:px-0 lg:px-0 max-w-prose">
+  <Container class="max-w-prose min-w-0 py-12 md:px-0 lg:px-0">
     <section class="flex items-center mb-24 justify-between">
-      <BackLink href="/" title="Back home" />
+      <BackLink
+        href={isLocalArticle ? "/blog" : "/"}
+        title={isLocalArticle ? "Back to notes" : "Back home"}
+      />
       <ThemeToggle />
     </section>
     <header class="flex flex-col gap-4 mb-6 md:mb-14">
@@ -38,25 +68,26 @@ const readTime = calculateReadTime(entry.data.content);
       >
         {entry.data.title}
       </h1>
-      <div class="flex items-center gap-6 justify-btween">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
         <div class="flex items-center gap-2">
           <span class="h-4 w-0.5 bg-border shrink-0"></span>
           <time
-            datetime={entry.data.publishedAt.toISOString()}
             class="text-muted-foreground text-sm sm:text-base"
+            datetime={entry.data.publishedAt.toISOString()}
             >{formattedDate}</time
           >
         </div>
         <div class="flex items-center gap-2">
           <span class="h-4 w-0.5 bg-border shrink-0"></span>
           <p class="text-muted-foreground text-sm sm:text-base">
-            {readTime} minute read
+            {readTime}
+            minute read
           </p>
         </div>
       </div>
     </header>
     <Prose>
-      <div set:html={entry.data.content} />
+      {Content ? <Content /> : <div set:html={remoteContent ?? ""} />}
     </Prose>
   </Container>
 </BlogLayout>

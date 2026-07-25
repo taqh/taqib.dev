@@ -1,9 +1,22 @@
 import { marble } from "./client";
+import type { Post } from "./types";
+
+interface MarbleCategory {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface MarbleTag {
+  id: string;
+  name: string;
+  slug: string;
+}
 
 export async function fetchPosts() {
   try {
     const response = await marble.posts.list();
-    const allPosts = [];
+    const allPosts: Post[] = [];
 
     for await (const page of response) {
       if (page.result.posts) {
@@ -21,7 +34,7 @@ export async function fetchPosts() {
 export async function fetchCategories() {
   try {
     const response = await marble.categories.list();
-    const allCategories = [];
+    const allCategories: MarbleCategory[] = [];
 
     for await (const page of response) {
       if (page.result.categories) {
@@ -39,7 +52,7 @@ export async function fetchCategories() {
 export async function fetchTags() {
   try {
     const response = await marble.tags.list();
-    const allTags = [];
+    const allTags: MarbleTag[] = [];
 
     for await (const page of response) {
       if (page.result.tags) {

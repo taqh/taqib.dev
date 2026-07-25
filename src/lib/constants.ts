@@ -1,40 +1,40 @@
 export const SITE = {
-  TITLE: "Taqib Ibrahim",
   DESCRIPTION: "Software Engineer",
+  TITLE: "Taqib Ibrahim",
 };
 
 export const PROJECTS = [
   {
-    title: "Marble",
     description: "A simple headless CMS for managing blogs",
     links: {
-      repo: "https://github.com/usemarble?ref=taqib.dev",
       live: "https://marblecms.com?ref=taqib.dev",
+      repo: "https://github.com/usemarble?ref=taqib.dev",
     },
+    title: "Marble",
   },
   {
-    title: "Fable",
     description: "Transform documents to audio podcasts",
     links: {
-      repo: "https://helloworld.ng/fable",
       live: "https://fablepod.com?ref=taqib.dev",
+      repo: "https://helloworld.ng/fable",
     },
+    title: "Fable",
   },
   {
-    title: "Rdio",
     description:
       "An open-source internet radio control suite for running a single-station broadcast",
     links: {
-      repo: "https://github.com/helloworld-ng/rdio",
       live: "https://rdio-docs.vercel.app",
+      repo: "https://github.com/helloworld-ng/rdio",
     },
+    title: "Rdio",
   },
   {
-    title: "GRVL",
     description: "A shared planner for organizing group trips",
     links: {
-      repo: "https://app.grvl.ai",
       live: "https://grvl.ai",
+      repo: "https://app.grvl.ai",
     },
+    title: "GRVL",
   },
 ];

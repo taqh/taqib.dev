@@ -1,0 +1,135 @@
+---
+title: Understanding transition timing functions
+description: A visual guide to what cubic-bezier means and how four numbers turn time into motion.
+image: /transition-timing-functions-og.png
+publishedAt: 2026-07-24
+readingTime: 9
+draft: false
+---
+
+import ArticleBreakout from "@/components/article/ArticleBreakout.astro";
+import ArticleTable from "@/components/article/ArticleTable.astro";
+import BezierPointPairs from "@/components/article/BezierPointPairs.astro";
+import ReadTheCurve from "@/components/article/ReadTheCurve.astro";
+import SlopeComparison from "@/components/article/SlopeComparison.astro";
+import BezierAnatomy from "@/components/BezierAnatomy.astro";
+import CubicBezierExplorer from "@/components/CubicBezierExplorer.astro";
+
+I’ve been trying to write animations over the past few days, and one thing was especially confusing: the four numbers inside `cubic-bezier()`.
+
+I knew that changing the numbers changed the feel of a transition. I could drag handles in an easing tool until the motion looked right. But I could not explain what a value such as `cubic-bezier(0.25, 0.1, 0.25, 1)` actually meant.
+
+Turns out that they are the coordinates of two control handles on a graph.
+
+## What does a timing function do?
+
+A transition’s duration answers _how long_ the change or animation takes. Its timing function answers _how the change is distributed_ across that time.
+
+```css
+.button {
+  transition: transform 800ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+```
+
+The browser repeatedly asks one question during those 800 milliseconds: “Given how much time has passed, how much of the property change should be complete?”
+
+A timing function maps an **input progress** to an **output progress**. On the graph, input is time on the horizontal axis and output is completed progress on the vertical axis.
+
+<ArticleBreakout>
+  <BezierAnatomy />
+</ArticleBreakout>
+
+Both axes use normalized values. `0` means none and `1` means all. So `x = 0.5` means half of the duration has elapsed, while `y = 0.75` means the animated property has completed 75% of its journey.
+
+> **Basically:** at time `x`, use the curve to look up progress `y`.
+
+## The four values position two handles
+
+The function is easier to read when you group the four values into two coordinate pairs. A cubic Bézier curve has four defining points, but CSS only lets you position the middle two:
+
+- `P0 = (0, 0)` is the fixed start.
+- `P1 = (x1, y1)` is the first movable handle.
+- `P2 = (x2, y2)` is the second movable handle.
+- `P3 = (1, 1)` is the fixed end.
+
+<ArticleBreakout maxWidth="52rem">
+  <BezierPointPairs />
+</ArticleBreakout>
+
+“Control point” is an important name. `P1` and `P2` pull the curve into shape; they are not waypoints that the curve must pass through. `P1 = (x1, y1)` does not mean “at time `x1`, progress is `y1`.”
+
+At each moment, the browser takes elapsed time as `x`, finds that `x` on the curve, and reads the curve’s `y` as progress. The progress comes from the curve—not from either handle.
+
+<ArticleBreakout maxWidth="58rem">
+  <ReadTheCurve />
+</ArticleBreakout>
+
+This is why `x2` may be smaller than `x1`. The handles can cross horizontally because they are not ordered timestamps. CSS only requires each x-coordinate to stay between `0` and `1`.
+
+The familiar `linear` timing function is the simplest baseline: `cubic-bezier(0, 0, 1, 1)`. In that representation, `P1` overlaps `P0`, `P2` overlaps `P3`, and all four points lie on the same diagonal. Progress therefore always equals elapsed time.
+
+## The slope is the speed
+
+Now we can get from the shape of a curve to the feel of an animation. The slope tells us how quickly progress is changing as time passes:
+
+- A **flat** part of the curve makes little progress while time continues, so the motion is slow.
+- A **steep** part makes a lot of progress in a short time, so the motion is fast.
+- A straight diagonal has a constant slope, so it produces linear motion.
+
+<ArticleBreakout maxWidth="58rem">
+  <SlopeComparison />
+</ArticleBreakout>
+
+The dashed line from the start to `P1` is tangent to the beginning of the curve, so the first handle directly controls the starting velocity. The line from `P2` to the end does the same for the ending velocity.
+
+Ignoring a couple of edge cases, the starting slope is `y1 / x1`, and the ending slope is `(1 - y2) / (1 - x2)`. You do not need these formulas to choose an easing, but they explain why moving a handle changes the way motion departs or arrives.
+
+## The familiar keywords are curves too
+
+CSS’s named timing functions are aliases for particular cubic Bézier curves:
+
+<ArticleTable>
+
+| Keyword       | Equivalent curve               | Feel              |
+| ------------- | ------------------------------ | ----------------- |
+| `linear`      | `cubic-bezier(0, 0, 1, 1)`     | constant speed    |
+| `ease-in`     | `cubic-bezier(.42, 0, 1, 1)`   | slow departure    |
+| `ease-out`    | `cubic-bezier(0, 0, .58, 1)`   | soft arrival      |
+| `ease-in-out` | `cubic-bezier(.42, 0, .58, 1)` | soft at both ends |
+
+</ArticleTable>
+
+## Why x is restricted but y is not
+
+CSS requires `x1` and `x2` to be between `0` and `1`. That keeps the curve valid as a timing function: each moment in time can map to one progress value. If either x value falls outside that range, the whole `cubic-bezier()` value is invalid.
+
+The y values have no such restriction. A negative y value can make the property move backwards before it moves forward. A y value above 1 can carry the property beyond its destination and then bring it back. That is how a cubic Bézier curve can create anticipation or overshoot without a spring.
+
+## Shape the curve, then watch the motion
+
+Below is a visualizer of the same time-to-progress mapping. Drag either blue handles or adjust the four values, then press Play.
+
+Watch the graph and the track together. Time advances evenly from left to right. At each moment, the dot’s vertical position shows the progress returned by the curve, and the ball underneath uses that same progress to move from start to finish. The curve is not a path the ball follows through space—it is the rule that controls how far the ball has travelled at each moment.
+
+<ArticleBreakout>
+  <CubicBezierExplorer />
+</ArticleBreakout>
+
+## An easy mental model to keep
+
+1. **x is elapsed time.**
+2. **y is completed progress.**
+3. The start `(0, 0)` and end `(1, 1)` are fixed.
+4. The first pair positions the handle that shapes the departure.
+5. The second pair positions the handle that shapes the arrival.
+6. Flat means slow; steep means fast.
+7. The handles pull the curve. They are not points it must visit.
+
+So when I see `cubic-bezier(x1, y1, x2, y2)` now, I picture two handles on a time–progress graph and ask: how should this motion leave, where should it accelerate, and how should it arrive?
+
+---
+
+## References
+
+1. [CSS Easing Functions Level 2](https://www.w3.org/TR/css-easing-2/#cubic-bezier-easing-functions) — W3C specification, “Cubic Bézier easing functions.”
+2. [cubic-bezier()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function/cubic-bezier) — MDN Web Docs reference.

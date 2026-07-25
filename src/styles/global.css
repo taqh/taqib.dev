@@ -24,7 +24,7 @@
   .dark {
     --foreground: 34 78% 91%;
     --background: 0 0% 10%;
-    --muted-foreground: 33, 15%, 76%;
+    --muted-foreground: 33 15% 76%;
     --muted: 0 0% 24%;
     --border: 220 5% 18%;
     --card: 0 0% 17%;
@@ -64,12 +64,12 @@
 
 @layer utilities {
   .bg-dot::before {
-    content: "";
     position: absolute;
+    inset: 0;
+    z-index: -10;
     width: 100%;
     height: 100%;
-    z-index: -10;
-    inset: 0;
+    content: "";
     background:
       linear-gradient(90deg, var(--dot-bg-color) 18px, transparent 1%) 50%,
       linear-gradient(var(--dot-bg-color) 18px, transparent 1%) 50%,
@@ -84,20 +84,34 @@
     mask-image: linear-gradient(0deg, transparent 5%, var(--dot-mask-color));
   }
 
-  /* code blocks overflow for some reason so i magic numbered the max width and it works */
-  .prose pre.shiki {
+  .prose pre {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    width: 100%;
-    max-width: calc(100vw - 3rem);
+    overscroll-behavior-inline: contain;
+  }
+
+  .prose pre code {
+    display: block;
+    min-width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .prose pre,
+    .prose pre code {
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
   }
 }
 
 /* theme switch animation styles */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;
   mix-blend-mode: normal;
+  animation: none;
 }
 
 ::view-transition-old(root) {

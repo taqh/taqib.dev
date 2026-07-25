@@ -1,17 +1,25 @@
 ---
+import { getCollection } from "astro:content";
 import Container from "@/components/Container.astro";
 import PostCard from "@/components/PostCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
 import ViewAll from "@/components/ViewAll.astro";
 import Layout from "@/layouts/Layout.astro";
-import { SITE, PROJECTS } from "@/lib/constants";
-import ThemeToggle from "@/components/ThemeToggle.astro";
-import { getCollection } from "astro:content";
+import { PROJECTS, SITE } from "@/lib/constants";
 
-const posts = await getCollection("posts");
+const [articles, remotePosts] = await Promise.all([
+  getCollection("articles", ({ data }) => !data.draft),
+  getCollection("posts"),
+]);
+const localSlugs = new Set(articles.map((entry) => entry.id));
+const posts = [
+  ...articles,
+  ...remotePosts.filter((entry) => !localSlugs.has(entry.data.slug)),
+].sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
 ---
 
-<Layout title={SITE.TITLE} description={SITE.DESCRIPTION}>
+<Layout description={SITE.DESCRIPTION} title={SITE.TITLE}>
   <div>
     <!-- about section -->
     <section id="about">
@@ -27,76 +35,81 @@ const posts = await getCollection("posts");
           </div>
           <div class="space-y-4">
             <p class="leading-normal text-muted-foreground sm:leading-7">
-              Frontend engineer from Abuja, Nigeria. I build products across
-              the stack, with a soft spot for open source and developer tools.
-              I&apos;m currently maintaining <a
+              Frontend engineer from Abuja, Nigeria. I build products across the
+              stack, with a soft spot for open source and developer tools.
+              I&apos;m currently maintaining
+              <a
+                class="text-accent underline-offset-2 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors"
                 href="https://marblecms.com?ref=taqib.dev"
                 target="_blank"
-                class="text-accent underline-offset-2 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors"
                 >Marble</a
-              > and thinking a lot about usability, systems, and the craft of
+              >
+              and thinking a lot about usability, systems, and the craft of
               building for the web.
             </p>
           </div>
           <div class="py-4 flex items-center gap-6 mt-4 text-sm sm:text-base">
             <a
+              class="text-muted-foreground rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               href="https://github.com/taqh"
               target="_blank"
-              class="text-muted-foreground rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
             >
               <span>Github</span>
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
                 class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
+                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+                ></path>
               </svg>
             </a>
             <a
+              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               href="mailto:hello@taqib.dev"
               target="_blank"
-              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
             >
               <span>Mail</span>
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
                 class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
+                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+                ></path>
               </svg>
             </a>
             <a
+              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               href="https://x.com/retaqib"
               target="_blank"
-              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
             >
               <span>Twitter</span>
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
                 class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
+                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+                ></path>
               </svg>
             </a>
           </div>
@@ -108,34 +121,24 @@ const posts = await getCollection("posts");
     <section id="projects">
       <Container>
         <div
-          id="projects"
           class="flex flex-col justify-between gap-6 mb-8 sm:mb-10"
+          id="projects"
         >
-          <div class="flex flex-col">
-            <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
-              Projects
-            </h2>
-            <p
-              class="leading-normal sr-only text-muted-foreground sm:leading-7 text-sm sm:text-base"
-            >
-              A couple of projects I’ve worked on.
-            </p>
-          </div>
+          <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
+            Projects
+          </h2>
+
           <!-- project list -->
           <ul class="grid gap-4 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-            {
-              PROJECTS.slice(0, 4).map((project) => (
+            {PROJECTS.slice(0, 4).map((project) => (
                 <ProjectCard entry={project} />
-              ))
-            }
+              ))}
           </ul>
-          {
-            PROJECTS.length > 4 && (
-              <div class="flex justify-center mt-10">
+          {PROJECTS.length > 4 && (
+              <div class="mt-10 flex justify-center">
                 <ViewAll href="/projects"> See All </ViewAll>
               </div>
-            )
-          }
+            )}
         </div>
       </Container>
     </section>
@@ -144,27 +147,18 @@ const posts = await getCollection("posts");
     <section id="posts">
       <Container>
         <div class="flex flex-col justify-between gap-6 mb-8 sm:mb-10">
-          <div class="flex flex-col">
-            <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
-              Notes
-            </h2>
-            <p
-              class="leading-normal sr-only text-muted-foreground sm:leading-7 text-sm sm:text-base"
-            >
-              My attempts at writing.
-            </p>
-          </div>
+          <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
+            Notes
+          </h2>
           <!-- project list -->
           <ul class="grid gap-4">
             {posts.slice(0, 4).map((post) => <PostCard entry={post} />)}
           </ul>
-          {
-            posts.length > 4 && (
-              <div class="flex justify-center mt-10">
+          {posts.length > 4 && (
+              <div class="mt-10 flex justify-center">
                 <ViewAll href="/blog"> See All</ViewAll>
               </div>
-            )
-          }
+            )}
         </div>
       </Container>
     </section>
@@ -193,63 +187,66 @@ const posts = await getCollection("posts");
               class="flex items-center flex-wrap justify-center gap-6 text-sm sm:text-base"
             >
               <a
+                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
                 href="https://github.com/taqh"
                 target="_blank"
-                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>Github</span>
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
                   class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
+                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+                  ></path>
                 </svg>
               </a>
               <a
+                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
                 href="mailto:hello@taqib.dev"
                 target="_blank"
-                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>Mail</span>
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
                   class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
+                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+                  ></path>
                 </svg>
               </a>
               <a
+                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
                 href="https://x.com/retaqib"
                 target="_blank"
-                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
               >
                 <span>Twitter</span>
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
                   class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
+                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+                  ></path>
                 </svg>
               </a>
             </div>

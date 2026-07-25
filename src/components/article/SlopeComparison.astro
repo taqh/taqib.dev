@@ -1,0 +1,115 @@
+<figure>
+  <div class="slope-card">
+    <svg aria-label="A curve that starts flat" role="img" viewBox="0 0 220 180">
+      <g class="mini-grid">
+        <path d="M20 20V160H200"></path>
+        <path d="M20 90H200M110 20V160"></path>
+      </g>
+      <path class="mini-curve" d="M20 160C95.6 160 200 20 200 20"></path>
+    </svg>
+    <strong>Flat at the start</strong>
+    <span>slow → fast</span>
+  </div>
+  <div class="slope-card">
+    <svg aria-label="A straight linear curve" role="img" viewBox="0 0 220 180">
+      <g class="mini-grid">
+        <path d="M20 20V160H200"></path>
+        <path d="M20 90H200M110 20V160"></path>
+      </g>
+      <path class="mini-curve" d="M20 160 200 20"></path>
+    </svg>
+    <strong>Constant slope</strong>
+    <span>steady speed</span>
+  </div>
+  <div class="slope-card">
+    <svg aria-label="A curve that ends flat" role="img" viewBox="0 0 220 180">
+      <g class="mini-grid">
+        <path d="M20 20V160H200"></path>
+        <path d="M20 90H200M110 20V160"></path>
+      </g>
+      <path class="mini-curve" d="M20 160C20 160 124.4 20 200 20"></path>
+    </svg>
+    <strong>Flat at the end</strong>
+    <span>fast → slow</span>
+  </div>
+  <figcaption>
+    Read each curve from left to right. Steeper sections spend progress faster.
+  </figcaption>
+</figure>
+
+<style>
+  figure {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .slope-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.8rem;
+  }
+
+  svg {
+    width: 100%;
+    max-width: 13rem;
+    height: auto;
+  }
+
+  .mini-grid path {
+    fill: none;
+    stroke: hsl(var(--muted-foreground) / 0.32);
+    stroke-width: 1;
+  }
+
+  .mini-curve {
+    fill: none;
+    stroke: hsl(var(--accent));
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  strong {
+    font-family: var(--font-literata), Georgia, serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+  }
+
+  span {
+    margin-top: 0.25rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6875rem;
+    color: hsl(var(--muted-foreground));
+  }
+
+  figcaption {
+    grid-column: 1 / -1;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    figure {
+      grid-template-columns: 1fr;
+    }
+
+    svg {
+      max-width: 15rem;
+    }
+
+    figcaption {
+      grid-column: auto;
+    }
+  }
+</style>

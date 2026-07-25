@@ -8,7 +8,6 @@ let highlighter: Awaited<ReturnType<typeof createHighlighter>> | null = null;
 async function getHighlighter() {
   if (!highlighter) {
     highlighter = await createHighlighter({
-      themes: ["houston", "github-dark"],
       langs: [
         "javascript",
         "typescript",
@@ -23,6 +22,7 @@ async function getHighlighter() {
         "yaml",
         "xml",
       ],
+      themes: ["houston", "github-dark"],
     });
   }
   return highlighter;
@@ -32,7 +32,7 @@ async function getHighlighter() {
  * Transform content from Marble to add syntax highlighting to code blocks
  */
 export async function highlightContent(htmlContent: string): Promise<string> {
-  const highlighter = await getHighlighter();
+  const shiki = await getHighlighter();
 
   // Marble returns the language as a class attribute on the <code> tag
   // i.e <pre><code class="language-jsx">...</code></pre>
@@ -54,10 +54,10 @@ export async function highlightContent(htmlContent: string): Promise<string> {
       const lang = language || "text";
 
       // Check if the language is supported
-      const supportedLanguages = highlighter.getLoadedLanguages();
+      const supportedLanguages = shiki.getLoadedLanguages();
       const finalLang = supportedLanguages.includes(lang) ? lang : "text";
 
-      const highlighted = highlighter.codeToHtml(decodedCode, {
+      const highlighted = shiki.codeToHtml(decodedCode, {
         lang: finalLang,
         themes: {
           dark: "houston",

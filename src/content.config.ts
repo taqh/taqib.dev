@@ -1,34 +1,34 @@
 import { defineCollection } from "astro:content";
-import { z } from "astro/zod";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 import { highlightContent } from "./lib/marble/highlight";
 import { fetchPosts } from "./lib/marble/queries";
 import { postSchema } from "./lib/marble/types";
 
 const projectCollection = defineCollection({
   loader: glob({
-    pattern: "**/[^_]*.{md,mdx}",
     base: "./src/content/projects",
+    pattern: "**/[^_]*.{md,mdx}",
   }),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
-      status: z.enum(["live", "dev"]),
       description: z.string(),
-      image: z.string(),
-      slug: z.string(),
       draft: z.boolean().optional(),
+      image: z.string(),
+      links: z.object({
+        live: z.url().optional(),
+        repo: z.url().optional(),
+      }),
       preview: z
         .object({
-          src: image(),
           alt: z.string(),
+          src: image(),
         })
         .optional(),
-      links: z.object({
-        repo: z.url().optional(),
-        live: z.url().optional(),
-      }),
+      slug: z.string(),
+      status: z.enum(["live", "dev"]),
       technologies: z.array(z.string()),
+      title: z.string(),
     }),
 });
 
@@ -41,13 +41,29 @@ const postCollection = defineCollection({
       posts.map(async (post) => ({
         ...post,
         content: await highlightContent(post.content),
-      })),
+      }))
     );
   },
   schema: postSchema,
 });
 
+const articleCollection = defineCollection({
+  loader: glob({
+    base: "./src/content/articles",
+    pattern: "**/[^_]*.{md,mdx}",
+  }),
+  schema: z.object({
+    description: z.string(),
+    draft: z.boolean().default(false),
+    image: z.string().optional(),
+    publishedAt: z.coerce.date(),
+    readingTime: z.number().int().positive().optional(),
+    title: z.string(),
+  }),
+});
+
 export const collections = {
-  projects: projectCollection,
+  articles: articleCollection,
   posts: postCollection,
+  projects: projectCollection,
 };

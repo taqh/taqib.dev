@@ -1,5 +1,5 @@
 ---
-type Props = {
+interface Props {
   entry: {
     title: string;
     links: {
@@ -8,7 +8,7 @@ type Props = {
     };
     description: string;
   };
-};
+}
 
 const { entry } = Astro.props as Props;
 const { title, links, description } = entry;
@@ -16,9 +16,9 @@ const { title, links, description } = entry;
 
 <li>
   <a
+    class="group flex flex-col gap-4 justify-between border rounded-md hover:bg-card backdrop-blur-md z-10 overflow-hidden p-4 pb-4 transition-colors duration-300 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent h-full"
     href={links.live}
     target="_blank"
-    class="group flex flex-col gap-4 justify-between border rounded-md hover:bg-card backdrop-blur-md z-10 overflow-hidden p-4 pb-4 transition-colors duration-300 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent h-full"
   >
     <div class="flex flex-col gap-2.5">
       <div class="flex justify-between items-center">
@@ -26,17 +26,18 @@ const { title, links, description } = entry;
           {title}
         </p>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
           class="size-4 text-muted-foreground group-hover:text-foreground transition-colors"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
+            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
+          ></path>
         </svg>
       </div>
       <p class="text-muted-foreground text-sm">

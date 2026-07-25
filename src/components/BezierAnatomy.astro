@@ -1,0 +1,185 @@
+<figure class="bezier-anatomy">
+  <div class="illustration-frame">
+    <svg
+      aria-labelledby="bezier-anatomy-title bezier-anatomy-description"
+      role="img"
+      viewBox="0 0 720 500"
+    >
+      <title id="bezier-anatomy-title">
+        The control points of a CSS cubic Bézier timing function
+      </title>
+      <desc id="bezier-anatomy-description">
+        A time versus progress graph. The curve begins at zero, zero and ends at
+        one, one. The first and second pairs of numbers position two handles
+        that pull the curve.
+      </desc>
+
+      <defs>
+        <marker
+          id="anatomy-arrow"
+          markerHeight="7"
+          markerWidth="7"
+          orient="auto-start-reverse"
+          refX="8"
+          refY="5"
+          viewBox="0 0 10 10"
+        >
+          <path
+            d="M2 1 8 5 2 9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          ></path>
+        </marker>
+      </defs>
+
+      <g class="axes">
+        <path d="M90 390V56" marker-end="url(#anatomy-arrow)"></path>
+        <path d="M90 390H650" marker-end="url(#anatomy-arrow)"></path>
+        <text text-anchor="middle" x="90" y="34">progress</text>
+        <text x="662" y="395">time</text>
+        <text text-anchor="middle" x="90" y="424">0</text>
+        <text text-anchor="middle" x="630" y="424">1</text>
+        <text text-anchor="end" x="62" y="394">0</text>
+        <text text-anchor="end" x="62" y="92">1</text>
+      </g>
+
+      <g class="guides">
+        <path d="M90 390 225 150"></path>
+        <path d="M333 70 630 70"></path>
+      </g>
+
+      <path class="curve" d="M90 390C225 150 333 70 630 70"></path>
+
+      <g class="anchors">
+        <circle cx="90" cy="390" r="6"></circle>
+        <circle cx="630" cy="70" r="6"></circle>
+        <text x="108" y="377">start (0, 0)</text>
+        <text text-anchor="end" x="612" y="50">end (1, 1)</text>
+      </g>
+
+      <g class="control-point">
+        <circle cx="225" cy="150" r="9"></circle>
+        <text text-anchor="middle" x="225" y="119">P₁ = (x₁, y₁)</text>
+      </g>
+      <g class="control-point">
+        <circle cx="333" cy="70" r="9"></circle>
+        <text text-anchor="middle" x="333" y="38">P₂ = (x₂, y₂)</text>
+      </g>
+
+      <g class="key">
+        <text text-anchor="middle" x="360" y="458">x = elapsed time</text>
+        <text text-anchor="middle" x="360" y="480">y = completed progress</text>
+      </g>
+    </svg>
+  </div>
+  <figcaption>
+    The endpoints are fixed. The four numbers position only the two control
+    handles.
+  </figcaption>
+</figure>
+
+<style>
+  .bezier-anatomy {
+    --diagram-line: hsl(var(--muted-foreground) / 0.62);
+    --diagram-guide: hsl(var(--muted-foreground) / 0.45);
+    --diagram-curve: hsl(var(--accent));
+    --diagram-handle: hsl(210 75% 51%);
+    --diagram-panel: hsl(var(--card));
+    margin: 2.5rem 0;
+  }
+
+  .illustration-frame {
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  text {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 15px;
+    fill: hsl(var(--muted-foreground));
+  }
+
+  .axes {
+    color: var(--diagram-line);
+  }
+
+  .axes path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .guides path {
+    fill: none;
+    stroke: var(--diagram-guide);
+    stroke-width: 1.5;
+    stroke-dasharray: 7 7;
+  }
+
+  .curve {
+    fill: none;
+    stroke: var(--diagram-curve);
+    stroke-width: 5;
+    stroke-linecap: round;
+  }
+
+  .anchors circle {
+    fill: hsl(var(--muted-foreground));
+  }
+
+  .anchors text,
+  .control-point text {
+    font-size: 16px;
+    font-weight: 600;
+    fill: hsl(var(--foreground));
+  }
+
+  .control-point circle {
+    fill: var(--diagram-panel);
+    stroke: var(--diagram-handle);
+    stroke-width: 4;
+  }
+
+  .key text {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    fill: hsl(var(--muted-foreground));
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+  }
+
+  @media (max-width: 560px) {
+    text {
+      font-size: 18px;
+    }
+
+    .anchors text,
+    .control-point text {
+      font-size: 19px;
+    }
+
+    .key text {
+      font-size: 17px;
+    }
+  }
+</style>

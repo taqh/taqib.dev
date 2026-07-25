@@ -9,7 +9,7 @@ const { class: classNames, ...attrs } = Astro.props;
 <article
   {...attrs}
   class={cn(
-    "prose prose-taqib w-full prose-headings:font-medium prose-headings:text-balance prose-headings:font-serif prose-code:before:content-none prose-code:after:content-none prose-figcaption:text-center prose-figcaption:italic prose-figcaption:text-xs",
+    "prose prose-taqib w-full min-w-0 max-w-full prose-headings:text-balance prose-figcaption:text-center prose-headings:font-medium prose-headings:font-serif prose-figcaption:text-xs prose-figcaption:italic prose-code:before:content-none prose-code:after:content-none",
     classNames,
   )}
 >

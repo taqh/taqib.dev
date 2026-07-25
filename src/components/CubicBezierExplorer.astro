@@ -1,0 +1,1199 @@
+<bezier-explorer class="bezier-explorer">
+  <div class="stage">
+    <svg
+      aria-labelledby="explorer-title explorer-description"
+      class="graph"
+      data-graph
+      role="img"
+      viewBox="0 90 760 665"
+    >
+      <title id="explorer-title">Interactive cubic Bézier graph</title>
+      <desc id="explorer-description">
+        A time versus progress graph with two draggable control points. Press
+        Play to trace the curve and animate the ball below.
+      </desc>
+
+      <defs>
+        <marker
+          id="explorer-arrow"
+          markerHeight="7"
+          markerWidth="7"
+          orient="auto-start-reverse"
+          refX="8"
+          refY="5"
+          viewBox="0 0 10 10"
+        >
+          <path
+            d="M2 1 8 5 2 9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          ></path>
+        </marker>
+        <pattern
+          height="52"
+          id="explorer-grid"
+          patternUnits="userSpaceOnUse"
+          width="52"
+          x="146"
+          y="176"
+        >
+          <circle cx="26" cy="26" r="1.25"></circle>
+        </pattern>
+      </defs>
+
+      <rect class="grid" height="468" width="468" x="146" y="176"></rect>
+
+      <g class="reference-lines">
+        <path d="M120 670H660" marker-end="url(#explorer-arrow)"></path>
+        <path d="M120 670V130" marker-end="url(#explorer-arrow)"></path>
+        <path class="quiet" d="M120 150H640V670"></path>
+      </g>
+
+      <g class="axis-labels">
+        <text text-anchor="middle" x="380" y="728">elapsed time</text>
+        <text
+          text-anchor="middle"
+          transform="rotate(-90 58 410)"
+          x="58"
+          y="410"
+        >
+          progress
+        </text>
+        <text text-anchor="middle" x="120" y="700">0</text>
+        <text text-anchor="middle" x="640" y="700">1</text>
+        <text text-anchor="end" x="102" y="675">0</text>
+        <text text-anchor="end" x="102" y="155">1</text>
+      </g>
+
+      <g class="handle-guides">
+        <path d="M120 670 250 618" data-guide-one></path>
+        <path d="M250 150 640 150" data-guide-two></path>
+      </g>
+
+      <path
+        class="easing-curve"
+        d="M120 670C250 618 250 150 640 150"
+        data-curve
+      ></path>
+
+      <g class="fixed-points">
+        <circle cx="120" cy="670" r="5"></circle>
+        <circle cx="640" cy="150" r="5"></circle>
+      </g>
+
+      <g class="cursor" data-cursor>
+        <path d="M120 670V670" data-cursor-line></path>
+        <circle cx="120" cy="670" data-cursor-dot r="8"></circle>
+      </g>
+
+      <g
+        aria-label="First control point. Drag it, or use the arrow keys."
+        class="drag-handle"
+        data-handle="0"
+        tabindex="0"
+      >
+        <circle class="handle-hit-area" cx="250" cy="618" r="24"></circle>
+        <circle class="handle-dot" cx="250" cy="618" r="9"></circle>
+        <text data-handle-label="0" text-anchor="middle" x="250" y="589">
+          P₁
+        </text>
+      </g>
+      <g
+        aria-label="Second control point. Drag it, or use the arrow keys."
+        class="drag-handle"
+        data-handle="1"
+        tabindex="0"
+      >
+        <circle class="handle-hit-area" cx="250" cy="150" r="24"></circle>
+        <circle class="handle-dot" cx="250" cy="150" r="9"></circle>
+        <text data-handle-label="1" text-anchor="middle" x="250" y="121">
+          P₂
+        </text>
+      </g>
+    </svg>
+
+    <div class="motion-panel">
+      <section
+        aria-label="The same easing applied to an object"
+        class="motion-demo"
+      >
+        <div aria-hidden="true" class="track-labels">
+          <span>start</span>
+          <span>finish</span>
+        </div>
+        <div class="motion-track" data-motion-track>
+          <div class="motion-ball" data-motion-ball></div>
+        </div>
+      </section>
+
+      <div class="transport-bar">
+        <button
+          aria-label="Play animation"
+          class="transport-button"
+          data-play
+          title="Play animation"
+          type="button"
+        >
+          <svg aria-hidden="true" viewBox="0 0 20 20">
+            <path d="m7 5 8 5-8 5V5Z"></path>
+          </svg>
+        </button>
+
+        <code aria-label="Current timing function" data-function role="status">
+          <span>cubic-bezier(</span
+          ><span class="function-pair function-pair-one" data-function-pair="0"
+            >0.25, 0.10</span
+          ><span>, </span
+          ><span class="function-pair function-pair-two" data-function-pair="1"
+            >0.25, 1.00</span
+          ><span>)</span>
+        </code>
+
+        <button
+          aria-label="Reset curve and animation"
+          class="transport-button"
+          data-reset
+          title="Reset curve and animation"
+          type="button"
+        >
+          <svg aria-hidden="true" viewBox="0 0 20 20">
+            <path
+              d="M5.2 6.1A6 6 0 1 1 4 10"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="1.8"
+            ></path>
+            <path
+              d="M3.5 3.5v4h4"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <p aria-live="polite" class="sr-only" data-status>Ready to play</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <fieldset class="presets">
+      <legend class="sr-only">Easing presets</legend>
+      <button data-preset data-values="0,0,1,1" type="button">linear</button>
+      <button
+        aria-pressed="true"
+        data-preset
+        data-values="0.25,0.1,0.25,1"
+        type="button"
+      >
+        ease
+      </button>
+      <button data-preset data-values="0.42,0,1,1" type="button">
+        ease-in
+      </button>
+      <button data-preset data-values="0,0,0.58,1" type="button">
+        ease-out
+      </button>
+      <button data-preset data-values="0.42,0,0.58,1" type="button">
+        ease-in-out
+      </button>
+      <button data-preset data-values="0.34,1.4,0.64,1" type="button">
+        overshoot
+      </button>
+      <button data-preset data-values="0.36,-0.3,0.64,1" type="button">
+        anticipate
+      </button>
+    </fieldset>
+
+    <div class="value-grid">
+      <div class="value-control" data-pair="one">
+        <div class="value-heading">
+          <label for="bezier-x1">x₁</label>
+          <span>first handle · time</span>
+        </div>
+        <div class="value-inputs">
+          <input
+            data-coordinate="0"
+            data-range
+            id="bezier-x1"
+            max="1"
+            min="0"
+            step="0.01"
+            type="range"
+            value="0.25"
+          >
+          <input
+            aria-label="x one numeric value"
+            data-coordinate="0"
+            data-number
+            max="1"
+            min="0"
+            step="0.01"
+            type="number"
+            value="0.25"
+          >
+        </div>
+      </div>
+
+      <div class="value-control" data-pair="one">
+        <div class="value-heading">
+          <label for="bezier-y1">y₁</label>
+          <span>first handle · progress</span>
+        </div>
+        <div class="value-inputs">
+          <input
+            data-coordinate="1"
+            data-range
+            id="bezier-y1"
+            max="1.5"
+            min="-0.5"
+            step="0.01"
+            type="range"
+            value="0.1"
+          >
+          <input
+            aria-label="y one numeric value"
+            data-coordinate="1"
+            data-number
+            max="1.5"
+            min="-0.5"
+            step="0.01"
+            type="number"
+            value="0.1"
+          >
+        </div>
+      </div>
+
+      <div class="value-control" data-pair="two">
+        <div class="value-heading">
+          <label for="bezier-x2">x₂</label>
+          <span>second handle · time</span>
+        </div>
+        <div class="value-inputs">
+          <input
+            data-coordinate="2"
+            data-range
+            id="bezier-x2"
+            max="1"
+            min="0"
+            step="0.01"
+            type="range"
+            value="0.25"
+          >
+          <input
+            aria-label="x two numeric value"
+            data-coordinate="2"
+            data-number
+            max="1"
+            min="0"
+            step="0.01"
+            type="number"
+            value="0.25"
+          >
+        </div>
+      </div>
+
+      <div class="value-control" data-pair="two">
+        <div class="value-heading">
+          <label for="bezier-y2">y₂</label>
+          <span>second handle · progress</span>
+        </div>
+        <div class="value-inputs">
+          <input
+            data-coordinate="3"
+            data-range
+            id="bezier-y2"
+            max="1.5"
+            min="-0.5"
+            step="0.01"
+            type="range"
+            value="1"
+          >
+          <input
+            aria-label="y two numeric value"
+            data-coordinate="3"
+            data-number
+            max="1.5"
+            min="-0.5"
+            step="0.01"
+            type="number"
+            value="1"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</bezier-explorer>
+
+<p class="explorer-caption">
+  CSS keeps x₁ and x₂ between 0 and 1; y values may extend beyond that range.
+</p>
+
+<script>
+  const GRAPH = {
+    bottom: 670,
+    left: 120,
+    right: 640,
+    top: 150,
+    yMax: 1,
+    yMin: 0,
+  };
+
+  const graphWidth = GRAPH.right - GRAPH.left;
+  const graphHeight = GRAPH.bottom - GRAPH.top;
+  const defaultValues = [0.25, 0.1, 0.25, 1];
+
+  class BezierExplorer extends HTMLElement {
+    values = [...defaultValues];
+    animation: Animation | null = null;
+    animationFrame = 0;
+    dragIndex: number | null = null;
+    startedAt = 0;
+    duration = 2200;
+
+    connectedCallback() {
+      if (this.dataset.ready === "true") {
+        return;
+      }
+      this.dataset.ready = "true";
+
+      for (const input of this.querySelectorAll<HTMLInputElement>(
+        "[data-range]"
+      )) {
+        input.addEventListener("input", () => this.readControl(input));
+      }
+      for (const input of this.querySelectorAll<HTMLInputElement>(
+        "[data-number]"
+      )) {
+        input.addEventListener("change", () => this.readControl(input));
+      }
+
+      for (const button of this.querySelectorAll<HTMLButtonElement>(
+        "[data-preset]"
+      )) {
+        button.addEventListener("click", () => {
+          const nextValues = button.dataset.values
+            ?.split(",")
+            .map(Number) as number[];
+          if (nextValues?.length !== 4) {
+            return;
+          }
+          this.values = nextValues;
+          this.syncControls();
+          this.render();
+        });
+      }
+
+      this.querySelector<HTMLButtonElement>("[data-play]")?.addEventListener(
+        "click",
+        () => this.play()
+      );
+      this.querySelector<HTMLButtonElement>("[data-reset]")?.addEventListener(
+        "click",
+        () => this.reset()
+      );
+
+      for (const handle of this.querySelectorAll<SVGGElement>(
+        "[data-handle]"
+      )) {
+        handle.addEventListener("pointerdown", (event) => {
+          this.dragIndex = Number(handle.dataset.handle);
+          handle.setPointerCapture(event.pointerId);
+          this.updateFromPointer(event);
+        });
+        handle.addEventListener("pointermove", (event) => {
+          if (
+            this.dragIndex === Number(handle.dataset.handle) &&
+            handle.hasPointerCapture(event.pointerId)
+          ) {
+            this.updateFromPointer(event);
+          }
+        });
+        handle.addEventListener("pointerup", (event) => {
+          handle.releasePointerCapture(event.pointerId);
+          this.dragIndex = null;
+        });
+        handle.addEventListener("pointercancel", () => {
+          this.dragIndex = null;
+        });
+        handle.addEventListener("keydown", (event) => {
+          this.updateFromKeyboard(event, Number(handle.dataset.handle));
+        });
+      }
+
+      this.render();
+    }
+
+    disconnectedCallback() {
+      this.animation?.cancel();
+      cancelAnimationFrame(this.animationFrame);
+    }
+
+    clamp(value: number, min: number, max: number) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    readControl(input: HTMLInputElement) {
+      const coordinate = Number(input.dataset.coordinate);
+      const min = coordinate === 0 || coordinate === 2 ? 0 : -0.5;
+      const max = coordinate === 0 || coordinate === 2 ? 1 : 1.5;
+      const parsed = Number(input.value);
+      if (!Number.isFinite(parsed)) {
+        return;
+      }
+
+      this.values[coordinate] = this.clamp(parsed, min, max);
+      this.cancelPlayback();
+      this.syncControls();
+      this.render();
+    }
+
+    syncControls() {
+      for (const input of this.querySelectorAll<HTMLInputElement>(
+        "[data-range], [data-number]"
+      )) {
+        const coordinate = Number(input.dataset.coordinate);
+        input.value = this.values[coordinate].toFixed(2);
+      }
+    }
+
+    updateFromPointer(event: PointerEvent) {
+      if (this.dragIndex === null) {
+        return;
+      }
+      const svg = this.querySelector<SVGSVGElement>("[data-graph]");
+      if (!svg) {
+        return;
+      }
+
+      const bounds = svg.getBoundingClientRect();
+      const viewBox = svg.viewBox.baseVal;
+      const svgX =
+        viewBox.x +
+        ((event.clientX - bounds.left) / bounds.width) * viewBox.width;
+      const svgY =
+        viewBox.y +
+        ((event.clientY - bounds.top) / bounds.height) * viewBox.height;
+      const x = this.clamp((svgX - GRAPH.left) / graphWidth, 0, 1);
+      const y = this.clamp(
+        GRAPH.yMax -
+          ((svgY - GRAPH.top) / graphHeight) * (GRAPH.yMax - GRAPH.yMin),
+        -0.5,
+        1.5
+      );
+      const offset = this.dragIndex === 0 ? 0 : 2;
+
+      this.values[offset] = Math.round(x * 100) / 100;
+      this.values[offset + 1] = Math.round(y * 100) / 100;
+      this.cancelPlayback();
+      this.syncControls();
+      this.render();
+    }
+
+    updateFromKeyboard(event: KeyboardEvent, handleIndex: number) {
+      if (
+        !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      const amount = event.shiftKey ? 0.1 : 0.01;
+      const offset = handleIndex === 0 ? 0 : 2;
+
+      if (event.key === "ArrowLeft") {
+        this.values[offset] = this.clamp(this.values[offset] - amount, 0, 1);
+      }
+      if (event.key === "ArrowRight") {
+        this.values[offset] = this.clamp(this.values[offset] + amount, 0, 1);
+      }
+      if (event.key === "ArrowDown") {
+        this.values[offset + 1] = this.clamp(
+          this.values[offset + 1] - amount,
+          -0.5,
+          1.5
+        );
+      }
+      if (event.key === "ArrowUp") {
+        this.values[offset + 1] = this.clamp(
+          this.values[offset + 1] + amount,
+          -0.5,
+          1.5
+        );
+      }
+
+      this.values = this.values.map((value) => Math.round(value * 100) / 100);
+      this.cancelPlayback();
+      this.syncControls();
+      this.render();
+    }
+
+    toSvgX(value: number) {
+      return GRAPH.left + value * graphWidth;
+    }
+
+    toSvgY(value: number) {
+      return (
+        GRAPH.top +
+        ((GRAPH.yMax - value) / (GRAPH.yMax - GRAPH.yMin)) * graphHeight
+      );
+    }
+
+    setElementAttribute(
+      selector: string,
+      attribute: string,
+      value: string | number
+    ) {
+      this.querySelector(selector)?.setAttribute(attribute, String(value));
+    }
+
+    render() {
+      const [x1, y1, x2, y2] = this.values;
+      const startX = this.toSvgX(0);
+      const startY = this.toSvgY(0);
+      const endX = this.toSvgX(1);
+      const endY = this.toSvgY(1);
+      const p1X = this.toSvgX(x1);
+      const p1Y = this.toSvgY(y1);
+      const p2X = this.toSvgX(x2);
+      const p2Y = this.toSvgY(y2);
+      const graph = this.querySelector<SVGSVGElement>("[data-graph]");
+      const viewTop = Math.min(90, Math.floor(Math.min(p1Y, p2Y) - 45));
+      const viewBottom = Math.max(755, Math.ceil(Math.max(p1Y, p2Y) + 45));
+      graph?.setAttribute(
+        "viewBox",
+        `0 ${viewTop} 760 ${viewBottom - viewTop}`
+      );
+
+      this.setElementAttribute(
+        "[data-curve]",
+        "d",
+        `M${startX} ${startY}C${p1X} ${p1Y} ${p2X} ${p2Y} ${endX} ${endY}`
+      );
+      this.setElementAttribute(
+        "[data-guide-one]",
+        "d",
+        `M${startX} ${startY} ${p1X} ${p1Y}`
+      );
+      this.setElementAttribute(
+        "[data-guide-two]",
+        "d",
+        `M${p2X} ${p2Y} ${endX} ${endY}`
+      );
+
+      for (const { index, x, y } of [
+        { index: 0, x: p1X, y: p1Y },
+        { index: 1, x: p2X, y: p2Y },
+      ]) {
+        const handle = this.querySelector<SVGGElement>(
+          `[data-handle="${index}"]`
+        );
+        for (const circle of handle?.querySelectorAll("circle") ?? []) {
+          circle.setAttribute("cx", String(x));
+          circle.setAttribute("cy", String(y));
+        }
+        const label = handle?.querySelector("text");
+        label?.setAttribute("x", String(x));
+        label?.setAttribute("y", String(y - 29));
+        handle?.setAttribute(
+          "aria-label",
+          `${index === 0 ? "First" : "Second"} control point: ${this.values[index * 2].toFixed(2)}, ${this.values[index * 2 + 1].toFixed(2)}. Drag it, or use the arrow keys.`
+        );
+      }
+
+      const pairOne = this.querySelector<HTMLElement>(
+        '[data-function-pair="0"]'
+      );
+      const pairTwo = this.querySelector<HTMLElement>(
+        '[data-function-pair="1"]'
+      );
+      if (pairOne) {
+        pairOne.textContent = `${x1.toFixed(2)}, ${y1.toFixed(2)}`;
+      }
+      if (pairTwo) {
+        pairTwo.textContent = `${x2.toFixed(2)}, ${y2.toFixed(2)}`;
+      }
+      this.querySelector<HTMLElement>("[data-function]")?.setAttribute(
+        "aria-label",
+        `Current timing function: cubic-bezier(${this.values
+          .map((value) => value.toFixed(2))
+          .join(", ")})`
+      );
+
+      for (const button of this.querySelectorAll<HTMLButtonElement>(
+        "[data-preset]"
+      )) {
+        const preset = button.dataset.values?.split(",").map(Number);
+        const isActive = preset?.every(
+          (value, index) => Math.abs(value - this.values[index]) < 0.001
+        );
+        button.setAttribute("aria-pressed", String(Boolean(isActive)));
+      }
+    }
+
+    cubicAt(parameter: number, first: number, second: number) {
+      const inverse = 1 - parameter;
+      return (
+        3 * inverse * inverse * parameter * first +
+        3 * inverse * parameter * parameter * second +
+        parameter * parameter * parameter
+      );
+    }
+
+    progressAtTime(time: number) {
+      let low = 0;
+      let high = 1;
+
+      for (let iteration = 0; iteration < 24; iteration += 1) {
+        const middle = (low + high) / 2;
+        const currentX = this.cubicAt(middle, this.values[0], this.values[2]);
+        if (currentX < time) {
+          low = middle;
+        } else {
+          high = middle;
+        }
+      }
+
+      return this.cubicAt((low + high) / 2, this.values[1], this.values[3]);
+    }
+
+    updatePlayback(time: number, progress: number) {
+      const cursorX = this.toSvgX(time);
+      const cursorY = this.toSvgY(progress);
+      this.setElementAttribute("[data-cursor-dot]", "cx", cursorX);
+      this.setElementAttribute("[data-cursor-dot]", "cy", cursorY);
+      this.setElementAttribute(
+        "[data-cursor-line]",
+        "d",
+        `M${cursorX} ${this.toSvgY(0)}V${cursorY}`
+      );
+    }
+
+    cancelPlayback(message = "Curve updated") {
+      this.animation?.cancel();
+      this.animation = null;
+      cancelAnimationFrame(this.animationFrame);
+      this.updatePlayback(0, 0);
+      const ball = this.querySelector<HTMLElement>("[data-motion-ball]");
+      if (ball) {
+        ball.style.transform = "translateX(0)";
+      }
+      const playButton = this.querySelector<HTMLButtonElement>("[data-play]");
+      playButton?.setAttribute("aria-label", "Play animation");
+      playButton?.setAttribute("title", "Play animation");
+      const status = this.querySelector<HTMLElement>("[data-status]");
+      if (status && message) {
+        status.textContent = message;
+      }
+    }
+
+    reset() {
+      this.values = [...defaultValues];
+      this.cancelPlayback("Curve and animation reset");
+      this.syncControls();
+      this.render();
+    }
+
+    play() {
+      this.cancelPlayback("");
+      const ball = this.querySelector<HTMLElement>("[data-motion-ball]");
+      const track = this.querySelector<HTMLElement>("[data-motion-track]");
+      const playButton = this.querySelector<HTMLButtonElement>("[data-play]");
+      const status = this.querySelector<HTMLElement>("[data-status]");
+      if (!(ball && track)) {
+        return;
+      }
+
+      const distance = Math.max(track.clientWidth - ball.clientWidth, 0);
+      const easing = `cubic-bezier(${this.values.join(",")})`;
+      this.animation = ball.animate(
+        [
+          { transform: "translateX(0)" },
+          { transform: `translateX(${distance}px)` },
+        ],
+        {
+          duration: this.duration,
+          easing,
+          fill: "forwards",
+        }
+      );
+
+      playButton?.setAttribute("aria-label", "Restart animation");
+      playButton?.setAttribute("title", "Restart animation");
+      if (status) {
+        status.textContent = "Animation in progress";
+      }
+      this.startedAt = performance.now();
+
+      const tick = (now: number) => {
+        const time = this.clamp((now - this.startedAt) / this.duration, 0, 1);
+        const progress = this.progressAtTime(time);
+        this.updatePlayback(time, progress);
+
+        if (time < 1) {
+          this.animationFrame = requestAnimationFrame(tick);
+          return;
+        }
+
+        playButton?.setAttribute("aria-label", "Replay animation");
+        playButton?.setAttribute("title", "Replay animation");
+        if (status) {
+          status.textContent = "Animation complete";
+        }
+      };
+
+      this.animationFrame = requestAnimationFrame(tick);
+    }
+  }
+
+  if (!customElements.get("bezier-explorer")) {
+    customElements.define("bezier-explorer", BezierExplorer);
+  }
+</script>
+
+<style>
+  .bezier-explorer {
+    --explorer-blue: hsl(210 90% 55%);
+    --pair-one: hsl(210 78% 43%);
+    --pair-two: hsl(28 82% 40%);
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+  }
+
+  :global(.dark) .bezier-explorer {
+    --pair-one: hsl(210 92% 68%);
+    --pair-two: hsl(32 90% 66%);
+  }
+
+  button {
+    font: inherit;
+  }
+
+  .transport-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: hsl(var(--foreground));
+    cursor: pointer;
+    background: hsl(var(--background) / 0.7);
+    border: 1px solid hsl(var(--muted-foreground) / 0.38);
+    border-radius: 0.6rem;
+  }
+
+  .transport-button:hover {
+    background: hsl(var(--accent) / 0.1);
+    border-color: hsl(var(--accent));
+  }
+
+  .transport-button:focus-visible,
+  .presets button:focus-visible,
+  input:focus-visible,
+  .drag-handle:focus-visible {
+    outline: 2px dashed hsl(var(--accent));
+    outline-offset: 3px;
+  }
+
+  .transport-button svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .transport-button[data-play] svg {
+    fill: currentColor;
+  }
+
+  .stage {
+    position: relative;
+    min-width: 0;
+    padding: 1.5rem;
+    background: hsl(var(--card));
+  }
+
+  .graph {
+    display: block;
+    width: 100%;
+    max-width: 52rem;
+    height: auto;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .grid {
+    color: hsl(var(--muted-foreground) / 0.24);
+    fill: url("#explorer-grid");
+  }
+
+  .reference-lines {
+    color: hsl(var(--muted-foreground) / 0.78);
+  }
+
+  .reference-lines path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  .reference-lines .quiet {
+    stroke: hsl(var(--muted-foreground) / 0.24);
+    stroke-linecap: butt;
+    stroke-dasharray: 5 8;
+  }
+
+  .axis-labels text {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 13px;
+    fill: hsl(var(--muted-foreground));
+  }
+
+  .handle-guides path {
+    fill: none;
+    stroke: hsl(var(--muted-foreground) / 0.58);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 6;
+  }
+
+  .easing-curve {
+    fill: none;
+    stroke: hsl(var(--accent));
+    stroke-width: 5;
+    stroke-linecap: round;
+  }
+
+  .fixed-points circle {
+    fill: hsl(var(--muted-foreground));
+  }
+
+  .cursor path {
+    fill: none;
+    stroke: hsl(var(--accent) / 0.42);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 5;
+  }
+
+  .cursor circle {
+    fill: hsl(var(--card));
+    stroke: hsl(var(--accent));
+    stroke-width: 5;
+  }
+
+  #explorer-grid circle {
+    fill: currentColor;
+  }
+
+  .drag-handle {
+    cursor: grab;
+  }
+
+  .drag-handle:active {
+    cursor: grabbing;
+  }
+
+  .handle-hit-area {
+    fill: transparent;
+  }
+
+  .handle-dot {
+    fill: hsl(var(--card));
+    stroke: var(--explorer-blue);
+    stroke-width: 4;
+  }
+
+  .drag-handle text {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 15px;
+    font-weight: 700;
+    fill: hsl(var(--foreground));
+    stroke: hsl(var(--card));
+    stroke-width: 5px;
+    paint-order: stroke;
+  }
+
+  .motion-panel {
+    min-width: 0;
+    max-width: 46rem;
+    padding: 1rem 1.25rem;
+    margin: 0 auto;
+    border: 1px solid hsl(var(--foreground) / 0.16);
+    border-radius: 0.65rem;
+  }
+
+  .motion-demo {
+    width: 100%;
+  }
+
+  .track-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.55rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6875rem;
+    color: hsl(var(--muted-foreground));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .motion-track {
+    position: relative;
+    height: 2px;
+    margin: 0.8rem 0;
+    background: hsl(var(--foreground) / 0.5);
+  }
+
+  .motion-track::before,
+  .motion-track::after {
+    position: absolute;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    content: "";
+    background: hsl(var(--foreground) / 0.72);
+    border-radius: 999px;
+    transform: translateY(-50%);
+  }
+
+  .motion-track::before {
+    left: 0;
+  }
+
+  .motion-track::after {
+    right: 0;
+  }
+
+  .motion-ball {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: -0.75rem;
+    background: var(--explorer-blue);
+    border: 4px solid hsl(var(--card));
+    border-radius: 999px;
+  }
+
+  .transport-bar {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1.15rem;
+  }
+
+  .transport-bar code {
+    min-width: 0;
+    padding: 0.72rem 0.75rem;
+    overflow-x: auto;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(0.625rem, 1.7vw, 0.8125rem);
+    line-height: 1.2;
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+    white-space: nowrap;
+    background: hsl(var(--background) / 0.7);
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.55rem;
+  }
+
+  .function-pair {
+    font-weight: 700;
+  }
+
+  .function-pair-one {
+    color: var(--pair-one);
+  }
+
+  .function-pair-two {
+    color: var(--pair-two);
+  }
+
+  .controls {
+    min-width: 0;
+    padding: 1.5rem;
+    background: hsl(var(--card));
+    border-top: 1px solid hsl(var(--foreground) / 0.22);
+  }
+
+  .presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-bottom: 1.25rem;
+    margin: 0 0 1.5rem;
+    border-bottom: 1px solid hsl(var(--foreground) / 0.16);
+  }
+
+  .presets button {
+    padding: 0.4rem 0.65rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6875rem;
+    color: hsl(var(--muted-foreground));
+    cursor: pointer;
+    background: hsl(var(--background) / 0.55);
+    border: 1px solid hsl(var(--muted-foreground) / 0.38);
+    border-radius: 999px;
+  }
+
+  .presets button:hover,
+  .presets button[aria-pressed="true"] {
+    color: hsl(var(--foreground));
+    background: hsl(var(--accent) / 0.09);
+    border-color: hsl(var(--accent));
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.75rem;
+  }
+
+  .value-control {
+    min-width: 0;
+  }
+
+  .value-heading {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.55rem;
+  }
+
+  .value-heading label {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+  }
+
+  .value-control[data-pair="one"] .value-heading label {
+    color: var(--pair-one);
+  }
+
+  .value-control[data-pair="two"] .value-heading label {
+    color: var(--pair-two);
+  }
+
+  .value-heading span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.6875rem;
+    color: hsl(var(--muted-foreground));
+    white-space: nowrap;
+  }
+
+  .value-inputs {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 4.5rem;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .value-control[data-pair="one"] input[type="range"] {
+    accent-color: var(--pair-one);
+  }
+
+  .value-control[data-pair="two"] input[type="range"] {
+    accent-color: var(--pair-two);
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 0.45rem 0.35rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    color: hsl(var(--foreground));
+    text-align: center;
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.4rem;
+  }
+
+  .explorer-caption {
+    margin: 0.9rem auto 0;
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+  }
+
+  .explorer-caption a {
+    color: hsl(var(--foreground));
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18rem;
+  }
+
+  .explorer-caption a:hover {
+    color: hsl(var(--accent));
+  }
+
+  @media (max-width: 640px) {
+    .stage,
+    .controls {
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+
+    .graph {
+      width: calc(100% + 1.25rem);
+      max-width: none;
+      margin-left: -0.625rem;
+    }
+
+    .axis-labels text,
+    .drag-handle text {
+      font-size: 17px;
+    }
+
+    .motion-panel {
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+
+    .transport-bar {
+      gap: 0.5rem;
+    }
+
+    .value-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .transport-button,
+    .presets button {
+      transition: none;
+    }
+  }
+</style>

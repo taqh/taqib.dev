@@ -2,10 +2,10 @@
 import Container from "@/components/Container.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { SITE, PROJECTS } from "@/lib/constants";
+import { PROJECTS, SITE } from "@/lib/constants";
 ---
 
-<Layout title={`Projects - ${SITE.TITLE}`} description={SITE.DESCRIPTION}>
+<Layout description={SITE.DESCRIPTION} title={`Projects - ${SITE.TITLE}`}>
   <Container class="py-20 sm:py-24 lg:py-28">
     <div class="flex flex-col gap-6">
       <div class="space-y-2">
@@ -19,13 +19,11 @@ import { SITE, PROJECTS } from "@/lib/constants";
         </p>
       </div>
       <ul class="flex flex-col gap-4">
-        {
-          PROJECTS.map((project) => (
+        {PROJECTS.map((project) => (
             <li>
               <ProjectCard entry={project} />
             </li>
-          ))
-        }
+          ))}
       </ul>
     </div>
   </Container>

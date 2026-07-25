@@ -1,0 +1,32 @@
+---
+interface Props {
+  class?: string;
+  maxWidth?: string;
+}
+
+const { maxWidth = "64rem", class: className } = Astro.props;
+---
+
+<div
+  style={`--article-breakout-width: ${maxWidth}`}
+  class:list={["not-prose", "article-breakout", className]}
+>
+  <slot />
+</div>
+
+<style>
+  .article-breakout {
+    box-sizing: border-box;
+    width: min(calc(100vw - 2rem), var(--article-breakout-width));
+    min-width: 0;
+    max-width: none;
+    margin: 2rem 50% 3.5rem;
+    transform: translateX(-50%);
+  }
+
+  @media (min-width: 768px) {
+    .article-breakout {
+      width: min(calc(100vw - 4rem), var(--article-breakout-width));
+    }
+  }
+</style>

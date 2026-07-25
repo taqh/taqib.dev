@@ -1,0 +1,195 @@
+<div class="point-pairs">
+  <div class="function-map">
+    <code>
+      <span>cubic-bezier(</span><span class="pair-one">x₁, y₁</span
+      ><span>, </span><span class="pair-two">x₂, y₂</span><span>)</span>
+    </code>
+    <div aria-hidden="true" class="function-labels">
+      <span class="pair-one">P₁ · first handle</span>
+      <span class="pair-two">P₂ · second handle</span>
+    </div>
+  </div>
+
+  <div class="pair-grid">
+    <section class="pair-card pair-card-one">
+      <p class="pair-label">First handle</p>
+      <h3>P₁ = (x₁, y₁)</h3>
+      <p>
+        Sets the curve’s initial direction—how motion leaves the fixed starting
+        point.
+      </p>
+      <dl>
+        <div>
+          <dt>x₁</dt>
+          <dd>horizontal position · time axis</dd>
+        </div>
+        <div>
+          <dt>y₁</dt>
+          <dd>vertical position · progress axis</dd>
+        </div>
+      </dl>
+    </section>
+    <section class="pair-card pair-card-two">
+      <p class="pair-label">Second handle</p>
+      <h3>P₂ = (x₂, y₂)</h3>
+      <p>
+        Sets the curve’s final direction—how motion approaches the fixed ending
+        point.
+      </p>
+      <dl>
+        <div>
+          <dt>x₂</dt>
+          <dd>horizontal position · time axis</dd>
+        </div>
+        <div>
+          <dt>y₂</dt>
+          <dd>vertical position · progress axis</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+</div>
+
+<style>
+  .point-pairs {
+    --pair-one: hsl(210 78% 43%);
+    --pair-two: hsl(28 82% 40%);
+    display: grid;
+    gap: 1rem;
+  }
+
+  :global(.dark) .point-pairs {
+    --pair-one: hsl(210 92% 68%);
+    --pair-two: hsl(32 90% 66%);
+  }
+
+  .function-map {
+    padding: 1.1rem 1.25rem;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+  }
+
+  .function-map code {
+    display: block;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(0.8125rem, 2.4vw, 1rem);
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .pair-one {
+    color: var(--pair-one);
+  }
+
+  .pair-two {
+    color: var(--pair-two);
+  }
+
+  .function-map .pair-one,
+  .function-map .pair-two {
+    font-weight: 700;
+  }
+
+  .function-labels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 27rem;
+    margin: 0.75rem auto 0;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6875rem;
+    text-align: center;
+  }
+
+  .pair-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .pair-card {
+    padding: 1.35rem;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.85rem;
+  }
+
+  .pair-label {
+    margin: 0 0 0.45rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pair-card-one .pair-label,
+  .pair-card-one dt {
+    color: var(--pair-one);
+  }
+
+  .pair-card-two .pair-label,
+  .pair-card-two dt {
+    color: var(--pair-two);
+  }
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-literata), Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+  }
+
+  .pair-card > p:not(.pair-label) {
+    margin: 0.75rem 0 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: hsl(var(--muted-foreground));
+  }
+
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  dl {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0.65rem;
+    align-items: baseline;
+  }
+
+  .pair-card dt {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+
+  dd {
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
+  }
+
+  @media (max-width: 640px) {
+    .function-labels,
+    .pair-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .function-labels {
+      gap: 0.35rem;
+    }
+  }
+</style>

@@ -1,12 +1,27 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+
 interface Props extends HTMLAttributes<"a"> {
-  href: string;
+  class?: string;
   external?: boolean;
   forward?: boolean;
-  class?: string;
+  href: string;
   variant?: "card" | "icon" | "button";
 }
+
+function getVariantClasses(linkVariant?: Props["variant"]) {
+  if (linkVariant === "card") {
+    return "flex-col hover:bg-background/80 backdrop-blur-sm p-4 text-base";
+  }
+  if (linkVariant === "icon") {
+    return "p-2 border-none";
+  }
+  if (linkVariant === "button") {
+    return "hover:bg-border focus-visible:bg-border";
+  }
+  return "px-4 py-2 items-center justify-center text-sm";
+}
+
 const {
   href,
   external,
@@ -18,50 +33,46 @@ const {
 ---
 
 <a
+  class={`group font-sans rounded-md flex border hover:bg-card cursor-pointer transition focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 duration-300 focus-visible:outline-offset-2 ${getVariantClasses(variant)} ${classNames}`}
   href={href}
   target={external ? "_blank" : "_self"}
-  class={`group font-sans rounded-md flex border hover:bg-card cursor-pointer transition focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 duration-300 focus-visible:outline-offset-2 ${variant === "card" ? "flex-col hover:bg-background/80 backdrop-blur-sm p-4 text-base" : variant === "icon" ? "p-2 border-none" : variant === "button" ? "hover:bg-border focus-visible:bg-border" : "px-4 py-2 items-center justify-center text-sm"} ${classNames}`}
   {...attrs}
 >
   <slot />
-  {
-    external && variant !== "icon" && (
+  {external && variant !== "icon" && (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
+        class="lucide lucide-arrow-up-right translate-x-1.5 transition duration-300 group-hover:translate-x-2.5 group-hover:-translate-y-0.5 group-focus-visible:translate-x-3 group-focus-visible:-translate-y-0.5"
         fill="none"
+        height="16"
         stroke="currentColor"
-        stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="translate-x-1.5 group-hover:-translate-y-0.5 group-hover:translate-x-2.5 group-focus-visible:-translate-y-0.5 group-focus-visible:translate-x-3 transition duration-300 lucide lucide-arrow-up-right"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M7 7h10v10" />
         <path d="M7 17 17 7" />
       </svg>
-    )
-  }
-  {
-    forward && (
+    )}
+  {forward && (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
+        class="absolute top-1/2 right-4 size-5 -translate-y-1/2 fill-none stroke-2 stroke-current"
         viewBox="0 0 24 24"
-        class="absolute top-1/2 right-4 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <line
+          class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100"
           x1="5"
-          y1="12"
           x2="19"
+          y1="12"
           y2="12"
-          class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
         />
         <polyline
+          class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0"
           points="12 5 19 12 12 19"
-          class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
         />
       </svg>
-    )
-  }
+    )}
 </a>

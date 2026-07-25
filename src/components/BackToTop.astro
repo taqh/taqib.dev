@@ -1,23 +1,24 @@
 ---
-
 ---
 
 <button
-  id="scroll-to-top"
   class="group fixed bottom-8 right-8 lg:bottom-20 lg:right-20 z-50 hidden w-fit flex-nowrap rounded-md border hover:bg-background/80 hover:backdrop-blur-sm p-2 bg-background transition duration-300"
+  id="scroll-to-top"
+  type="button"
 >
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
     class="transition-all group-hover:-translate-y-0.5 duration-300 size-4"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
+      d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"
       stroke-linecap="round"
       stroke-linejoin="round"
-      d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18"></path>
+    ></path>
   </svg>
   <span class="sr-only">Scroll to top</span>
 </button>
@@ -29,7 +30,7 @@
 
     if (scrollToTopButton && footer) {
       scrollToTopButton.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ behavior: "smooth", top: 0 });
       });
 
       window.addEventListener("scroll", () => {
@@ -38,7 +39,7 @@
 
         scrollToTopButton.classList.toggle(
           "hidden",
-          window.scrollY <= 300 || isFooterVisible,
+          window.scrollY <= 300 || isFooterVisible
         );
       });
     }

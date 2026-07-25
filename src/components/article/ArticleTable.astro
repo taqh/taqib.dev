@@ -1,0 +1,19 @@
+<div class="article-table">
+  <slot />
+</div>
+
+<style>
+  .article-table {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 1.5rem 0 2rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  .article-table :global(table) {
+    min-width: 38rem;
+    margin: 0;
+  }
+</style>

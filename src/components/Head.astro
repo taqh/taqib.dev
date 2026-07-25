@@ -1,12 +1,12 @@
 ---
 import "@/styles/global.css";
-import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
-  title: string;
   description: string;
   image?: string;
+  title: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -15,49 +15,45 @@ const { title, description, image = "/og.webp" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1" name="viewport">
 <meta
-  name="theme-color"
-  media="(prefers-color-scheme: light)"
   content="#f6f2ee"
-/>
-<meta
+  media="(prefers-color-scheme: light)"
   name="theme-color"
-  media="(prefers-color-scheme: dark)"
-  content="#1a1a1a"
-/>
-<meta name="generator" content={Astro.generator} />
+>
+<meta content="#1a1a1a" media="(prefers-color-scheme: dark)" name="theme-color">
+<meta content={Astro.generator} name="generator">
 
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Taqib" />
-<link rel="manifest" href="/site.webmanifest" />
+<link href="/favicon.svg" rel="icon" type="image/svg+xml">
+<link href="/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png">
+<link href="/favicon.ico" rel="shortcut icon">
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+<meta content="Taqib" name="apple-mobile-web-app-title">
+<link href="/site.webmanifest" rel="manifest">
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link href={canonicalURL} rel="canonical">
 
 <!-- Page Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<meta content={title} name="title">
+<meta content={description} name="description">
 
 <!-- Open Graph Tags -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta content="website" property="og:type">
+<meta content={Astro.url} property="og:url">
+<meta content={title} property="og:title">
+<meta content={description} property="og:description">
+<meta content={new URL(image, Astro.url)} property="og:image">
 
 <!-- Twitter Open Graph -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta content="summary_large_image" property="twitter:card">
+<meta content={Astro.url} property="twitter:url">
+<meta content={title} property="twitter:title">
+<meta content={description} property="twitter:description">
+<meta content={new URL(image, Astro.url)} property="twitter:image">
 
 <!-- Fonts -->
 <Font cssVariable="--font-inter" preload />

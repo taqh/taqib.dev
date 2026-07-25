@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "signal-geometry": {
+      "source": "calicastle/skills",
+      "sourceType": "github",
+      "skillPath": "skills/signal-geometry/SKILL.md",
+      "computedHash": "25e302ad3f4265b6abbceb483bd7d37990e76843ee9b04966b993a1a0d846373"
+    }
+  }
+}

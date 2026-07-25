@@ -1,7 +1,9 @@
 <div>
   <button
-    id="themeToggle"
+    aria-pressed="false"
     class="rounded-full grid place-content-center size-8 transition duration-300 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent relative z-10"
+    data-theme-toggle
+    type="button"
   >
     <span class="sr-only">Toggle website theme</span>
     <svg
@@ -31,103 +33,119 @@
 </style>
 
 <script>
-  function getSystemTheme(): "dark" | "light" {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
+  type Theme = "dark" | "light";
+
+  type ThemeTransitionDocument = Document & {
+    startViewTransition?: (callback: () => void) => {
+      ready: Promise<void>;
+    };
+  };
+
+  const getSystemTheme = (): Theme =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-  }
 
-  function getCurrentTheme(): "dark" | "light" {
-    return document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light";
-  }
+  const getStoredTheme = (): Theme | null => {
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme === "dark" || storedTheme === "light"
+      ? storedTheme
+      : null;
+  };
 
-  function setTheme(theme: "dark" | "light") {
-    localStorage.setItem("theme", theme);
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+  const getCurrentTheme = (): Theme =>
+    document.documentElement.classList.contains("dark") ? "dark" : "light";
+
+  const applyTheme = (theme: Theme, persist = false): void => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+
+    if (persist) {
+      localStorage.setItem("theme", theme);
     }
-  }
 
-  function initializeTheme() {
-    const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
-    const theme = savedTheme || getSystemTheme();
-    setTheme(theme);
-  }
+    const button = document.querySelector<HTMLButtonElement>(
+      "[data-theme-toggle]"
+    );
+    button?.setAttribute("aria-pressed", String(theme === "dark"));
+  };
 
-  function toggleTheme(event: MouseEvent) {
+  const toggleTheme = async (event: MouseEvent): Promise<void> => {
+    const nextTheme = getCurrentTheme() === "dark" ? "light" : "dark";
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const transitionDocument = document as ThemeTransitionDocument;
+
+    if (!transitionDocument.startViewTransition || prefersReducedMotion) {
+      applyTheme(nextTheme, true);
+      return;
+    }
+
     const x = event.clientX;
     const y = event.clientY;
     const endRadius = Math.hypot(
       Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y),
+      Math.max(y, window.innerHeight - y)
     );
+    const transition = transitionDocument.startViewTransition(() => {
+      applyTheme(nextTheme, true);
+    });
 
-    const doc = document as Document & {
-      startViewTransition?: (callback: () => void) => {
-        ready: Promise<void>;
-      };
-    };
-
-    const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
-
-    if (!doc.startViewTransition) {
-      setTheme(newTheme);
-    } else {
-      const transition = doc.startViewTransition(() => {
-        setTheme(newTheme);
-      });
-
-      transition.ready.then(() => {
-        const clipPath = [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${endRadius}px at ${x}px ${y}px)`,
-        ];
-        document.documentElement.animate(
-          {
-            clipPath: newTheme === "dark" ? [...clipPath].reverse() : clipPath,
-          },
-          {
-            duration: 400,
-            easing: "ease-in",
-            pseudoElement:
-              newTheme === "dark"
-                ? "::view-transition-old(root)"
-                : "::view-transition-new(root)",
-          },
-        );
-      });
+    try {
+      await transition.ready;
+    } catch {
+      return;
     }
-  }
 
-  // Initialize theme on page load
-  document.addEventListener("astro:page-load", () => {
-    initializeTheme();
-    document
-      .getElementById("themeToggle")
-      ?.addEventListener("click", toggleTheme);
-  });
+    const clipPath = [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${endRadius}px at ${x}px ${y}px)`,
+    ];
+    document.documentElement.animate(
+      {
+        clipPath: nextTheme === "dark" ? [...clipPath].reverse() : clipPath,
+      },
+      {
+        duration: 400,
+        easing: "ease-in",
+        pseudoElement:
+          nextTheme === "dark"
+            ? "::view-transition-old(root)"
+            : "::view-transition-new(root)",
+      }
+    );
+  };
+
+  const initializeThemeToggle = (): void => {
+    applyTheme(getStoredTheme() ?? getSystemTheme());
+
+    const button = document.querySelector<HTMLButtonElement>(
+      "[data-theme-toggle]"
+    );
+    if (!button || button.dataset.themeToggleReady === "true") {
+      return;
+    }
+
+    button.dataset.themeToggleReady = "true";
+    button.addEventListener("click", toggleTheme);
+  };
+
+  initializeThemeToggle();
+  document.addEventListener("astro:page-load", initializeThemeToggle);
 </script>
 
 <script is:inline>
-  function applyTheme() {
+  (() => {
+    const storedTheme = localStorage.getItem("theme");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
     const theme =
-      localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
+      storedTheme === "dark" || storedTheme === "light"
+        ? storedTheme
+        : systemTheme;
 
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }
-
-  // Apply theme immediately and after page transitions
-  applyTheme();
-  document.addEventListener("astro:after-swap", applyTheme);
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  })();
 </script>

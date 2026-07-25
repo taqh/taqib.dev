@@ -1,5 +1,5 @@
-import { Marble } from "@usemarble/sdk";
 import { getSecret } from "astro:env/server";
+import { Marble } from "@usemarble/sdk";
 
 const key = getSecret("MARBLE_API_KEY");
 

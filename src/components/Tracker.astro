@@ -2,18 +2,18 @@
 
 <style>
   #dot {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    display: none;
     height: 6px;
     aspect-ratio: 1;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    border-radius: 50%;
-    background: hsl(var(--background));
-    z-index: 100;
     pointer-events: none;
-    display: none;
+    background: hsl(var(--background));
+    border-radius: 50%;
     mix-blend-mode: difference;
+    translate: -50% -50%;
 
     @media screen and (min-width: 600px) {
       display: block;
@@ -37,7 +37,7 @@
             left: `${clientX}px`,
             top: `${clientY}px`,
           },
-          { duration: 3000, fill: "forwards" },
+          { duration: 3000, fill: "forwards" }
         );
       }
     }
