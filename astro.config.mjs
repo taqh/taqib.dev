@@ -29,7 +29,6 @@ export default defineConfig({
     },
   ],
   integrations: [tailwind(), mdx(), sitemap()],
-  output: "server",
   site: "https://taqib.dev",
   trailingSlash: "never",
 });
