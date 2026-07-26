@@ -116,7 +116,7 @@
         </div>
       </div>
 
-      <section aria-label="Progress applied to an object" class="motion-demo">
+      <section aria-label="Motion preview and time control" class="motion-demo">
         <div aria-hidden="true" class="track-labels">
           <span>start</span>
           <span>finish</span>
@@ -124,23 +124,25 @@
         <div class="motion-track" data-motion-track>
           <div class="motion-ball" data-motion-ball></div>
         </div>
-      </section>
 
-      <div class="time-control">
-        <label for="curve-reader-time">
-          Elapsed time
-          <output data-time-output for="curve-reader-time">25%</output>
-        </label>
-        <input
-          data-time-input
-          id="curve-reader-time"
-          max="1"
-          min="0"
-          step="0.01"
-          type="range"
-          value="0.25"
-        >
-      </div>
+        <div class="time-control">
+          <label for="curve-reader-time">
+            <span>Scrub through the animation</span>
+            <output data-time-output for="curve-reader-time">
+              25% elapsed
+            </output>
+          </label>
+          <input
+            data-time-input
+            id="curve-reader-time"
+            max="1"
+            min="0"
+            step="0.01"
+            type="range"
+            value="0.25"
+          >
+        </div>
+      </section>
     </div>
   </curve-reader>
 </figure>
@@ -313,7 +315,7 @@
       const timeOutput =
         this.querySelector<HTMLOutputElement>("[data-time-output]");
       if (timeOutput) {
-        timeOutput.value = timePercentage;
+        timeOutput.value = `${timePercentage} elapsed`;
       }
 
       const comparisonOutput = this.querySelector<HTMLElement>(
@@ -475,7 +477,9 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
-    margin-top: -0.25rem;
+    padding-top: 1.25rem;
+    margin-top: 1.25rem;
+    border-top: 1px solid hsl(var(--border));
   }
 
   .comparison div {
@@ -565,10 +569,10 @@
 
   .time-control {
     display: grid;
-    grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
-    gap: 1rem;
-    align-items: center;
+    gap: 0.65rem;
+    padding-top: 1rem;
     margin-top: 1rem;
+    border-top: 1px solid hsl(var(--border));
   }
 
   .time-control label {
@@ -609,12 +613,6 @@
 
     .comparison {
       grid-template-columns: 1fr;
-      margin-top: 0;
-    }
-
-    .time-control {
-      grid-template-columns: 1fr;
-      gap: 0.6rem;
     }
   }
 </style>

@@ -4,10 +4,6 @@
       <span>cubic-bezier(</span><span class="pair-one">x₁, y₁</span
       ><span>, </span><span class="pair-two">x₂, y₂</span><span>)</span>
     </code>
-    <div aria-hidden="true" class="function-labels">
-      <span class="pair-one">P₁ · first handle</span>
-      <span class="pair-two">P₂ · second handle</span>
-    </div>
   </div>
 
   <div class="pair-grid">
@@ -93,18 +89,6 @@
     font-weight: 700;
   }
 
-  .function-labels {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    max-width: 27rem;
-    margin: 0.75rem auto 0;
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.6875rem;
-    text-align: center;
-  }
-
   .pair-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -183,13 +167,8 @@
   }
 
   @media (max-width: 640px) {
-    .function-labels,
     .pair-grid {
       grid-template-columns: 1fr;
-    }
-
-    .function-labels {
-      gap: 0.35rem;
     }
   }
 </style>
