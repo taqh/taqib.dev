@@ -117,13 +117,25 @@
 ::view-transition-old(root),
 ::view-transition-new(root) {
   mix-blend-mode: normal;
-  animation: none;
 }
 
 ::view-transition-old(root) {
   z-index: 1;
+  animation: none;
 }
 
 ::view-transition-new(root) {
   z-index: 2;
+  animation: route-fade-in 200ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+html[data-theme-transition="true"]::view-transition-old(root),
+html[data-theme-transition="true"]::view-transition-new(root) {
+  animation: none;
+}
+
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+  }
 }
