@@ -23,7 +23,7 @@ Turns out that they are the coordinates of two control handles on a graph.
 
 ## What does a timing function do?
 
-A transition’s duration answers how long the change or animation takes. Its timing function answers how the change is distributed across that time.
+A transition’s duration defines how long the change or animation takes. Its timing function states how the change is distributed across that time.
 
 ```css
 .button {
@@ -39,9 +39,11 @@ A timing function maps an **input progress** to an **output progress**. On the g
   <BezierAnatomy />
 </ArticleBreakout>
 
-Both axes use normalized values. `0` means none and `1` means all. So `x = 0.5` means half of the duration has elapsed, while `y = 0.75` means the animated property has completed 75% of its journey. The x-values stay between `0` and `1` because they represent time, but y-values can go below `0` or above `1` to create effects like anticipation or overshoot. We’ll come back to that later.
+Both axes use normalized values. `0` means none and `1` means all. So `x = 0.5` means half of the duration has elapsed, while `y = 0.75` means the animated property has completed 75% of its journey. 
 
-> **Basically:** at time `x`, use the curve to look up progress `y`.
+The x-values stay between `0` and `1` because they represent time, but y-values can go below `0` or above `1` to create effects like anticipation or overshoot. We’ll come back to that later.
+
+In other words, elapsed time gives us `x`, and the curve tells us the corresponding progress `y`.
 
 ## The four values position two handles
 
@@ -68,23 +70,22 @@ At each moment, the browser takes elapsed time as `x`, finds that `x` on the cur
   <ReadTheCurve />
 </ArticleBreakout>
 
-## The slope is the speed
+## The slope controls the feel of motion
 
-Now we can get from the shape of a curve to the feel of an animation. The slope tells us how quickly progress is changing as time passes:
+The slope tells us how quickly progress changes as time passes:
 
-- A **flat** part of the curve makes little progress while time continues, so the motion is slow.
-- A **steep** part makes a lot of progress in a short time, so the motion is fast.
-- A straight diagonal has a constant slope, so it produces linear motion.
+- A **flat** part means progress changes slowly, so the motion feels slower.
+- A **steep** part means progress changes quickly, so the motion feels faster.
+- A straight diagonal means progress changes at a constant rate, producing linear motion.
 
 <ArticleBreakout maxWidth="58rem">
   <SlopeComparison />
 </ArticleBreakout>
 
-The dashed line from the start to `P1` is tangent to the beginning of the curve, so the first handle directly controls the starting velocity. The line from `P2` to the end does the same for the ending velocity.
+Read the curves from left to right. The first curve starts flat, so the motion begins slowly and speeds up. The middle curve keeps the same slope, so the motion stays constant. The last curve ends flat, so the motion starts quickly and slows down as it arrives.
 
-You can think of the starting slope as the handle’s vertical position divided by its horizontal position: how far it pulls upward or downward compared with how far it pulls forward in time. At the end, the same idea applies between the second handle and the fixed endpoint. 
+The first handle controls how the curve leaves the starting point. Move `P1` to change the beginning of the motion. The second handle controls how the curve approaches the ending point. Move `P2` to change the arrival.
 
-You do not need to calculate these slopes to choose an easing; they simply explain why moving a handle changes the way motion departs or arrives.
 
 ## The familiar keywords are curves too
 
