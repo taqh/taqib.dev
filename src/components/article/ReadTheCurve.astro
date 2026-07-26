@@ -57,12 +57,12 @@
         </g>
 
         <g class="axis-labels">
-          <text text-anchor="middle" x="380" y="705">elapsed time</text>
+          <text text-anchor="middle" x="380" y="640">elapsed time</text>
           <text
             text-anchor="middle"
-            transform="rotate(-90 58 350)"
-            x="58"
-            y="350"
+            transform="rotate(-90 102 355)"
+            x="102"
+            y="355"
           >
             progress
           </text>
@@ -97,7 +97,7 @@
           <path d="M250 610V90" data-probe-vertical></path>
           <path d="M120 446H250" data-probe-horizontal></path>
           <circle cx="250" cy="446" data-curve-point r="9"></circle>
-          <text data-time-label text-anchor="middle" x="250" y="665">25%</text>
+          <text data-time-label text-anchor="middle" x="250" y="680">25%</text>
           <text data-progress-label text-anchor="end" x="102" y="451">
             ≈32%
           </text>
@@ -273,11 +273,7 @@
       const progressLabel = this.querySelector<SVGTextElement>(
         "[data-progress-label]"
       );
-      const progressLabelIsNearEndpoint = progress < 0.08 || progress > 0.92;
-      progressLabel?.setAttribute(
-        "x",
-        String(progressLabelIsNearEndpoint ? 82 : 102)
-      );
+      progressLabel?.setAttribute("x", "58");
       progressLabel?.setAttribute("y", String(graphY + 5));
       if (progressLabel) {
         progressLabel.textContent = compactProgressPercentage;
