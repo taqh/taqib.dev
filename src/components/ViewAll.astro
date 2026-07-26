@@ -8,27 +8,21 @@ const { href } = Astro.props;
 
 <a
   aria-label="See all"
-  class="relative group w-fit flex pr-8 pl-3 py-2 flex-nowrap rounded border hover:bg-card duration-300 ease-in-out"
+  class="group inline-flex w-fit items-center gap-1.5 text-base text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
   href={href}
 >
-  <div class="text-sm">
-    <slot />
-  </div>
+  <slot />
   <svg
-    class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
+    aria-hidden="true"
+    class="size-4 fill-none stroke-current transition-transform duration-200 group-hover:translate-x-0.5"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <line
-      class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
-      x1="5"
-      x2="19"
-      y1="12"
-      y2="12"
-    ></line>
-    <polyline
-      class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
-      points="12 5 19 12 12 19"
-    ></polyline>
+    <path
+      d="m9 18 6-6-6-6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+    />
   </svg>
 </a>

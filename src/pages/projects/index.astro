@@ -1,29 +1,27 @@
 ---
+import BackLink from "@/components/BackLink.astro";
 import Container from "@/components/Container.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
 import Layout from "@/layouts/Layout.astro";
 import { PROJECTS, SITE } from "@/lib/constants";
 ---
 
 <Layout description={SITE.DESCRIPTION} title={`Projects - ${SITE.TITLE}`}>
-  <Container class="py-20 sm:py-24 lg:py-28">
-    <div class="flex flex-col gap-6">
+  <Container class="pb-24 pt-24 sm:pb-32 sm:pt-28">
+    <div class="mb-16 flex items-center justify-between">
+      <BackLink href="/" title="Back home" />
+      <ThemeToggle />
+    </div>
+    <div class="space-y-8">
       <div class="space-y-2">
-        <h1
-          class="font-medium font-serif text-2xl leading-[1.1] sm:text-3xl md:text-4xl"
-        >
-          Projects
-        </h1>
-        <p class="text-muted-foreground text-sm">
+        <h1 class="font-serif text-2xl font-medium leading-tight">Projects</h1>
+        <p class="text-base leading-7 text-muted-foreground">
           A list of projects I've worked on or currently working on.
         </p>
       </div>
       <ul class="flex flex-col gap-4">
-        {PROJECTS.map((project) => (
-            <li>
-              <ProjectCard entry={project} />
-            </li>
-          ))}
+        {PROJECTS.map((project) => <ProjectCard entry={project} />)}
       </ul>
     </div>
   </Container>

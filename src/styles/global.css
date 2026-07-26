@@ -4,36 +4,36 @@
 
 @layer base {
   :root {
-    --foreground: 223 16% 9%;
-    --background: 26 30% 95%;
-    --muted-foreground: 220 11% 22%;
-    --muted: 44 18% 88%;
-    --border: 0 0% 86%;
-    --card: 45 21% 93%;
+    --background: 0 0% 99%;
+    --foreground: 0 0% 4%;
+    --muted-foreground: 0 0% 38%;
+    --muted: 0 0% 95%;
+    --border: 0 0% 88%;
+    --card: 0 0% 96%;
 
-    --accent: 167 70% 45%;
+    --accent: 164 58% 38%;
 
-    --dot-bg-color: hsl(26, 30%, 95%);
-    --dot-color: hsl(0, 0%, 85%);
-    --dot-mask-color: hsl(30, 100%, 99%);
+    --dot-bg-color: hsl(0, 0%, 99%);
+    --dot-color: hsl(0, 0%, 90%);
+    --dot-mask-color: hsl(0, 0%, 99%);
 
     --scrollbar-thumb: 0 0% 37%;
     --scrollbar-thumb-hover: 0 0% 40%;
   }
 
   .dark {
-    --foreground: 34 78% 91%;
-    --background: 0 0% 10%;
-    --muted-foreground: 33 15% 76%;
-    --muted: 0 0% 24%;
-    --border: 220 5% 18%;
-    --card: 0 0% 17%;
+    --background: 60 3% 6%;
+    --foreground: 0 0% 98%;
+    --muted-foreground: 0 0% 63%;
+    --muted: 60 2% 12%;
+    --border: 60 2% 20%;
+    --card: 60 2% 11%;
 
-    --accent: 167 70% 55%;
+    --accent: 164 55% 55%;
 
-    --dot-bg-color: hsl(0, 0%, 10%);
-    --dot-color: hsl(225, 5%, 16%);
-    --dot-mask-color: hsl(223 16% 9%);
+    --dot-bg-color: hsl(60, 3%, 6%);
+    --dot-color: hsl(60, 2%, 14%);
+    --dot-mask-color: hsl(60, 3%, 6%);
   }
 }
 
@@ -46,13 +46,20 @@
     font-family: Inter, system-ui, sans-serif;
     background: hsl(var(--background));
     color: hsl(var(--foreground));
+    color-scheme: light;
     scroll-behavior: smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   body {
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: hsl(var(--foreground));
+    background: hsl(var(--background));
   }
 
   html.dark .shiki,
@@ -107,7 +114,6 @@
   }
 }
 
-/* theme switch animation styles */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   mix-blend-mode: normal;
@@ -119,13 +125,5 @@
 }
 
 ::view-transition-new(root) {
-  z-index: 2147483646;
-}
-
-html.dark::view-transition-old(root) {
-  z-index: 2147483646;
-}
-
-html.dark::view-transition-new(root) {
-  z-index: 1;
+  z-index: 2;
 }

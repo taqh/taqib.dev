@@ -1,0 +1,44 @@
+<div aria-hidden="true" class="scroll-fade scroll-fade-top"></div>
+<div aria-hidden="true" class="scroll-fade scroll-fade-bottom"></div>
+
+<style>
+  .scroll-fade {
+    position: fixed;
+    inset-inline: 0;
+    z-index: 30;
+    height: 4.5rem;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .scroll-fade-top {
+    top: 0;
+    -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent);
+    mask-image: linear-gradient(to bottom, black 20%, transparent);
+  }
+
+  .scroll-fade-bottom {
+    bottom: 0;
+    -webkit-mask-image: linear-gradient(to top, black 20%, transparent);
+    mask-image: linear-gradient(to top, black 20%, transparent);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .scroll-fade-top {
+      background: linear-gradient(
+        to bottom,
+        hsl(var(--background) / 0.9),
+        transparent
+      );
+    }
+
+    .scroll-fade-bottom {
+      background: linear-gradient(
+        to top,
+        hsl(var(--background) / 0.9),
+        transparent
+      );
+    }
+  }
+</style>

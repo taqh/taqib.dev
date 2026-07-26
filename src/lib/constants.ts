@@ -22,7 +22,7 @@ export const PROJECTS = [
   },
   {
     description:
-      "An open-source internet radio control suite for running a single-station broadcast",
+      "Internet radio control suite for running a single-station broadcast",
     links: {
       live: "https://rdio-docs.vercel.app",
       repo: "https://github.com/helloworld-ng/rdio",

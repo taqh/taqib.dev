@@ -1,9 +1,10 @@
 ---
 import { getCollection } from "astro:content";
+import ContactLinks from "@/components/ContactLinks.astro";
 import Container from "@/components/Container.astro";
+import Header from "@/components/Header.astro";
 import PostCard from "@/components/PostCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
-import ThemeToggle from "@/components/ThemeToggle.astro";
 import ViewAll from "@/components/ViewAll.astro";
 import Layout from "@/layouts/Layout.astro";
 import { PROJECTS, SITE } from "@/lib/constants";
@@ -20,239 +21,50 @@ const posts = [
 ---
 
 <Layout description={SITE.DESCRIPTION} title={SITE.TITLE}>
-  <div>
-    <!-- about section -->
-    <section id="about">
-      <Container>
-        <div
-          class="overflow-x-hidden py-16 sm:pt-20 lg:pt-24 flex flex-col text-justify"
-        >
-          <div class="flex justify-between items-center mb-4">
-            <h1 class="text-xl sm:text-2xl font-medium font-serif">
-              Hi there, I&apos;m Taqib
-            </h1>
-            <ThemeToggle />
-          </div>
-          <div class="space-y-4">
-            <p class="leading-normal text-muted-foreground sm:leading-7">
-              Frontend engineer from Abuja, Nigeria. I build products across the
-              stack, with a soft spot for open source and developer tools.
-              I&apos;m currently maintaining
-              <a
-                class="text-accent underline-offset-2 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors"
-                href="https://marblecms.com?ref=taqib.dev"
-                target="_blank"
-                >Marble</a
-              >
-              and thinking a lot about usability, systems, and the craft of
-              building for the web.
-            </p>
-          </div>
-          <div class="py-4 flex items-center gap-6 mt-4 text-sm sm:text-base">
+  <Container class="pb-24 pt-24 sm:pb-32 sm:pt-28">
+    <Header />
+    <div class="mt-16 space-y-24 sm:mt-20 sm:space-y-28">
+      <section id="about">
+        <div class="space-y-4 text-base leading-7 text-muted-foreground">
+          <p>
+            Frontend engineer from Abuja, Nigeria. I build products across the
+            stack, with a soft spot for open source and developer tools.
+          </p>
+          <p>
+            I&apos;m currently maintaining{" "}
             <a
-              class="text-muted-foreground rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-              href="https://github.com/taqh"
+              class="text-foreground underline decoration-foreground/30 underline-offset-[3px] transition-colors hover:decoration-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
+              href="https://marblecms.com?ref=taqib.dev"
+              rel="noopener"
               target="_blank"
-            >
-              <span>Github</span>
-              <svg
-                class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </a>
-            <a
-              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-              href="mailto:hello@taqib.dev"
-              target="_blank"
-            >
-              <span>Mail</span>
-              <svg
-                class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </a>
-            <a
-              class="text-muted-foreground hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-              href="https://x.com/retaqib"
-              target="_blank"
-            >
-              <span>Twitter</span>
-              <svg
-                class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </a>
-          </div>
+              >marble</a
+            >{" "}
+            and thinking a lot about usability, systems, and the craft of
+            building for the web.
+          </p>
         </div>
-      </Container>
-    </section>
+        <ContactLinks class="mt-6" />
+      </section>
 
-    <!-- projects section -->
-    <section id="projects">
-      <Container>
-        <div
-          class="flex flex-col justify-between gap-6 mb-8 sm:mb-10"
-          id="projects"
-        >
-          <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
-            Projects
-          </h2>
+      <section class="space-y-5" id="projects">
+        <h2 class="font-serif text-lg font-medium leading-tight">Projects</h2>
+        <ul class="flex flex-col gap-4">
+          {PROJECTS.slice(0, 4).map((project) => (
+              <ProjectCard entry={project} />
+            ))}
+        </ul>
+        {PROJECTS.length > 4 && (
+            <ViewAll href="/projects">See all projects</ViewAll>
+          )}
+      </section>
 
-          <!-- project list -->
-          <ul class="grid gap-4 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-            {PROJECTS.slice(0, 4).map((project) => (
-                <ProjectCard entry={project} />
-              ))}
-          </ul>
-          {PROJECTS.length > 4 && (
-              <div class="mt-10 flex justify-center">
-                <ViewAll href="/projects"> See All </ViewAll>
-              </div>
-            )}
-        </div>
-      </Container>
-    </section>
-
-    <!-- posts section -->
-    <section id="posts">
-      <Container>
-        <div class="flex flex-col justify-between gap-6 mb-8 sm:mb-10">
-          <h2 class="font-medium text-lg leading-[1.1] sm:text-xl font-serif">
-            Notes
-          </h2>
-          <!-- project list -->
-          <ul class="grid gap-4">
-            {posts.slice(0, 4).map((post) => <PostCard entry={post} />)}
-          </ul>
-          {posts.length > 4 && (
-              <div class="mt-10 flex justify-center">
-                <ViewAll href="/blog"> See All</ViewAll>
-              </div>
-            )}
-        </div>
-      </Container>
-    </section>
-
-    <!-- contact section -->
-    <section id="contact">
-      <Container>
-        <div
-          class="pb-8 md:py-10 lg:py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-10"
-        >
-          <div
-            class="flex flex-col items-center justify-center md:justify-start md:items-start"
-          >
-            <h2 class="font-medium text-lg sm:text-xl leading-[1.1] font-serif">
-              Get in touch
-            </h2>
-            <p
-              class="max-w-prose md:sr-only leading-normal text-muted-foreground sm:leading-7 text-sm sm:text-base"
-            >
-              How to reach me.
-            </p>
-          </div>
-
-          <div class="flex justify-center">
-            <div
-              class="flex items-center flex-wrap justify-center gap-6 text-sm sm:text-base"
-            >
-              <a
-                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-                href="https://github.com/taqh"
-                target="_blank"
-              >
-                <span>Github</span>
-                <svg
-                  class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-                href="mailto:hello@taqib.dev"
-                target="_blank"
-              >
-                <span>Mail</span>
-                <svg
-                  class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                class="text-muted-foreground py-2 px-4 bg-muted rounded-full hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent text-base sm:text-sm flex items-center group font-mono"
-                href="https://x.com/retaqib"
-                target="_blank"
-              >
-                <span>Twitter</span>
-                <svg
-                  class="size-3 translate-x-1 group-hover:translate-x-2 group-focus-visible:translate-x-2 transition duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-  </div>
+      <section class="space-y-5" id="posts">
+        <h2 class="font-serif text-lg font-medium leading-tight">Notes</h2>
+        <ul class="flex flex-col gap-4">
+          {posts.slice(0, 4).map((post) => <PostCard entry={post} />)}
+        </ul>
+        {posts.length > 4 && <ViewAll href="/blog">See all notes</ViewAll>}
+      </section>
+    </div>
+  </Container>
 </Layout>

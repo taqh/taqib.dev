@@ -1,0 +1,50 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const links = [
+  {
+    href: "mailto:hello@taqib.dev",
+    label: "Email",
+  },
+  {
+    href: "https://github.com/taqh",
+    label: "GitHub",
+  },
+  {
+    href: "https://x.com/retaqib",
+    label: "Twitter",
+  },
+];
+---
+
+<div class:list={["flex flex-wrap items-center gap-2", className]}>
+  {links.map(({ href, label }) => (
+      <a
+        class="group inline-flex min-h-8 items-center gap-1 rounded-full bg-muted px-3 py-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent active:scale-[0.96]"
+        href={href}
+        rel={href.startsWith("http") ? "noopener" : undefined}
+        target={href.startsWith("http") ? "_blank" : undefined}
+      >
+        <span>{label}</span>
+        <svg
+          aria-hidden="true"
+          class="size-3 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    ))}
+</div>

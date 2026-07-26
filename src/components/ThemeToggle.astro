@@ -1,36 +1,31 @@
-<div>
-  <button
-    aria-pressed="false"
-    class="rounded-full grid place-content-center size-8 transition duration-300 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent relative z-10"
-    data-theme-toggle
-    type="button"
+<button
+  aria-label="Switch to dark theme"
+  aria-pressed="false"
+  class="relative grid size-8 shrink-0 place-content-center rounded-full bg-muted text-muted-foreground transition-colors duration-150 hover:text-foreground active:scale-[0.96] focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
+  data-theme-toggle
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="size-4"
+    fill="none"
+    height="24"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="24"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <span class="sr-only">Toggle website theme</span>
-    <svg
-      class="w-4 h-4 fill-current"
-      viewBox="0 0 16 16"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle cx="8" cy="8" r="8"></circle>
-    </svg>
-  </button>
-</div>
-
-<style>
-  .sun {
-    display: none;
-  }
-  .moon {
-    display: block;
-  }
-
-  :global(.dark) .sun {
-    display: block;
-  }
-  :global(.dark) .moon {
-    display: none;
-  }
-</style>
+    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0"></path>
+    <path d="M12 3v18"></path>
+    <path d="m12 9 4.65-4.65"></path>
+    <path d="m12 14.3 7.37-7.37"></path>
+    <path d="m12 19.6 8.85-8.85"></path>
+  </svg>
+</button>
 
 <script>
   type Theme = "dark" | "light";
@@ -58,6 +53,7 @@
 
   const applyTheme = (theme: Theme, persist = false): void => {
     document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
 
     if (persist) {
       localStorage.setItem("theme", theme);
@@ -67,6 +63,10 @@
       "[data-theme-toggle]"
     );
     button?.setAttribute("aria-pressed", String(theme === "dark"));
+    button?.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
   };
 
   const toggleTheme = async (event: MouseEvent): Promise<void> => {
@@ -81,8 +81,15 @@
       return;
     }
 
-    const x = event.clientX;
-    const y = event.clientY;
+    const button = event.currentTarget as HTMLButtonElement;
+    const buttonRect = button.getBoundingClientRect();
+    const isKeyboardActivation = event.detail === 0;
+    const x = isKeyboardActivation
+      ? buttonRect.left + buttonRect.width / 2
+      : event.clientX;
+    const y = isKeyboardActivation
+      ? buttonRect.top + buttonRect.height / 2
+      : event.clientY;
     const endRadius = Math.hypot(
       Math.max(x, window.innerWidth - x),
       Math.max(y, window.innerHeight - y)
@@ -97,21 +104,17 @@
       return;
     }
 
-    const clipPath = [
-      `circle(0px at ${x}px ${y}px)`,
-      `circle(${endRadius}px at ${x}px ${y}px)`,
-    ];
     document.documentElement.animate(
       {
-        clipPath: nextTheme === "dark" ? [...clipPath].reverse() : clipPath,
+        clipPath: [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`,
+        ],
       },
       {
-        duration: 400,
-        easing: "ease-in",
-        pseudoElement:
-          nextTheme === "dark"
-            ? "::view-transition-old(root)"
-            : "::view-transition-new(root)",
+        duration: 450,
+        easing: "cubic-bezier(0.2, 0, 0, 1)",
+        pseudoElement: "::view-transition-new(root)",
       }
     );
   };

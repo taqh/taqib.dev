@@ -10,37 +10,18 @@ const { title, description } = entry.data;
 const slug = entry.collection === "articles" ? entry.id : entry.data.slug;
 ---
 
-<div>
+<li>
   <a
-    class="group hover:bg-card p-4 grid grid-cols-[80%_20%] border rounded-md backdrop-blur-md transition-colors duration-300 ease-in-out focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
+    class="group -mx-3 block rounded-lg px-3 py-3 transition-colors duration-200 hover:bg-muted/70 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
     href={`/blog/${slug}`}
   >
-    <div class="flex flex-col gap-1 flex-1">
-      <div class="font-medium font-serif line-clamp-1">
+    <div class="space-y-1">
+      <div class="line-clamp-1 text-base leading-6">
         {title}
       </div>
-      <div class="text-sm text-muted-foreground line-clamp-1">
+      <div class="line-clamp-1 text-base leading-6 text-muted-foreground">
         {description}
       </div>
     </div>
-    <div class="flex items-center justify-end">
-      <svg
-        class="size-5 stroke-[1.5] fill-none stroke-current"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <line
-          class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
-          x1="5"
-          x2="19"
-          y1="12"
-          y2="12"
-        ></line>
-        <polyline
-          class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
-          points="12 5 19 12 12 19"
-        ></polyline>
-      </svg>
-    </div>
   </a>
-</div>
+</li>

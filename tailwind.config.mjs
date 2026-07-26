@@ -40,7 +40,7 @@ export default {
         },
         taqib: {
           css: {
-            "--tw-prose-body": "hsl(var(--muted-foreground))",
+            "--tw-prose-body": "hsl(var(--foreground) / 0.78)",
             "--tw-prose-bold": "hsl(var(--foreground))",
             "--tw-prose-bullets": "hsl(var(--foreground))",
             "--tw-prose-captions": "hsl(var(--muted-foreground))",
@@ -68,6 +68,18 @@ export default {
               overflowWrap: "anywhere",
               paddingInline: "0.275rem",
               WebkitBoxDecorationBreak: "clone",
+            },
+            h2: {
+              fontSize: "1.25rem",
+              lineHeight: "1.4",
+              marginBottom: "1.25rem",
+              marginTop: "3rem",
+            },
+            h3: {
+              fontSize: "1.125rem",
+              lineHeight: "1.5",
+              marginBottom: "0.5rem",
+              marginTop: "2.25rem",
             },
           },
         },

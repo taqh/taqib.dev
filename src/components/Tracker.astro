@@ -15,7 +15,9 @@
     mix-blend-mode: difference;
     translate: -50% -50%;
 
-    @media screen and (min-width: 600px) {
+    @media (min-width: 600px) and (pointer: fine) and (
+        prefers-reduced-motion: no-preference
+      ) {
       display: block;
     }
   }
@@ -25,10 +27,15 @@
 </style>
 
 <script>
-  function setupTracker() {
+  const shouldTrackPointer = (): boolean =>
+    window.matchMedia(
+      "(min-width: 600px) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
+    ).matches;
+
+  function setupTracker(): () => void {
     const dot = document.getElementById("dot");
 
-    function handlePointerMove(event: PointerEvent) {
+    function handlePointerMove(event: PointerEvent): void {
       const { clientX, clientY } = event;
 
       if (dot) {
@@ -37,12 +44,18 @@
             left: `${clientX}px`,
             top: `${clientY}px`,
           },
-          { duration: 3000, fill: "forwards" }
+          {
+            duration: 1200,
+            easing: "cubic-bezier(0.2, 0, 0, 1)",
+            fill: "forwards",
+          }
         );
       }
     }
 
-    document.body.addEventListener("pointermove", handlePointerMove);
+    if (shouldTrackPointer()) {
+      document.body.addEventListener("pointermove", handlePointerMove);
+    }
 
     return () => {
       document.body.removeEventListener("pointermove", handlePointerMove);

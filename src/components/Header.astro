@@ -1,22 +1,18 @@
 ---
-import Container from "./Container.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
 
-<header>
-  <Container class="h-auto py-3.5">
-    <nav class="sm:bg-background flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <a
-          class="hover:underline underline-offset-[2px] decoration-dashed focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent duration-300 transition-colors font-medium font-serif"
-          href="/"
-        >
-          taqib.dev
-        </a>
-      </div>
-      <div>
-        <ThemeToggle />
-      </div>
-    </nav>
-  </Container>
+<header class="flex items-center justify-between">
+  <h1>
+    <a
+      class="group flex flex-col focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
+      href="/"
+    >
+      <span class="font-medium font-serif text-lg leading-tight">Taqib</span>
+      <span class="text-muted-foreground text-sm leading-5">
+        Software engineer
+      </span>
+    </a>
+  </h1>
+  <ThemeToggle />
 </header>

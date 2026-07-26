@@ -54,35 +54,28 @@ const remoteContent =
   image={image}
   title={entry.data.title}
 >
-  <Container class="max-w-prose min-w-0 py-12 md:px-0 lg:px-0">
-    <section class="flex items-center mb-24 justify-between">
+  <Container class="min-w-0 max-w-prose pb-24 pt-24 sm:pt-28 md:px-0 lg:px-0">
+    <section class="mb-16 flex items-center justify-between">
       <BackLink
         href={isLocalArticle ? "/blog" : "/"}
-        title={isLocalArticle ? "Back to notes" : "Back home"}
+        title={isLocalArticle ? "Notes" : "Home"}
       />
       <ThemeToggle />
     </section>
-    <header class="flex flex-col gap-4 mb-6 md:mb-14">
+    <header class="mb-12 flex flex-col gap-4">
       <h1
-        class="text-xl sm:text-2xl lg:text-3xl font-medium font-serif text-balance leading-[1.2] mb-2"
+        class="mb-2 text-balance font-serif text-2xl font-medium leading-tight sm:text-3xl"
       >
         {entry.data.title}
       </h1>
-      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-        <div class="flex items-center gap-2">
-          <span class="h-4 w-0.5 bg-border shrink-0"></span>
-          <time
-            class="text-muted-foreground text-sm sm:text-base"
-            datetime={entry.data.publishedAt.toISOString()}
-            >{formattedDate}</time
-          >
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="h-4 w-0.5 bg-border shrink-0"></span>
-          <p class="text-muted-foreground text-sm sm:text-base">
-            {`${readTime} minute read`}
-          </p>
-        </div>
+      <div
+        class="flex flex-wrap items-center gap-x-2 text-base text-muted-foreground"
+      >
+        <time datetime={entry.data.publishedAt.toISOString()}
+          >{formattedDate}</time
+        >
+        <span aria-hidden="true">·</span>
+        <p>{`${readTime} minute read`}</p>
       </div>
     </header>
     <Prose>
