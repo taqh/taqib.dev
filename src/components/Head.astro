@@ -17,12 +17,27 @@ const { title, description, image = "/og.webp" } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8">
 <meta content="width=device-width,initial-scale=1" name="viewport">
-<meta
-  content="#fcfcfc"
-  media="(prefers-color-scheme: light)"
-  name="theme-color"
->
-<meta content="#10100f" media="(prefers-color-scheme: dark)" name="theme-color">
+<meta content="#fcfcfc" name="theme-color">
+<script is:inline>
+  (() => {
+    const storedTheme = localStorage.getItem("theme");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+    const theme =
+      storedTheme === "dark" || storedTheme === "light"
+        ? storedTheme
+        : systemTheme;
+    const isDark = theme === "dark";
+
+    document.documentElement.classList.toggle("dark", isDark);
+    document.documentElement.style.colorScheme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", isDark ? "#10100f" : "#fcfcfc");
+  })();
+</script>
 <meta content={Astro.generator} name="generator">
 
 <!-- Favicons -->

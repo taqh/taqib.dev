@@ -55,6 +55,9 @@
   const applyTheme = (theme: Theme, persist = false): void => {
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.style.colorScheme = theme;
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "dark" ? "#10100f" : "#fcfcfc");
 
     if (persist) {
       localStorage.setItem("theme", theme);
@@ -138,20 +141,4 @@
 
   initializeThemeToggle();
   document.addEventListener("astro:after-swap", initializeThemeToggle);
-</script>
-
-<script is:inline>
-  (() => {
-    const storedTheme = localStorage.getItem("theme");
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
-    const theme =
-      storedTheme === "dark" || storedTheme === "light"
-        ? storedTheme
-        : systemTheme;
-
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  })();
 </script>
