@@ -23,7 +23,7 @@ Turns out that they are the coordinates of two control handles on a graph.
 
 ## What does a timing function do?
 
-A transition’s duration answers _how long_ the change or animation takes. Its timing function answers _how the change is distributed_ across that time.
+A transition’s duration answers how long the change or animation takes. Its timing function answers how the change is distributed across that time.
 
 ```css
 .button {
@@ -39,7 +39,7 @@ A timing function maps an **input progress** to an **output progress**. On the g
   <BezierAnatomy />
 </ArticleBreakout>
 
-Both axes use normalized values. `0` means none and `1` means all. So `x = 0.5` means half of the duration has elapsed, while `y = 0.75` means the animated property has completed 75% of its journey.
+Both axes use normalized values. `0` means none and `1` means all. So `x = 0.5` means half of the duration has elapsed, while `y = 0.75` means the animated property has completed 75% of its journey. The x-values stay between `0` and `1` because they represent time, but y-values can go below `0` or above `1` to create effects like anticipation or overshoot. We’ll come back to that later.
 
 > **Basically:** at time `x`, use the curve to look up progress `y`.
 
@@ -56,17 +56,17 @@ The function is easier to read when you group the four values into two coordinat
   <BezierPointPairs />
 </ArticleBreakout>
 
-“Control point” is an important name. `P1` and `P2` pull the curve into shape; they are not waypoints that the curve must pass through. `P1 = (x1, y1)` does not mean “at time `x1`, progress is `y1`.”
-
-At each moment, the browser takes elapsed time as `x`, finds that `x` on the curve, and reads the curve’s `y` as progress. The progress comes from the curve—not from either handle.
-
-<ArticleBreakout maxWidth="58rem">
-  <ReadTheCurve />
-</ArticleBreakout>
+The four numbers are not points the curve must pass through. They position two handles that pull the curve into a shape, and that shape determines how the animation leaves the start, moves through the middle, and arrives at the end. These handles are often called control points. So `P1 = (x1, y1)` does not mean “at time `x1`, progress is `y1`.”
 
 This is why `x2` may be smaller than `x1`. The handles can cross horizontally because they are not ordered timestamps. CSS only requires each x-coordinate to stay between `0` and `1`.
 
 The familiar `linear` timing function is the simplest baseline: `cubic-bezier(0, 0, 1, 1)`. In that representation, `P1` overlaps `P0`, `P2` overlaps `P3`, and all four points lie on the same diagonal. Progress therefore always equals elapsed time.
+
+At each moment, the browser takes elapsed time as `x`, finds that `x` on the curve, and reads the curve’s `y` as progress. The progress comes from the curve not from either handle.
+
+<ArticleBreakout maxWidth="58rem">
+  <ReadTheCurve />
+</ArticleBreakout>
 
 ## The slope is the speed
 
@@ -82,7 +82,9 @@ Now we can get from the shape of a curve to the feel of an animation. The slope 
 
 The dashed line from the start to `P1` is tangent to the beginning of the curve, so the first handle directly controls the starting velocity. The line from `P2` to the end does the same for the ending velocity.
 
-Ignoring a couple of edge cases, the starting slope is `y1 / x1`, and the ending slope is `(1 - y2) / (1 - x2)`. You do not need these formulas to choose an easing, but they explain why moving a handle changes the way motion departs or arrives.
+You can think of the starting slope as the handle’s vertical position divided by its horizontal position: how far it pulls upward or downward compared with how far it pulls forward in time. At the end, the same idea applies between the second handle and the fixed endpoint. 
+
+You do not need to calculate these slopes to choose an easing; they simply explain why moving a handle changes the way motion departs or arrives.
 
 ## The familiar keywords are curves too
 
@@ -105,11 +107,13 @@ CSS requires `x1` and `x2` to be between `0` and `1`. That keeps the curve valid
 
 The y values have no such restriction. A negative y value can make the property move backwards before it moves forward. A y value above 1 can carry the property beyond its destination and then bring it back. That is how a cubic Bézier curve can create anticipation or overshoot without a spring.
 
-## Shape the curve, then watch the motion
+## How the curve controls motion
 
 Below is a visualizer of the same time-to-progress mapping. Drag either blue handles or adjust the four values, then press Play.
 
-Watch the graph and the track together. Time advances evenly from left to right. At each moment, the dot’s vertical position shows the progress returned by the curve, and the ball underneath uses that same progress to move from start to finish. The curve is not a path the ball follows through space—it is the rule that controls how far the ball has travelled at each moment.
+Watch the graph and the track together. Time advances evenly from left to right. At each moment, the dot’s vertical position shows the progress returned by the curve, and the ball underneath uses that same progress to move from start to finish.
+
+The curve is not a path the ball follows through space it is the rule that controls how far the ball has travelled at each moment.
 
 <ArticleBreakout>
   <CubicBezierExplorer />
