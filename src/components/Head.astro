@@ -1,7 +1,7 @@
 ---
 import "@/styles/global.css";
 import { Font } from "astro:assets";
-// import { ClientRouter } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   description: string;
@@ -74,4 +74,4 @@ const { title, description, image = "/og.webp" } = Astro.props;
 <Font cssVariable="--font-inter" preload />
 <Font cssVariable="--font-literata" preload />
 
-<!-- <ClientRouter /> -->
+<ClientRouter />
