@@ -23,7 +23,7 @@ Inside the project, you'll see the following folders and files:
 ├── astro.config.mjs
 ├── package.json
 ├── README.md
-├── tailwind.config.cjs
+├── tailwind.config.mjs
 └── tsconfig.json
 ```
 
@@ -39,6 +39,8 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm dev`             | Starts local dev server at `localhost:4321`      |
 | `pnpm build`           | Build your production site to `./dist/`          |
 | `pnpm preview`         | Preview your build locally, before deploying     |
+| `pnpm check`           | Check formatting and lint rules with Ultracite   |
+| `pnpm format`          | Format and fix code with Ultracite               |
 | `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm astro -- --help` | Get help using the Astro CLI                     |
 
@@ -47,13 +49,13 @@ All commands are run from the root of the project, from a terminal:
 First, clone the repository:
 
 ```bash
-git clone https://github.com/taqh/website.git
+git clone https://github.com/taqh/taqib.dev.git
 ```
 
 Then, navigate to the project directory:
 
 ```bash
-cd website
+cd taqib.dev
 ```
 
 Install the dependencies:

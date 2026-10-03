@@ -6,7 +6,7 @@ export const postSchema = z.object({
       author: z.string(),
       url: z.url(),
     })
-    .nullable(),
+    .nullish(),
   authors: z.array(
     z.object({
       id: z.string(),

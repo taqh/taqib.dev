@@ -1,17 +1,17 @@
 ---
 interface Props {
   href: string;
+  label: string;
 }
 
-const { href } = Astro.props;
+const { href, label } = Astro.props;
 ---
 
 <a
-  aria-label="See all"
   class="group inline-flex w-fit items-center gap-1.5 text-base text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
   href={href}
 >
-  <slot />
+  {label}
   <svg
     aria-hidden="true"
     class="size-4 fill-none stroke-current transition-transform duration-200 group-hover:translate-x-0.5"

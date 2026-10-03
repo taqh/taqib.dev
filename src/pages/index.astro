@@ -49,12 +49,12 @@ const posts = [
         <h2 class="font-serif text-lg font-medium leading-tight">Projects</h2>
         <ul class="flex flex-col gap-4">
           {PROJECTS.slice(0, 4).map((project) => (
-              <ProjectCard entry={project} />
-            ))}
+            <ProjectCard entry={project} />
+          ))}
         </ul>
         {PROJECTS.length > 4 && (
-            <ViewAll href="/projects">See all projects</ViewAll>
-          )}
+          <ViewAll href="/projects" label="See all projects" />
+        )}
       </section>
 
       <section class="space-y-5" id="posts">
@@ -62,7 +62,7 @@ const posts = [
         <ul class="flex flex-col gap-4">
           {posts.slice(0, 4).map((post) => <PostCard entry={post} />)}
         </ul>
-        {posts.length > 4 && <ViewAll href="/blog">See all notes</ViewAll>}
+        {posts.length > 4 && <ViewAll href="/blog" label="See all notes" />}
       </section>
     </div>
   </Container>

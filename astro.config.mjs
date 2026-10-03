@@ -1,9 +1,10 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 
 import vercel from "@astrojs/vercel";
 import { defineConfig, fontProviders } from "astro/config";
+import autoprefixer from "autoprefixer";
+import tailwindcss from "tailwindcss";
 
 // https://astro.build/config
 export default defineConfig({
@@ -28,7 +29,14 @@ export default defineConfig({
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     },
   ],
-  integrations: [tailwind(), mdx(), sitemap()],
+  integrations: [mdx(), sitemap()],
   site: "https://taqib.dev",
   trailingSlash: "never",
+  vite: {
+    css: {
+      postcss: {
+        plugins: [tailwindcss(), autoprefixer()],
+      },
+    },
+  },
 });
