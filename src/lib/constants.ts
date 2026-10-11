@@ -5,6 +5,13 @@ export const SITE = {
 
 export const PROJECTS = [
   {
+    description: "Salah reminders from your Mac's notch",
+    links: {
+      live: "https://hamza.taqib.dev",
+    },
+    title: "Hamza",
+  },
+  {
     description: "A simple headless CMS for managing blogs",
     links: {
       live: "https://marblecms.com?ref=taqib.dev",
@@ -36,12 +43,5 @@ export const PROJECTS = [
       repo: "https://app.grvl.ai",
     },
     title: "GRVL",
-  },
-  {
-    description: "Salah reminders from your Mac's notch",
-    links: {
-      live: "https://hamza.taqib.dev",
-    },
-    title: "Hamza",
   },
 ];
