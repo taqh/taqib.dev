@@ -37,4 +37,11 @@ export const PROJECTS = [
     },
     title: "GRVL",
   },
+  {
+    description: "Salah reminders from your Mac's notch",
+    links: {
+      live: "https://hamza.taqib.dev",
+    },
+    title: "Hamza",
+  },
 ];
