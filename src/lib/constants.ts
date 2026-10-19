@@ -5,14 +5,14 @@ export const SITE = {
 
 export const PROJECTS = [
   {
-    description: "Salah reminders from your Mac's notch",
+    description: "Salah reminders right in your Mac's notch",
     links: {
       live: "https://hamza.taqib.dev",
     },
     title: "Hamza",
   },
   {
-    description: "A simple headless CMS for managing blogs",
+    description: "Super simple headless CMS for managing blogs",
     links: {
       live: "https://marblecms.com?ref=taqib.dev",
       repo: "https://github.com/usemarble?ref=taqib.dev",
@@ -29,7 +29,7 @@ export const PROJECTS = [
   },
   {
     description:
-      "Internet radio control suite for running a single-station broadcast",
+      "Control suite for running a single-station radio broadcast",
     links: {
       live: "https://rdio-docs.vercel.app",
       repo: "https://github.com/helloworld-ng/rdio",
