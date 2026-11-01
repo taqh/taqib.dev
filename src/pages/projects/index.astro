@@ -4,7 +4,7 @@ import Container from "@/components/Container.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import Layout from "@/layouts/Layout.astro";
-import { PROJECTS, SITE } from "@/lib/constants";
+import { ACTIVE_PROJECTS, SITE } from "@/lib/constants";
 ---
 
 <Layout description={SITE.DESCRIPTION} title={`Projects - ${SITE.TITLE}`}>
@@ -21,7 +21,7 @@ import { PROJECTS, SITE } from "@/lib/constants";
         </p>
       </div>
       <ul class="flex flex-col gap-4">
-        {PROJECTS.map((project) => <ProjectCard entry={project} />)}
+        {ACTIVE_PROJECTS.map((project) => <ProjectCard entry={project} />)}
       </ul>
     </div>
   </Container>

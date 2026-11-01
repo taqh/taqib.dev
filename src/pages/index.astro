@@ -7,7 +7,7 @@ import PostCard from "@/components/PostCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import ViewAll from "@/components/ViewAll.astro";
 import Layout from "@/layouts/Layout.astro";
-import { PROJECTS, SITE } from "@/lib/constants";
+import { ACTIVE_PROJECTS, SITE } from "@/lib/constants";
 
 const [articles, remotePosts] = await Promise.all([
   getCollection("articles", ({ data }) => !data.draft),
@@ -48,7 +48,7 @@ const posts = [
       <section class="space-y-5" id="projects">
         <h2 class="font-serif text-lg font-medium leading-tight">Projects</h2>
         <ul class="flex flex-col gap-4">
-          {PROJECTS.map((project) => <ProjectCard entry={project} />)}
+          {ACTIVE_PROJECTS.map((project) => <ProjectCard entry={project} />)}
         </ul>
       </section>
 

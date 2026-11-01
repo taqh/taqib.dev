@@ -5,6 +5,7 @@ export const SITE = {
 
 export const PROJECTS = [
   {
+    active: true,
     description: "Salah reminders right in your Mac's notch",
     links: {
       live: "https://hamza.taqib.dev",
@@ -12,6 +13,7 @@ export const PROJECTS = [
     title: "Hamza",
   },
   {
+    active: true,
     description: "Super simple headless CMS for managing blogs",
     links: {
       live: "https://marblecms.com?ref=taqib.dev",
@@ -20,6 +22,7 @@ export const PROJECTS = [
     title: "Marble",
   },
   {
+    active: true,
     description: "Transform documents to audio podcasts",
     links: {
       live: "https://fablepod.com?ref=taqib.dev",
@@ -28,8 +31,8 @@ export const PROJECTS = [
     title: "Fable",
   },
   {
-    description:
-      "Control suite for running a single-station radio broadcast",
+    active: true,
+    description: "Control suite for running a single-station radio broadcast",
     links: {
       live: "https://rdio-docs.vercel.app",
       repo: "https://github.com/helloworld-ng/rdio",
@@ -37,6 +40,7 @@ export const PROJECTS = [
     title: "Rdio",
   },
   {
+    active: false,
     description: "A shared planner for organizing group trips",
     links: {
       live: "https://grvl.ai",
@@ -45,3 +49,5 @@ export const PROJECTS = [
     title: "GRVL",
   },
 ];
+
+export const ACTIVE_PROJECTS = PROJECTS.filter((project) => project.active);
