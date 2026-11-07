@@ -33,7 +33,7 @@ const {
 ---
 
 <a
-  class={`group font-sans rounded-md flex border hover:bg-card cursor-pointer transition focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-emerald-500 duration-300 focus-visible:outline-offset-2 ${getVariantClasses(variant)} ${classNames}`}
+  class={`group hover:bg-card flex cursor-pointer rounded-md border font-sans transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 focus-visible:outline-dashed ${getVariantClasses(variant)} ${classNames}`}
   href={href}
   target={external ? "_blank" : "_self"}
   {...attrs}
@@ -58,7 +58,7 @@ const {
   )}
   {forward && (
     <svg
-      class="absolute top-1/2 right-4 size-5 -translate-y-1/2 fill-none stroke-2 stroke-current"
+      class="absolute top-1/2 right-4 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >

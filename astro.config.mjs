@@ -1,10 +1,8 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-
 import vercel from "@astrojs/vercel";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
-import autoprefixer from "autoprefixer";
-import tailwindcss from "tailwindcss";
 
 // https://astro.build/config
 export default defineConfig({
@@ -33,10 +31,6 @@ export default defineConfig({
   site: "https://taqib.dev",
   trailingSlash: "never",
   vite: {
-    css: {
-      postcss: {
-        plugins: [tailwindcss(), autoprefixer()],
-      },
-    },
+    plugins: [tailwindcss()],
   },
 });

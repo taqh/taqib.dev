@@ -33,7 +33,7 @@
     ).matches;
 
   function setupTracker(): () => void {
-    const dot = document.getElementById("dot");
+    const dot = document.querySelector("#dot");
 
     function handlePointerMove(event: PointerEvent): void {
       const { clientX, clientY } = event;

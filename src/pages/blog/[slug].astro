@@ -54,7 +54,7 @@ const remoteContent =
   image={image}
   title={entry.data.title}
 >
-  <Container class="min-w-0 max-w-prose pb-24 pt-24 sm:pt-28 md:px-0 lg:px-0">
+  <Container class="max-w-prose min-w-0 pt-24 pb-24 sm:pt-28 md:px-0 lg:px-0">
     <section class="mb-16 flex items-center justify-between">
       <BackLink
         href={isLocalArticle ? "/blog" : "/"}
@@ -64,14 +64,14 @@ const remoteContent =
     </section>
     <header class="mb-12 flex flex-col gap-4">
       <h1
-        class="mb-2 text-balance font-serif text-2xl font-medium leading-tight sm:text-3xl"
+        class="mb-2 font-serif text-2xl leading-tight font-medium text-balance sm:text-3xl"
       >
         {entry.data.title}
       </h1>
       <div
-        class="flex flex-wrap items-center gap-x-2 text-base text-muted-foreground"
+        class="text-muted-foreground flex flex-wrap items-center gap-x-2 text-base"
       >
-        <span aria-hidden="true" class="h-4 w-0.5 shrink-0 bg-border"></span>
+        <span aria-hidden="true" class="bg-border h-4 w-0.5 shrink-0"></span>
         <time datetime={entry.data.publishedAt.toISOString()}
           >{formattedDate}</time
         >

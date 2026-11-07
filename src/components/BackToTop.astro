@@ -2,12 +2,12 @@
 ---
 
 <button
-  class="group fixed bottom-8 right-8 lg:bottom-20 lg:right-20 z-50 hidden w-fit flex-nowrap rounded-md border hover:bg-background/80 hover:backdrop-blur-sm p-2 bg-background transition duration-300"
+  class="group hover:bg-background/80 bg-background fixed right-8 bottom-8 z-50 hidden w-fit flex-nowrap rounded-md border p-2 transition duration-300 hover:backdrop-blur-sm lg:right-20 lg:bottom-20"
   id="scroll-to-top"
   type="button"
 >
   <svg
-    class="transition-all group-hover:-translate-y-0.5 duration-300 size-4"
+    class="size-4 transition-all duration-300 group-hover:-translate-y-0.5"
     fill="none"
     stroke="currentColor"
     stroke-width="1.5"
@@ -25,7 +25,7 @@
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const scrollToTopButton = document.getElementById("scroll-to-top");
+    const scrollToTopButton = document.querySelector("#scroll-to-top");
     const footer = document.querySelector("footer");
 
     if (scrollToTopButton && footer) {

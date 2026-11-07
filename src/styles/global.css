@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {
@@ -43,11 +43,11 @@
   }
 
   html {
+    scroll-behavior: smooth;
     font-family: Inter, system-ui, sans-serif;
-    background: hsl(var(--background));
     color: hsl(var(--foreground));
     color-scheme: light;
-    scroll-behavior: smooth;
+    background: hsl(var(--background));
   }
 
   html.dark {

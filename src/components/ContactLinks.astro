@@ -31,7 +31,7 @@ const links = [
 <div class:list={["flex flex-wrap items-center gap-2", className]}>
   {links.map(({ href, icon: Icon, label }) => (
     <a
-      class="inline-flex min-h-8 items-center gap-2 rounded-full bg-muted px-3 py-1.5 text-muted-foreground text-sm transition-colors duration-150 hover:text-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent active:scale-[0.96]"
+      class="bg-muted text-muted-foreground hover:text-foreground focus-visible:outline-accent inline-flex min-h-8 items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-dashed active:scale-[0.96]"
       href={href}
       rel={href.startsWith("http") ? "noopener" : undefined}
       target={href.startsWith("http") ? "_blank" : undefined}

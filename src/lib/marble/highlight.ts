@@ -38,17 +38,17 @@ export async function highlightContent(htmlContent: string): Promise<string> {
   // i.e <pre><code class="language-jsx">...</code></pre>
   // so we use a regex to find and pick the language from the classname
   const codeBlockRegex =
-    /<pre><code(?:\s+class="language-([^"]+)")?[^>]*>([\s\S]*?)<\/code><\/pre>/g;
+    /<pre><code(?:\s+class="language-(?<language>[^"]+)")?[^>]*>(?<code>[\s\S]*?)<\/code><\/pre>/gu;
 
   return htmlContent.replace(codeBlockRegex, (match, language, code) => {
     try {
       // Decode HTML entities in the code
       const decodedCode = code
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">")
-        .replace(/&amp;/g, "&")
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'");
+        .replace(/&lt;/gu, "<")
+        .replace(/&gt;/gu, ">")
+        .replace(/&amp;/gu, "&")
+        .replace(/&quot;/gu, '"')
+        .replace(/&#39;/gu, "'");
 
       // Use detected language or default to text if none specified
       const lang = language || "text";

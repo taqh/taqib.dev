@@ -19,12 +19,12 @@ const posts = [
 ---
 
 <Layout description={SITE.DESCRIPTION} title={`Blog - ${SITE.TITLE}`}>
-  <Container class="pb-24 pt-24 sm:pb-32 sm:pt-28">
+  <Container class="pt-24 pb-24 sm:pt-28 sm:pb-32">
     <div class="mb-16 flex items-center justify-between">
       <BackLink href="/" title="Home" />
       <ThemeToggle />
     </div>
-    <h1 class="mb-8 font-serif text-2xl font-medium leading-tight">Notes</h1>
+    <h1 class="mb-8 font-serif text-2xl leading-tight font-medium">Notes</h1>
     <ul class="flex flex-col gap-4">
       {posts.map((post) => <PostCard entry={post} />)}
     </ul>

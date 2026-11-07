@@ -21,11 +21,11 @@ const posts = [
 ---
 
 <Layout description={SITE.DESCRIPTION} title={SITE.TITLE}>
-  <Container class="pb-24 pt-24 sm:pb-32 sm:pt-28">
+  <Container class="pt-24 pb-24 sm:pt-28 sm:pb-32">
     <Header />
     <div class="mt-16 space-y-24 sm:mt-20 sm:space-y-28">
       <section id="about">
-        <div class="space-y-4 text-base leading-7 text-muted-foreground">
+        <div class="text-muted-foreground space-y-4 text-base leading-7">
           <p>
             Software engineer based in Abuja, Nigeria. I build products across
             the stack, with a soft spot for open source and developer tools.
@@ -33,7 +33,7 @@ const posts = [
           <p>
             I&apos;m currently maintaining{" "}
             <a
-              class="text-foreground underline decoration-foreground/30 underline-offset-[3px] transition-colors hover:decoration-foreground focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
+              class="text-foreground decoration-foreground/30 hover:decoration-foreground focus-visible:outline-accent underline underline-offset-[3px] transition-colors focus-visible:outline-2 focus-visible:outline-dashed"
               href="https://marblecms.com?ref=taqib.dev"
               rel="noopener"
               target="_blank"
@@ -46,14 +46,14 @@ const posts = [
       </section>
 
       <section class="space-y-5" id="projects">
-        <h2 class="font-serif text-lg font-medium leading-tight">Projects</h2>
+        <h2 class="font-serif text-lg leading-tight font-medium">Projects</h2>
         <ul class="flex flex-col gap-4">
           {ACTIVE_PROJECTS.map((project) => <ProjectCard entry={project} />)}
         </ul>
       </section>
 
       <section class="space-y-5" id="posts">
-        <h2 class="font-serif text-lg font-medium leading-tight">Notes</h2>
+        <h2 class="font-serif text-lg leading-tight font-medium">Notes</h2>
         <ul class="flex flex-col gap-4">
           {posts.slice(0, 4).map((post) => <PostCard entry={post} />)}
         </ul>

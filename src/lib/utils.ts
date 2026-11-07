@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-const HTML_TAG_REGEX = /<[^>]*>/g;
-const WHITESPACE_REGEX = /\s+/;
+const HTML_TAG_REGEX = /<[^>]*>/gu;
+const WHITESPACE_REGEX = /\s+/u;
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

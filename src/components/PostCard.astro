@@ -12,14 +12,14 @@ const slug = entry.collection === "articles" ? entry.id : entry.data.slug;
 
 <li>
   <a
-    class="group -mx-3 block rounded-lg px-3 py-3 transition-colors duration-200 hover:bg-muted/70 focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-accent"
+    class="group hover:bg-muted/70 focus-visible:outline-accent -mx-3 block rounded-lg px-3 py-3 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-dashed"
     href={`/blog/${slug}`}
   >
     <div class="space-y-1">
       <div class="line-clamp-1 text-base leading-6">
         {title}
       </div>
-      <div class="line-clamp-1 text-base leading-6 text-muted-foreground">
+      <div class="text-muted-foreground line-clamp-1 text-base leading-6">
         {description}
       </div>
     </div>
