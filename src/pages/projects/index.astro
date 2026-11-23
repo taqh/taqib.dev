@@ -7,7 +7,10 @@ import Layout from "@/layouts/Layout.astro";
 import { ACTIVE_PROJECTS, SITE } from "@/lib/constants";
 ---
 
-<Layout description={SITE.DESCRIPTION} title={`Projects - ${SITE.TITLE}`}>
+<Layout
+  description="A list of projects I've worked on or am currently working on."
+  title={`Projects - ${SITE.TITLE}`}
+>
   <Container class="pt-24 pb-24 sm:pt-28 sm:pb-32">
     <div class="mb-16 flex items-center justify-between">
       <BackLink href="/" title="Back home" />

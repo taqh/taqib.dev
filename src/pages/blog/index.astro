@@ -18,7 +18,10 @@ const posts = [
 ].sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
 ---
 
-<Layout description={SITE.DESCRIPTION} title={`Blog - ${SITE.TITLE}`}>
+<Layout
+  description="Notes on things I've built and what I learned along the way."
+  title={`Blog - ${SITE.TITLE}`}
+>
   <Container class="pt-24 pb-24 sm:pt-28 sm:pb-32">
     <div class="mb-16 flex items-center justify-between">
       <BackLink href="/" title="Home" />
