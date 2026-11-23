@@ -1,0 +1,11 @@
+---
+if (import.meta.env.PROD) {
+  throw new Error(
+    `${Astro.url.pathname} is published with a <Todo> marker. Fill it in, or set draft: true.`
+  );
+}
+---
+
+<mark class="text-foreground rounded bg-amber-200/70 px-1 dark:bg-amber-400/25"
+  >TODO: <slot /></mark
+>

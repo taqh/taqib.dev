@@ -1,0 +1,255 @@
+---
+import { getImage, Image } from "astro:assets";
+
+interface Props {
+  alt: string;
+  /** Path under src/assets/work without the extension, such as "rumpty/site-before". */
+  name: string;
+}
+
+const files = import.meta.glob<ImageMetadata>("/src/assets/work/**/*.png", {
+  eager: true,
+  import: "default",
+});
+
+/** One image per theme the site has. A site with one theme gets a single variant. */
+const variantsOf = (screenshot: string) => {
+  const base = `/src/assets/work/${screenshot}`;
+  const light = files[`${base}-light.png`];
+  const dark = files[`${base}-dark.png`];
+  if (light && dark) {
+    return [
+      { class: "dark:hidden", src: light },
+      { class: "hidden dark:block", src: dark },
+    ];
+  }
+  const single = files[`${base}.png`];
+  if (single) {
+    return [{ class: "", src: single }];
+  }
+  throw new Error(
+    `No screenshot named "${screenshot}". Add ${base}-light.png and ${base}-dark.png, or ${base}.png when the site has one theme.`
+  );
+};
+
+const { alt, name } = Astro.props;
+const variants = await Promise.all(
+  variantsOf(name).map(async (variant) => {
+    const fullSize = await getImage({
+      format: "webp",
+      quality: 90,
+      src: variant.src,
+    });
+    return { ...variant, zoomSrc: fullSize.src };
+  })
+);
+---
+
+<button
+  aria-haspopup="dialog"
+  class="focus-visible:outline-accent block w-full cursor-zoom-in rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dashed"
+  data-zoom
+  type="button"
+>
+  <span class="sr-only">View full size:</span>
+  {variants.map((variant) => (
+    <Image
+      alt={alt}
+      class:list={["w-full rounded-lg border", variant.class]}
+      data-zoom-src={variant.zoomSrc}
+      quality={90}
+      sizes="(min-width: 768px) 688px, 100vw"
+      src={variant.src}
+      widths={[688, 1376, 2064]}
+    />
+  ))}
+</button>
+
+<script>
+  const MAX_MARGIN = 32;
+  /** Scrolling further than this while zoomed closes the image. */
+  const SCROLL_TOLERANCE = 40;
+  const OPEN_MS = 320;
+  const CLOSE_MS = 240;
+  const EASING = "cubic-bezier(0.2, 0, 0, 1)";
+
+  interface Parts {
+    backdrop: HTMLDivElement;
+    dialog: HTMLDialogElement;
+    full: HTMLImageElement;
+  }
+
+  let parts: Parts | undefined;
+  let zoom: (Parts & { openedAt: number; thumb: HTMLImageElement }) | undefined;
+  let closing = false;
+
+  const prefersReducedMotion = () =>
+    matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /** Built on first use, and again after a page swap removes it. */
+  const getParts = (): Parts => {
+    if (parts?.dialog.isConnected) {
+      return parts;
+    }
+    const dialog = document.createElement("dialog");
+    dialog.className =
+      "m-0 h-dvh max-h-none w-screen max-w-none place-items-center overflow-hidden border-0 bg-transparent p-0 backdrop:bg-transparent open:grid";
+    const backdrop = document.createElement("div");
+    backdrop.className = "bg-background/95 absolute inset-0";
+    const full = document.createElement("img");
+    full.alt = "";
+    full.className = "relative max-w-none origin-top-left rounded-lg border";
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "absolute inset-0 cursor-zoom-out";
+    closeButton.dataset.zoomClose = "";
+    const label = document.createElement("span");
+    label.className = "sr-only";
+    label.textContent = "Close full size image";
+    closeButton.append(label);
+    dialog.append(backdrop, full, closeButton);
+    document.body.append(dialog);
+    parts = { backdrop, dialog, full };
+    return parts;
+  };
+
+  /** Moves and scales a box from `to` back onto `from`, for a FLIP animation. */
+  const flip = (from: DOMRect, to: DOMRect) =>
+    `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(${from.width / to.width})`;
+
+  const open = (trigger: HTMLElement) => {
+    const thumb = [...trigger.querySelectorAll("img")].find(
+      (img) => img.offsetParent !== null
+    );
+    if (!thumb || zoom) {
+      return;
+    }
+    const { backdrop, dialog, full } = getParts();
+    const from = thumb.getBoundingClientRect();
+    const ratio = from.width / from.height;
+    const margin = Math.min(MAX_MARGIN, innerWidth / 32);
+    const width = Math.min(
+      innerWidth - margin * 2,
+      (innerHeight - margin * 2) * ratio
+    );
+    full.style.width = `${width}px`;
+    full.style.height = `${width / ratio}px`;
+    full.src = thumb.currentSrc || thumb.src;
+    full.alt = thumb.alt;
+    dialog.showModal();
+    thumb.style.visibility = "hidden";
+    zoom = { backdrop, dialog, full, openedAt: scrollY, thumb };
+
+    if (!prefersReducedMotion()) {
+      const to = full.getBoundingClientRect();
+      const timing = { duration: OPEN_MS, easing: EASING };
+      full.animate(
+        [{ transform: flip(from, to) }, { transform: "none" }],
+        timing
+      );
+      backdrop.animate([{ opacity: 0 }, { opacity: 1 }], timing);
+    }
+
+    const { zoomSrc } = thumb.dataset;
+    if (zoomSrc) {
+      const fullSize = new Image();
+      fullSize.src = zoomSrc;
+      fullSize.decode().then(
+        () => {
+          if (zoom?.thumb === thumb) {
+            full.src = zoomSrc;
+          }
+        },
+        () => undefined
+      );
+    }
+  };
+
+  const close = () => {
+    if (!zoom || closing) {
+      return;
+    }
+    const { backdrop, dialog, full, thumb } = zoom;
+    const finish = () => {
+      for (const animation of [
+        ...full.getAnimations(),
+        ...backdrop.getAnimations(),
+      ]) {
+        animation.cancel();
+      }
+      dialog.close();
+      full.removeAttribute("src");
+      thumb.style.visibility = "";
+      zoom = undefined;
+      closing = false;
+    };
+
+    if (prefersReducedMotion()) {
+      finish();
+      return;
+    }
+    closing = true;
+    const timing = {
+      duration: CLOSE_MS,
+      easing: EASING,
+      fill: "forwards",
+    } as const;
+    backdrop.animate([{ opacity: 1 }, { opacity: 0 }], timing);
+    full
+      .animate(
+        [
+          { transform: "none" },
+          {
+            transform: flip(
+              thumb.getBoundingClientRect(),
+              full.getBoundingClientRect()
+            ),
+          },
+        ],
+        timing
+      )
+      .finished.then(finish, finish);
+  };
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+    if (event.target.closest("[data-zoom-close]")) {
+      close();
+      return;
+    }
+    const trigger = event.target.closest<HTMLElement>("[data-zoom]");
+    if (trigger) {
+      open(trigger);
+    }
+  });
+
+  document.addEventListener(
+    "cancel",
+    (event) => {
+      if (zoom?.dialog === event.target) {
+        event.preventDefault();
+        close();
+      }
+    },
+    true
+  );
+
+  addEventListener(
+    "scroll",
+    () => {
+      if (zoom && Math.abs(scrollY - zoom.openedAt) > SCROLL_TOLERANCE) {
+        close();
+      }
+    },
+    { passive: true }
+  );
+  addEventListener("resize", close);
+
+  document.addEventListener("astro:before-swap", () => {
+    zoom?.dialog.close();
+    zoom = undefined;
+    closing = false;
+  });
+</script>

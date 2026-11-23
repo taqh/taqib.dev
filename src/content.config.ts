@@ -62,8 +62,28 @@ const articleCollection = defineCollection({
   }),
 });
 
+const workCollection = defineCollection({
+  loader: glob({
+    base: "./src/content/work",
+    pattern: "**/[^_]*.{md,mdx}",
+  }),
+  schema: z.object({
+    client: z.string(),
+    description: z.string(),
+    draft: z.boolean(),
+    image: z.string().optional(),
+    /** Set when the entry goes live. Until then the page shows a TODO, which fails a production build. */
+    publishedAt: z.coerce.date().optional(),
+    /** Left out until known. The page shows a TODO, which fails a production build. */
+    role: z.string().optional(),
+    title: z.string(),
+    url: z.url().optional(),
+  }),
+});
+
 export const collections = {
   articles: articleCollection,
   posts: postCollection,
   projects: projectCollection,
+  work: workCollection,
 };

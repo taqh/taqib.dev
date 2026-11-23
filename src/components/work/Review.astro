@@ -1,0 +1,21 @@
+---
+interface Props {
+  /** Where the passage came from. The label reads "From {from}." */
+  from: string;
+}
+
+if (import.meta.env.PROD) {
+  throw new Error(
+    `${Astro.url.pathname} is published with a <Review> marker. Check the passage, then remove the marker.`
+  );
+}
+
+const { from } = Astro.props;
+---
+
+<div class="border-accent border-s-2 border-dashed ps-4">
+  <p class="not-prose text-accent text-xs leading-5">
+    From {from}. Check it, then remove this marker.
+  </p>
+  <slot />
+</div>

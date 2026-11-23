@@ -1,0 +1,28 @@
+---
+interface Props {
+  /** On /work itself, "work" names the current page instead of linking to it. */
+  isIndex?: boolean;
+}
+
+const { isIndex = false } = Astro.props;
+const linkClass =
+  "text-muted-foreground hover:text-foreground focus-visible:outline-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-dashed";
+---
+
+<nav aria-label="Breadcrumb">
+  <ol class="flex h-8 items-center gap-2 text-sm">
+    <li><a class={linkClass} href="/">taqib</a></li>
+    <li aria-hidden="true" class="text-muted-foreground/50">/</li>
+    <li>
+      {isIndex ? (
+        <span aria-current="page" class="text-foreground">
+          work
+        </span>
+      ) : (
+        <a class={linkClass} href="/work">
+          work
+        </a>
+      )}
+    </li>
+  </ol>
+</nav>

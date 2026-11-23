@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  entry: CollectionEntry<"work">;
+}
+
+const { entry } = Astro.props;
+const { description, draft, title } = entry.data;
+---
+
+<li>
+  <a
+    class="group hover:bg-muted/70 focus-visible:outline-accent -mx-3 block rounded-lg px-3 py-3 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-dashed"
+    href={`/work/${entry.id}`}
+  >
+    <div class="space-y-1">
+      <div class="flex items-center gap-2 text-base leading-6">
+        {title}
+        {draft && (
+          <span class="bg-muted text-muted-foreground rounded-full px-2 text-xs leading-5">
+            Draft
+          </span>
+        )}
+      </div>
+      <div class="text-muted-foreground line-clamp-2 text-base leading-6">
+        {description}
+      </div>
+    </div>
+  </a>
+</li>

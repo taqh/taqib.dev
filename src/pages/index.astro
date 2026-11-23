@@ -6,12 +6,15 @@ import Header from "@/components/Header.astro";
 import PostCard from "@/components/PostCard.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import ViewAll from "@/components/ViewAll.astro";
+import WorkCard from "@/components/work/WorkCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { ACTIVE_PROJECTS, SITE } from "@/lib/constants";
+import { getWorkEntries } from "@/lib/work";
 
-const [articles, remotePosts] = await Promise.all([
+const [articles, remotePosts, work] = await Promise.all([
   getCollection("articles", ({ data }) => !data.draft),
   getCollection("posts"),
+  getWorkEntries(),
 ]);
 const localSlugs = new Set(articles.map((entry) => entry.id));
 const posts = [
@@ -23,7 +26,7 @@ const posts = [
 <Layout description={SITE.DESCRIPTION} title={SITE.TITLE}>
   <Container class="pt-24 pb-24 sm:pt-28 sm:pb-32">
     <Header />
-    <div class="mt-16 space-y-24 sm:mt-20 sm:space-y-28">
+    <div class="mt-10 space-y-24">
       <section id="about">
         <div class="text-muted-foreground space-y-4 text-base leading-7">
           <p>
@@ -51,6 +54,18 @@ const posts = [
           {ACTIVE_PROJECTS.map((project) => <ProjectCard entry={project} />)}
         </ul>
       </section>
+
+      {work.length > 0 && (
+        <section class="space-y-5" id="work">
+          <h2 class="font-serif text-lg leading-tight font-medium">Work</h2>
+          <ul class="flex flex-col gap-4">
+            {work.slice(0, 4).map((entry) => (
+              <WorkCard entry={entry} />
+            ))}
+          </ul>
+          {work.length > 4 && <ViewAll href="/work" label="See all work" />}
+        </section>
+      )}
 
       <section class="space-y-5" id="posts">
         <h2 class="font-serif text-lg leading-tight font-medium">Notes</h2>

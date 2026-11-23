@@ -1,0 +1,29 @@
+---
+import Screenshot from "@/components/work/Screenshot.astro";
+
+interface Props {
+  afterAlt: string;
+  beforeAlt: string;
+  /** Screenshot pair under src/assets/work. "rumpty/site" reads rumpty/site-before and rumpty/site-after. */
+  name: string;
+  /** What the screenshots show. "hero section" captions them "Old hero section" and "Redesigned hero section". */
+  subject: string;
+}
+
+const { afterAlt, beforeAlt, name, subject } = Astro.props;
+const shots = [
+  { alt: beforeAlt, caption: `Old ${subject}`, name: `${name}-before` },
+  { alt: afterAlt, caption: `Redesigned ${subject}`, name: `${name}-after` },
+];
+---
+
+<div class="not-prose my-10 flex flex-col gap-8">
+  {shots.map((shot) => (
+    <figure>
+      <Screenshot alt={shot.alt} name={shot.name} />
+      <figcaption class="text-muted-foreground mt-3 text-center text-sm">
+        {shot.caption}
+      </figcaption>
+    </figure>
+  ))}
+</div>

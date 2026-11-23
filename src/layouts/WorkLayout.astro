@@ -1,0 +1,68 @@
+---
+import type { MarkdownHeading } from "astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import TableOfContents from "@/components/work/TableOfContents.astro";
+import WorkTrail from "@/components/work/WorkTrail.astro";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+
+interface Props {
+  description: string;
+  image?: string;
+  isIndex?: boolean;
+  title: string;
+  toc?: MarkdownHeading[];
+}
+
+const { description, image, isIndex = false, title, toc = [] } = Astro.props;
+const hasToc = toc.length > 0;
+---
+
+<BlogLayout description={description} image={image} title={title}>
+  <div
+    class="mx-auto grid w-full max-w-3xl grid-cols-[minmax(0,1fr)] items-start px-6 pt-24 pb-24 sm:pt-28 md:px-10 lg:px-14 xl:max-w-328 xl:grid-cols-[minmax(12rem,1fr)_minmax(0,40rem)_minmax(12rem,1fr)] xl:gap-x-14 xl:px-10"
+  >
+    <aside
+      class="flex items-center justify-between xl:sticky xl:top-28 xl:flex-col xl:items-start xl:justify-start xl:gap-6"
+    >
+      <WorkTrail isIndex={isIndex} />
+      <ThemeToggle />
+    </aside>
+
+    <div class="mt-16 min-w-0 xl:col-start-2 xl:row-start-1 xl:mt-0">
+      <slot name="header" />
+      {hasToc && (
+        <details class="group bg-muted mt-8 rounded-lg xl:hidden">
+          <summary class="flex h-11 cursor-pointer list-none items-center justify-between px-4 text-sm [&::-webkit-details-marker]:hidden">
+            On this page
+            <svg
+              aria-hidden="true"
+              class="text-muted-foreground size-4 fill-none stroke-current transition-transform duration-200 group-open:rotate-180"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m6 9 6 6 6-6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              />
+            </svg>
+          </summary>
+          <div class="px-4 pt-1 pb-4">
+            <TableOfContents headings={toc} />
+          </div>
+        </details>
+      )}
+      <slot />
+    </div>
+
+    {hasToc && (
+      <nav
+        aria-label="On this page"
+        class="hidden xl:sticky xl:top-28 xl:col-start-3 xl:row-start-1 xl:block"
+      >
+        <TableOfContents headings={toc} />
+      </nav>
+    )}
+  </div>
+</BlogLayout>

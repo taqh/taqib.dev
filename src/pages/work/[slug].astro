@@ -1,0 +1,87 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import Prose from "@/components/Prose.astro";
+import Todo from "@/components/work/Todo.astro";
+import WorkLayout from "@/layouts/WorkLayout.astro";
+import { formatDate } from "@/lib/utils";
+import { getWorkEntries } from "@/lib/work";
+
+/** Short entries read top to bottom. Longer ones get the "On this page" list. */
+const MIN_SECTIONS_FOR_TOC = 3;
+
+export async function getStaticPaths() {
+  const entries = await getWorkEntries();
+  return entries.map((workEntry) => ({
+    params: { slug: workEntry.id },
+    props: { entry: workEntry },
+  }));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<"work"> };
+const { client, description, draft, image, publishedAt, role, title, url } =
+  entry.data;
+const { Content, headings } = await render(entry);
+const sectionCount = headings.filter(({ depth }) => depth === 2).length;
+const toc =
+  sectionCount >= MIN_SECTIONS_FOR_TOC
+    ? [
+        { depth: 2, slug: "intro", text: "Intro" },
+        ...headings.filter(({ depth }) => depth === 2 || depth === 3),
+      ]
+    : [];
+---
+
+<WorkLayout description={description} image={image} title={title} toc={toc}>
+  <header
+    class="flex scroll-mt-28 flex-col items-start gap-3"
+    id="intro"
+    slot="header"
+  >
+    <h1
+      class="font-serif text-2xl leading-tight font-medium text-balance sm:text-3xl"
+    >
+      {title}
+    </h1>
+    <div
+      class="text-muted-foreground flex flex-wrap items-center gap-x-2 text-base"
+    >
+      <span aria-hidden="true" class="bg-border h-4 w-0.5 shrink-0"></span>
+      {publishedAt ? (
+        <time datetime={publishedAt.toISOString()}>
+          {formatDate(publishedAt)}
+        </time>
+      ) : (
+        <Todo>publish date</Todo>
+      )}
+      {client !== title && (
+        <>
+          <span aria-hidden="true">·</span>
+          <span>{client}</span>
+        </>
+      )}
+      <span aria-hidden="true">·</span>
+      <span>{role ?? <Todo>your role</Todo>}</span>
+      {url && (
+        <>
+          <span aria-hidden="true">·</span>
+          <a
+            class="text-foreground decoration-foreground/30 hover:decoration-foreground focus-visible:outline-accent underline underline-offset-[3px] transition-colors focus-visible:outline-2 focus-visible:outline-dashed"
+            href={url}
+            rel="noopener"
+            target="_blank"
+          >
+            Visit site
+          </a>
+        </>
+      )}
+    </div>
+    {draft && (
+      <span class="bg-muted text-muted-foreground rounded-full px-2 text-xs leading-5">
+        Draft: only visible in dev
+      </span>
+    )}
+  </header>
+  <Prose class="prose-headings:scroll-mt-8 mt-12">
+    <Content />
+  </Prose>
+</WorkLayout>

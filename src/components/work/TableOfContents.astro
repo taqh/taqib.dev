@@ -1,0 +1,77 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<ol class="flex flex-col gap-2.5 text-sm leading-5" data-toc>
+  {headings.map((heading) => (
+    <li class:list={[heading.depth > 2 && "ps-3"]}>
+      <a
+        class="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground focus-visible:outline-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-dashed"
+        href={`#${heading.slug}`}
+      >
+        {heading.text}
+      </a>
+    </li>
+  ))}
+</ol>
+
+<script>
+  /** A section is current once its heading scrolls above this line. Headings land at 32px when a link is clicked. */
+  const READING_LINE_PX = 120;
+
+  let frame = 0;
+
+  /** The last heading above the reading line, or the last one when the page is scrolled to the bottom. */
+  const currentHref = (hrefs: string[]) => {
+    const atBottom =
+      innerHeight + scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) {
+      return hrefs.at(-1);
+    }
+    let [current] = hrefs;
+    for (const href of hrefs) {
+      const heading = document.querySelector(
+        `#${CSS.escape(decodeURIComponent(href.slice(1)))}`
+      );
+      if (heading && heading.getBoundingClientRect().top <= READING_LINE_PX) {
+        current = href;
+      }
+    }
+    return current;
+  };
+
+  const update = () => {
+    frame = 0;
+    const links = [
+      ...document.querySelectorAll<HTMLAnchorElement>("[data-toc] a"),
+    ];
+    const hrefs = [
+      ...new Set(links.map((link) => link.getAttribute("href") ?? "")),
+    ];
+    const current = currentHref(hrefs);
+    for (const link of links) {
+      if (link.getAttribute("href") === current) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    }
+  };
+
+  const schedule = () => {
+    if (!frame) {
+      frame = requestAnimationFrame(update);
+    }
+  };
+
+  schedule();
+  addEventListener("scroll", schedule, { passive: true });
+  addEventListener("resize", schedule);
+  document.addEventListener("astro:page-load", schedule);
+</script>

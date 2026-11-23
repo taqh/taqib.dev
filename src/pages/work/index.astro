@@ -1,0 +1,25 @@
+---
+import WorkCard from "@/components/work/WorkCard.astro";
+import WorkLayout from "@/layouts/WorkLayout.astro";
+import { SITE } from "@/lib/constants";
+import { getWorkEntries } from "@/lib/work";
+
+const entries = await getWorkEntries();
+---
+
+<WorkLayout
+  description={SITE.DESCRIPTION}
+  isIndex
+  title={`Work - ${SITE.TITLE}`}
+>
+  <h1 class="mb-8 font-serif text-2xl leading-tight font-medium">Work</h1>
+  {entries.length > 0 ? (
+    <ul class="flex flex-col gap-4">
+      {entries.map((entry) => (
+        <WorkCard entry={entry} />
+      ))}
+    </ul>
+  ) : (
+    <p class="text-muted-foreground text-base leading-7">Nothing here yet.</p>
+  )}
+</WorkLayout>
