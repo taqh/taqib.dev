@@ -18,8 +18,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props as { entry: CollectionEntry<"work"> };
-const { client, description, draft, image, publishedAt, role, title, url } =
-  entry.data;
+const { description, draft, image, publishedAt, role, title, url } = entry.data;
 const { Content, headings } = await render(entry);
 const sectionCount = headings.filter(({ depth }) => depth === 2).length;
 const toc =
@@ -42,38 +41,34 @@ const toc =
     >
       {title}
     </h1>
-    <div
-      class="text-muted-foreground flex flex-wrap items-center gap-x-2 text-base"
-    >
-      <span aria-hidden="true" class="bg-border h-4 w-0.5 shrink-0"></span>
-      {publishedAt ? (
-        <time datetime={publishedAt.toISOString()}>
-          {formatDate(publishedAt)}
-        </time>
-      ) : (
-        <Todo>publish date</Todo>
-      )}
-      {client !== title && (
-        <>
-          <span aria-hidden="true">·</span>
-          <span>{client}</span>
-        </>
-      )}
-      <span aria-hidden="true">·</span>
-      <span>{role ?? <Todo>your role</Todo>}</span>
-      {url && (
-        <>
-          <span aria-hidden="true">·</span>
-          <a
-            class="text-foreground decoration-foreground/30 hover:decoration-foreground focus-visible:outline-accent underline underline-offset-[3px] transition-colors focus-visible:outline-2 focus-visible:outline-dashed"
-            href={url}
-            rel="noopener"
-            target="_blank"
-          >
-            Visit site
-          </a>
-        </>
-      )}
+    <div class="text-muted-foreground flex flex-col gap-1.5 text-base">
+      <div class="flex items-center gap-x-2">
+        <span aria-hidden="true" class="bg-border h-4 w-0.5 shrink-0"></span>
+        {publishedAt ? (
+          <time datetime={publishedAt.toISOString()}>
+            {formatDate(publishedAt)}
+          </time>
+        ) : (
+          <Todo>publish date</Todo>
+        )}
+      </div>
+      <div class="flex flex-wrap items-center gap-x-2">
+        <span aria-hidden="true" class="bg-border h-4 w-0.5 shrink-0"></span>
+        <span>{role ?? <Todo>your role</Todo>}</span>
+        {url && (
+          <>
+            <span aria-hidden="true">·</span>
+            <a
+              class="text-foreground decoration-foreground/30 hover:decoration-foreground focus-visible:outline-accent underline underline-offset-[3px] transition-colors focus-visible:outline-2 focus-visible:outline-dashed"
+              href={url}
+              rel="noopener"
+              target="_blank"
+            >
+              Visit site
+            </a>
+          </>
+        )}
+      </div>
     </div>
     {draft && (
       <span class="bg-muted text-muted-foreground rounded-full px-2 text-xs leading-5">
