@@ -23,15 +23,6 @@ export const PROJECTS = [
   },
   {
     active: true,
-    description: "Transform documents to audio podcasts",
-    links: {
-      live: "https://fablepod.com?ref=taqib.dev",
-      repo: "https://helloworld.ng/fable",
-    },
-    title: "Fable",
-  },
-  {
-    active: true,
     description: "Control suite for running a single-station radio broadcast",
     links: {
       live: "https://rdio-docs.vercel.app",
