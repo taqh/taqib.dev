@@ -79,8 +79,12 @@ const remoteContent =
         <p>{`${readTime} minute read`}</p>
       </div>
     </header>
-    <Prose>
+    <Prose data-zoomable>
       {Content ? <Content /> : <div set:html={remoteContent ?? ""} />}
     </Prose>
   </Container>
 </BlogLayout>
+
+<script>
+  import "@/lib/image-zoom";
+</script>
