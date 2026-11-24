@@ -9,13 +9,13 @@ draft: false
 
 import Screenshot from "@/components/work/Screenshot.astro";
 
-[Fable](https://www.fablepod.com/?ref=taqib.dev) is an iOS app that turns articles and documents into podcasts. I worked on the frontend and built the website. It was my first mobile app and my first time using React Native and Expo.
+[Fable](https://www.fablepod.com/?ref=taqib.dev) is an iOS app that turns articles and documents into podcasts. I worked on the frontend and built the website. It was my first time doing any form of iOS development.
 
-## Getting started with React Native
+## Getting started
 
-Someone else had already started the app when I joined, so I picked up the existing codebase and implemented the designs for the iOS frontend. Expo Router handled navigation, NativeWind handled styling, and we used Zustand for things like the player state. I was also using GraphQL through Apollo Client for the first time.
+The app was built with Expo and React Native, with Zustand for things like the player state and GraphQL through Apollo Client. It was my first time using React Native and my first time using GraphQL. Someone else had already started the app when I joined, so I picked up the existing codebase and implemented the designs for the iOS frontend.
 
-The Expo setup felt familiar once I got my bearings. There was file-based routing and I could style screens with Tailwind classes. I had more to learn about what I could test in Expo Go and what needed a native build.
+Coming from Next.js, Expo was easy to get into. File-based routing, Tailwind classes and React all carried over from the web. Most of the learning was working out which packages and features needed a native build through Xcode, and what I could run in Expo Go.
 
 <Screenshot
   alt="Four Fable screens showing the Explore feed, the Library, the podcast player, and the Create screen."
@@ -26,7 +26,7 @@ The Expo setup felt familiar once I got my bearings. There was file-based routin
 
 The hardest feature I worked on was the iOS share extension. If someone tapped Share on a document in Files or another app, they could choose Fable and land on the Create screen with the file already attached.
 
-This was my first time working in Xcode. The extension runs as its own target, so I had to set up an App Group that both the extension and the app could access. The extension copied the file into the shared container and opened Fable with a deep link. The app could then pick up the file and show it on the Create screen. I wrote about figuring that out in [Share to Fable](/blog/share-to-fable).
+The extension runs as its own target, so I had to set up an App Group that both the extension and the app could access. The extension copied the file into the shared container and opened Fable with a deep link. The app could then pick up the file and show it on the Create screen. I wrote about figuring that out in [Share to Fable](/blog/share-to-fable).
 
 <Screenshot
   alt="A PDF being shared from Files through the iOS share sheet, followed by the Fable Create screen with the PDF attached."
@@ -35,11 +35,11 @@ This was my first time working in Xcode. The extension runs as its own target, s
 
 Expo now has an experimental config plugin for receiving shares. On iOS it opens the main app from the share extension, which Apple doesn’t officially support. [Expo Sharing docs](https://docs.expo.dev/versions/latest/sdk/sharing/#sharing-to-your-app-from-other-apps)
 
-## Getting onto the App Store
+## Getting into the App Store
 
 The hardest and most interesting part overall was getting the app onto the App Store. I had to learn App Store Connect and how signing certificates and provisioning profiles fit together. The share extension was another target that needed its own signing and entitlements.
 
-We used EAS to make development and production builds and submit the app to App Store Connect. Getting used to that whole process was a big part of building my first iOS app.
+We used EAS to make development and production builds and submit the app to App Store Connect.
 
 ## The website
 
@@ -60,4 +60,4 @@ I also built a page for shared episodes. You can open a link someone sends you a
   <figcaption>The shared episode page with a sample episode.</figcaption>
 </figure>
 
-I wrote more about how Fable came together in the [full case study for Hello World](https://www.helloworld.ng/projects/fable/).
+I wrote more about how Fable came together in the [full case study](https://www.helloworld.ng/projects/fable/).
